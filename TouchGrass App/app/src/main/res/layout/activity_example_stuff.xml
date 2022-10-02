@@ -19,6 +19,12 @@
         app:layout_constraintLeft_toLeftOf = "parent"
         app:layout_constraintRight_toRightOf = "parent"
         />
+    <!-- TextView is plain text
+    android: functions -
+    id = the unique id to edit in Java
+    layout = width/height/top/bottom/left/right
+    gravity = positioning of the text within the text box (left/center)
+    "parent" = the page -->
 
     <Button
         android:id = "@+id/ChaChing"
@@ -31,5 +37,9 @@
         app:layout_constraintRight_toRightOf = "parent"
         android:onClick="Clicker"
         />
+    <!-- A button
+    Note - the onClick addition would be used in conjunction with
+    a Java method (in this case "Clicker") to do something
+    like, change a specific TextView's text -->
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,7 +11,6 @@ public class Example_Stuff extends AppCompatActivity {
     // String pj = "pp&j"; Text
     // boolean and = false; True/False
     // Character o = 'o'; ONE single letter
-    // - Adam
     public int i = 0;
 
     @Override
@@ -19,6 +18,7 @@ public class Example_Stuff extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_example_stuff);
     }
+    // onCreate is essentially what happens when the page opens up
 
     public void Clicker(View V) {
         TextView grayskull = findViewById(R.id.Grayskull);
@@ -31,4 +31,6 @@ public class Example_Stuff extends AppCompatActivity {
             i = 0;
         }
     }
+    // "Clicker" (could be any name) makes stuff happen when the feature (in this case, button)
+    // has been pressed. The xml requires the "onClick" addition for it to work
 }
