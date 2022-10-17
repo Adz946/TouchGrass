@@ -13,4 +13,5 @@
     <string name="home_yo">Home, yo!</string>
     <string name="reminder_yo">Reminders, yo!</string>
     <string name="profile_yo">Profile, yo!</string>
+    <string name="new_reminder">New Reminder</string>
 </resources>
