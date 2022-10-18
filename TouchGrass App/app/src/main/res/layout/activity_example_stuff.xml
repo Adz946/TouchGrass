@@ -30,7 +30,21 @@
         "parent" = the page
         -->
 
-    <Button
+    <ImageButton
+        android:id="@+id/Change"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:layout_width="100dp"
+        android:layout_height="200dp"
+        app:layout_constraintBottom_toBottomOf = "@id/Grayskull"
+        app:layout_constraintTop_toTopOf = "parent"
+        app:layout_constraintLeft_toLeftOf = "parent"
+        app:layout_constraintRight_toRightOf = "parent"
+        android:src="@drawable/skull"
+        android:onClick="Clicker"
+        ></ImageButton>
+
+    <!-- <Button
        android:id = "@+id/ChangeNow"
        android:text = "Press ME"
        android:layout_width = "150dp"
@@ -41,7 +55,6 @@
        app:layout_constraintRight_toRightOf = "parent"
        android:onClick="Clicker"
    />
-        <!--
        A button
        Note - the onClick addition would be used in conjunction with
        a Java method (in this case "Clicker") to do something
