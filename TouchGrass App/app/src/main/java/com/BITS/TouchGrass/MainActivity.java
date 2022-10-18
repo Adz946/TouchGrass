@@ -1,5 +1,6 @@
 package com.BITS.TouchGrass;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         bottomNavigationView.setSelectedItemId(R.id.home);
 
     }
+
     HomeFragment homeFragment = new HomeFragment();
     ChallengesMainFragment challengesMainFragment = new ChallengesMainFragment();
     CalendarMainFragment calendarMainFragment = new CalendarMainFragment();
