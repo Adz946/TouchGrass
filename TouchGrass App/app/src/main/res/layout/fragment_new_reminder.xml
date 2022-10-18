@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".reminders.NewReminderFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="100"
+    android:layout_margin="8dp">
+
+
+    <EditText
+        android:id="@+id/title_of_reminder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:minHeight="50dp"
+        android:text="Title of reminder"
+        android:textColor="#777777"
+        android:layout_weight="0"/>
+
+    <Button
+        android:id="@+id/make_group_reminder_button"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:text="@string/make_group_reminder"
+        android:layout_weight="0"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="100"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Shared with:"
+            android:layout_weight="35"/>
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</LinearLayout>

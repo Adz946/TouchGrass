@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">TouchGrass</string>
+    <!-- Any text in the app should not be hardcoded. Instead, rewrite it here using
+    snake_case/a descriptive title, and make reference to this. -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile">Profile</string>
+    <string name="calendar">Calendar</string>
+    <string name="home">Home</string>
+    <string name="reminders">Reminders</string>
+    <string name="challenges">Challenges</string>
+    <string name="calendar_yo">Calendar, yo!</string>
+    <string name="challenge_yo">Challenges, yo!</string>
+    <string name="home_yo">Home, yo!</string>
+    <string name="reminder_yo">Reminders, yo!</string>
+    <string name="profile_yo">Profile, yo!</string>
+    <string name="new_reminder">New Reminder</string>
+    <string name="group">Group</string>
+    <string name="self">Self</string>
+    <string name="your_reminders">Your Reminders</string>
+    <string name="make_group_reminder">Make Group Reminder</string>
 </resources>
