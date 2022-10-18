@@ -17,4 +17,5 @@
     <string name="group">Group</string>
     <string name="self">Self</string>
     <string name="your_reminders">Your Reminders</string>
+    <string name="make_group_reminder">Make Group Reminder</string>
 </resources>
