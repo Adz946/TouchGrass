@@ -10,14 +10,6 @@
     android:weightSum="100"
     android:layout_margin="8dp">
 
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        android:textColor="@color/red"/>
-
     <EditText
         android:id="@+id/title_of_reminder"
         android:layout_width="match_parent"
@@ -33,8 +25,8 @@
         android:id="@+id/make_group_reminder_button"
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:text="@string/make_group_reminder"
-        android:layout_weight="0"/>
+        android:layout_weight="0"
+        android:text="@string/make_group_reminder" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
