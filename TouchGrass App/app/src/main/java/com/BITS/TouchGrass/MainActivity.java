@@ -1,11 +1,9 @@
 package com.BITS.TouchGrass;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 
 import com.BITS.TouchGrass.calendar.*;
-import com.BITS.TouchGrass.home.*;
 import com.BITS.TouchGrass.reminders.*;
 import com.BITS.TouchGrass.challenges.*;
 import com.BITS.TouchGrass.profile.*;
@@ -25,11 +23,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
-        bottomNavigationView.setSelectedItemId(R.id.home);
+        bottomNavigationView.setSelectedItemId(R.id.calendar);
 
     }
 
-    HomeFragment homeFragment = new HomeFragment();
     ChallengesMainFragment challengesMainFragment = new ChallengesMainFragment();
     CalendarMainFragment calendarMainFragment = new CalendarMainFragment();
     RemindersMainFragment remindersMainFragment = new RemindersMainFragment();
@@ -45,10 +42,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
             case R.id.calendar:
                 getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, calendarMainFragment).commit();
-                return true;
-
-            case R.id.home:
-                getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, homeFragment).commit();
                 return true;
 
             case R.id.reminders:

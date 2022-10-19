@@ -10,10 +10,6 @@
         android:title="@string/calendar"
         android:icon="@drawable/ic_calendar_black" />
     <item
-        android:id="@+id/home"
-        android:title="@string/home"
-        android:icon="@drawable/ic_home_black" />
-    <item
         android:id="@+id/reminders"
         android:title="@string/reminders"
         android:icon="@drawable/ic_reminder_black" />

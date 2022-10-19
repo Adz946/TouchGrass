@@ -1,5 +1,8 @@
 package com.BITS.TouchGrass.reminders;
 
+import android.app.AlertDialog;
+import android.app.TimePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,55 +10,29 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TimePicker;
 
 import com.BITS.TouchGrass.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link NewReminderFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.Calendar;
+import java.util.Locale;
+
 public class NewReminderFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     public NewReminderFragment() {
-        // Required empty public constructor
+        // require a empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment NewReminderFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static NewReminderFragment newInstance(String param1, String param2) {
-        NewReminderFragment fragment = new NewReminderFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    Button setTimeBtn;
+    int hour, minute;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,6 +40,55 @@ public class NewReminderFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_new_reminder, container, false);
 
+
+        setTimeBtn = rootView.findViewById(R.id.set_time_button);
+        setTimeBtn.setOnClickListener(this::popTimePicker);
+
         return rootView;
+    }
+
+
+    public void popTimePicker(View v) {
+        TimePickerDialog.OnTimeSetListener onTimeSetListener = (timePicker, selectedHour, selectedMinute) -> {
+
+            hour = selectedHour;
+            minute = selectedMinute;
+
+            String formattedTime;
+
+            if (hour == 0) {
+                if (minute < 10) {
+                    formattedTime = String.format(Locale.getDefault(),"%d:0%d am",hour+12,minute);
+                } else {
+                    formattedTime = String.format(Locale.getDefault(),"%d:%d am",hour+12,minute);
+                }
+            } else if (hour > 12) {
+                if (minute < 10) {
+                    formattedTime = String.format(Locale.getDefault(),"%d:0%d pm",hour-12,minute);
+                } else {
+                    formattedTime = String.format(Locale.getDefault(),"%d:%d pm",hour-12,minute);
+                }
+            } else if (hour == 12) {
+                if (minute < 10) {
+                    formattedTime = String.format(Locale.getDefault(),"%d:0%d pm",hour,minute);
+                } else {
+                    formattedTime = String.format(Locale.getDefault(),"%d:%d pm",hour,minute);
+                }
+            } else {
+                if (minute < 10) {
+                    formattedTime = String.format(Locale.getDefault(),"%d:0%d am",hour,minute);
+                } else {
+                    formattedTime = String.format(Locale.getDefault(),"%d:%d am",hour,minute);
+                }
+            }
+
+            setTimeBtn.setText(formattedTime);
+        };
+
+//        int style = AlertDialog.THEME_HOLO_DARK;
+        TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), onTimeSetListener, hour, minute, false);
+
+        timePickerDialog.setTitle("Select Time");
+        timePickerDialog.show();
     }
 }
