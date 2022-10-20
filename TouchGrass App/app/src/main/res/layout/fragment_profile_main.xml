@@ -1,13 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".profile.ProfileMainFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/profile_yo" />
+    <EditText
+        android:id="@+id/editTxtUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/edtTxtPW"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="@+id/editTxtUsername"
+        app:layout_constraintStart_toStartOf="@+id/editTxtUsername"
+        app:layout_constraintTop_toBottomOf="@+id/editTxtUsername" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="110dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="30dp"
+        android:onClick="onLoginBtnClick"
+        android:text="Login"
+        app:layout_constraintEnd_toEndOf="@+id/txtViewErrorMsg"
+        app:layout_constraintStart_toStartOf="@+id/txtViewErrorMsg"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewErrorMsg" />
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:onClick="onRegisterBtnClick"
+        android:text="Register"
+        app:layout_constraintEnd_toEndOf="@+id/btnLogin"
+        app:layout_constraintStart_toStartOf="@+id/btnLogin"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/ic_launcher_foreground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtViewErrorMsg"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/edtTxtPW"
+        app:layout_constraintStart_toStartOf="@+id/edtTxtPW"
+        app:layout_constraintTop_toBottomOf="@+id/edtTxtPW" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
