@@ -19,8 +19,7 @@
         android:ems="10"
         android:inputType="text"
         android:minHeight="50dp"
-        android:text="Title of reminder"
-        android:textColor="#777777"/>
+        android:hint="Title of reminder"/>
 
     <Button
         android:id="@+id/make_group_reminder_button"
@@ -40,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Shared with:"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
     </LinearLayout>
 
@@ -66,13 +65,13 @@
                     android:layout_weight="1">
 
                     <Button
-                        android:id="@+id/button5"
+                        android:id="@+id/start_date_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Start Date" />
 
                     <Button
-                        android:id="@+id/button4"
+                        android:id="@+id/end_date_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="End Date" />
@@ -110,7 +109,53 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Priority"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ToggleButton
+                        android:id="@+id/priority_low"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textOn="Low"
+                        android:textOff="Low"/>
+
+                    <ToggleButton
+                        android:id="@+id/priority_moderate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textOn="Moderate"
+                        android:textOff="Moderate"/>
+
+                    <ToggleButton
+                        android:id="@+id/priority_high"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textOn="High"
+                        android:textOff="High"/>
+                </LinearLayout>
+
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -118,7 +163,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Set Tone"
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/spinner_repeat_reminder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dropdown"
+                    android:layout_gravity="center"/>
+
+            </LinearLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <EditText
+            android:id="@+id/description_of_reminder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:minHeight="50dp"
+            android:hint="Description" />
+
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -126,7 +204,6 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:id="@+id/buttones"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
