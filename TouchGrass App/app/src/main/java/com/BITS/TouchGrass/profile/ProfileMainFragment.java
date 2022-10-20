@@ -30,7 +30,7 @@ public class ProfileMainFragment extends Fragment {
         TextView txtViewErrorMsg = getView().findViewById(R.id.txtViewErrorMsg);
 
         EditText editTxtUsername = getView().findViewById(R.id.editTxtUsername);
-        EditText edtTxtPW = getView().findViewById(R.id.edtTxtPW);
+        EditText edtTxtPW = getView().findViewById(R.id.edtTxtRegPW);
 
         if (editTxtUsername.getText().toString().equalsIgnoreCase("bob")) {
             txtViewErrorMsg.setText("Success!");
