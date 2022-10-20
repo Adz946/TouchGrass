@@ -22,39 +22,42 @@ import java.util.ArrayList;
 
 public class CalendarMainFragment extends Fragment implements CalendarAdapter.OnItemListener {
 
+
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
     private LocalDate selectedDate;
 
-    public CalendarMainFragment(){
-        // require a empty public constructor
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_calendar_main, container, false);
+        View view = inflater.inflate(R.layout.fragment_calendar_main, container, false);
 
-        calendarRecyclerView = rootView.findViewById(R.id.calendarRecyclerView);
-        monthYearText = rootView.findViewById(R.id.monthYearTV);
+        calendarRecyclerView = view.findViewById(R.id.calendarRecyclerView);
+        monthYearText = view.findViewById(R.id.monthYearTV);
         selectedDate = LocalDate.now();
         setMonthView();
 
-        Button previousMonthBtn = rootView.findViewById(R.id.previous_month_button);
+        Button previousMonthBtn = view.findViewById(R.id.previous_month_button);
         previousMonthBtn.setOnClickListener(this::previousMonthAction);
 
-        Button nextMonthBtn = rootView.findViewById(R.id.next_month_button);
+        Button nextMonthBtn = view.findViewById(R.id.next_month_button);
         nextMonthBtn.setOnClickListener(this::nextMonthAction);
 
-        return rootView;
+        return view;
     }
 
     private void setMonthView() {
+        // Sets the text at the top according to format "MMMM yyyy"
         monthYearText.setText(monthYearFromDate(selectedDate));
+        // Makes a list of all the days in that month, including empty cells for other months' days
         ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
 
+        // Creates an adapter which will generate as many calendar cells as needed for that month
         CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 7);
+        // Lays out the generated cells and empty cells in a 7x6 form (to give that calendar look)
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(requireActivity().getApplicationContext(), 7);
+        // Apply both to the View
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(calendarAdapter);
     }
@@ -95,6 +98,9 @@ public class CalendarMainFragment extends Fragment implements CalendarAdapter.On
 
     @Override
     public void onItemClick(int position, String dayText) {
+
+        // This is where the view will change when the user clicks a date.
+
         if (!dayText.equals("")) {
             String message = "Selected Date: " + dayText + " " + monthYearFromDate(selectedDate);
             Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();

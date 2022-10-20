@@ -24,13 +24,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.calendar);
-
     }
+
 
     ChallengesMainFragment challengesMainFragment = new ChallengesMainFragment();
     CalendarMainFragment calendarMainFragment = new CalendarMainFragment();
     RemindersMainFragment remindersMainFragment = new RemindersMainFragment();
     ProfileMainFragment profileMainFragment = new ProfileMainFragment();
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -53,5 +54,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 return true;
         }
         return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() > 0) {
+            getFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
+        }
     }
 }
