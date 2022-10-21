@@ -1,7 +1,13 @@
 package com.BITS.TouchGrass.reminders;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.ToggleButton;
@@ -20,6 +27,7 @@ import com.BITS.TouchGrass.profile.Friend;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Locale;
 
 public class EditReminderFragment extends Fragment {
@@ -32,8 +40,8 @@ public class EditReminderFragment extends Fragment {
     Ringtone ringtone;
 
     ToggleButton priorityLow, priorityModerate, priorityHigh;
-    Spinner setToneSpinner;
-    Button setTimeBtn, setStartDateBtn, setEndDateBtn, cancelBtn, addReminderBtn;
+    Spinner setRepeatSpinner;
+    Button setTimeBtn, setStartDateBtn, setEndDateBtn, setToneBtn, cancelBtn, addReminderBtn;
     EditText title;
     int hour, minute;
 
@@ -49,33 +57,173 @@ public class EditReminderFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_edit_reminder, container, false);
 
+        // Initialise all the UI elements
         setTimeBtn = (Button) view.findViewById(R.id.set_time_button);
-        setTimeBtn.setOnClickListener(this::showTimePicker);
-
         setStartDateBtn = (Button) view.findViewById(R.id.start_date_button);
-        setStartDateBtn.setOnClickListener(this::showDatePicker);
-
         setEndDateBtn = (Button) view.findViewById(R.id.end_date_button);
-        setEndDateBtn.setOnClickListener(this::showDatePicker);
-
         cancelBtn = (Button) view.findViewById(R.id.cancel_button);
-        cancelBtn.setOnClickListener(this::cancelOperation);
-
         addReminderBtn = (Button) view.findViewById(R.id.add_reminder_button);
-        addReminderBtn.setOnClickListener(this::addReminder);
-
-        setToneSpinner = (Spinner) view.findViewById(R.id.spinner_repeat_reminder);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.repeat_reminder, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-        setToneSpinner.setAdapter(adapter);
-
-
+        setRepeatSpinner = (Spinner) view.findViewById(R.id.spinner_repeat_reminder);
         priorityLow = (ToggleButton) view.findViewById(R.id.priority_low);
         priorityModerate = (ToggleButton) view.findViewById(R.id.priority_moderate);
         priorityHigh = (ToggleButton) view.findViewById(R.id.priority_high);
-        priorityModerate.setChecked(true);
+        setToneBtn = (Button) view.findViewById(R.id.set_tone_button);
 
+
+        // Methods to call
+        buildRepeatSpinner();  // builds the repeat frequency drop down
+        priorityModerate.setChecked(true);  // defaults the priority to 'moderate'
+        setStartDateBtn.setText(getTodaysDate());
+        setEndDateBtn.setText(getTodaysDate());
+        setListeners();  // initialises all element listeners
+
+        return view;
+    }
+
+
+    private String getTodaysDate() {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        month = month + 1;  // 'cal' returns january as 0, so add 1 to be normal
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        return makeDateString(day, month, year);
+    }
+
+
+    private String makeDateString(int day, int month, int year) {
+        return String.format(Locale.getDefault(), "%d/%d/%d", day, month, year);
+    }
+
+
+    private void buildRepeatSpinner() {
+        // creates an adapter from the spinner template, and applies to our options in 'repeat_reminder'
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.repeat_reminder, android.R.layout.simple_spinner_item);
+        // sets the layout resource
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        // applies the adapter to our drop down
+        setRepeatSpinner.setAdapter(adapter);
+    }
+
+
+    public void addReminder(View view) {
+        Reminder reminder = new Reminder("fix this up");
+    }
+
+
+    public void cancelOperation(View view) {
+        getParentFragmentManager().popBackStack();
+    }
+
+
+    public void setTone(View view) {
+        // Intent to select Ringtone.
+        final Uri currentTone = RingtoneManager.getActualDefaultRingtoneUri(getContext(),
+                RingtoneManager.TYPE_ALARM);
+        Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
+        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_RINGTONE);
+        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select Tone");
+        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, currentTone);
+        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false);
+        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true);
+        startActivityForResult(intent, 999);
+    }
+
+
+    public void showStartDatePicker(View view) {
+        DatePickerDialog.OnDateSetListener onDateSetListener = (datePicker, year, month, day) -> {
+            month = month + 1;
+            String date = makeDateString(day, month, year);
+
+            setStartDateBtn.setText(date);
+        };
+
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), onDateSetListener, year, month, day);
+        datePickerDialog.show();
+    }
+
+
+    public void showEndDatePicker(View view) {
+        DatePickerDialog.OnDateSetListener onDateSetListener = (datePicker, year, month, day) -> {
+            month = month + 1;
+            String date = makeDateString(day, month, year);
+
+            setEndDateBtn.setText(date);
+        };
+
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), onDateSetListener, year, month, day);
+        datePickerDialog.show();
+    }
+
+
+
+    public void showTimePicker(View view) {
+        TimePickerDialog.OnTimeSetListener onTimeSetListener =
+                (timePicker, selectedHour, selectedMinute) -> {
+
+            hour = selectedHour;
+            minute = selectedMinute;
+
+            String formattedTime;
+
+            if (hour == 0)
+                if (minute < 10)
+                    formattedTime = String.format(Locale.getDefault(),"%d:0%d am",hour+12,minute);
+                else
+                    formattedTime = String.format(Locale.getDefault(),"%d:%d am",hour+12,minute);
+
+            else if (hour > 12)
+                if (minute < 10)
+                    formattedTime = String.format(Locale.getDefault(),"%d:0%d pm",hour-12,minute);
+                else
+                    formattedTime = String.format(Locale.getDefault(),"%d:%d pm",hour-12,minute);
+
+            else if (hour == 12)
+                if (minute < 10)
+                    formattedTime = String.format(Locale.getDefault(),"%d:0%d pm",hour,minute);
+                else
+                    formattedTime = String.format(Locale.getDefault(),"%d:%d pm",hour,minute);
+
+            else
+            if (minute < 10)
+                formattedTime = String.format(Locale.getDefault(),"%d:0%d am",hour,minute);
+            else
+                formattedTime = String.format(Locale.getDefault(),"%d:%d am",hour,minute);
+
+            setTimeBtn.setText(formattedTime);
+        };
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), onTimeSetListener,
+                hour, minute, false);
+
+        timePickerDialog.setTitle("Select Time");
+        timePickerDialog.show();
+    }
+
+
+    public void setListeners() {
+
+        // onClick listeners (buttons)
+        setTimeBtn.setOnClickListener(this::showTimePicker);
+        setStartDateBtn.setOnClickListener(this::showStartDatePicker);
+        setEndDateBtn.setOnClickListener(this::showEndDatePicker);
+        cancelBtn.setOnClickListener(this::cancelOperation);
+        addReminderBtn.setOnClickListener(this::addReminder);
+        setToneBtn.setOnClickListener(this::setTone);
+
+        // onCheckChange listeners (toggles)
         priorityLow.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) { // The toggle is enabled
                 priorityModerate.setChecked(false);
@@ -115,68 +263,8 @@ public class EditReminderFragment extends Fragment {
                 priority = "moderate";
             }
         });
-
-
-        return view;
     }
 
-
-    public void addReminder(View view) {
-        Reminder reminder = new Reminder("fix this up");
-    }
-
-
-    public void cancelOperation(View view) {
-        getParentFragmentManager().popBackStack();
-    }
-
-
-    public void showDatePicker(View view) {
-
-    }
-
-
-    public void showTimePicker(View view) {
-        TimePickerDialog.OnTimeSetListener onTimeSetListener = (timePicker, selectedHour, selectedMinute) -> {
-
-            hour = selectedHour;
-            minute = selectedMinute;
-
-            String formattedTime;
-
-            if (hour == 0)
-                if (minute < 10)
-                    formattedTime = String.format(Locale.getDefault(),"%d:0%d am",hour+12,minute);
-                else
-                    formattedTime = String.format(Locale.getDefault(),"%d:%d am",hour+12,minute);
-
-            else if (hour > 12)
-                if (minute < 10)
-                    formattedTime = String.format(Locale.getDefault(),"%d:0%d pm",hour-12,minute);
-                else
-                    formattedTime = String.format(Locale.getDefault(),"%d:%d pm",hour-12,minute);
-
-            else if (hour == 12)
-                if (minute < 10)
-                    formattedTime = String.format(Locale.getDefault(),"%d:0%d pm",hour,minute);
-                else
-                    formattedTime = String.format(Locale.getDefault(),"%d:%d pm",hour,minute);
-
-            else
-            if (minute < 10)
-                formattedTime = String.format(Locale.getDefault(),"%d:0%d am",hour,minute);
-            else
-                formattedTime = String.format(Locale.getDefault(),"%d:%d am",hour,minute);
-
-            setTimeBtn.setText(formattedTime);
-        };
-
-//        int style = AlertDialog.THEME_HOLO_DARK;
-        TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), onTimeSetListener, hour, minute, false);
-
-        timePickerDialog.setTitle("Select Time");
-        timePickerDialog.show();
-    }
 
 //    public void saveReminderAction(View view) {
 //        title
