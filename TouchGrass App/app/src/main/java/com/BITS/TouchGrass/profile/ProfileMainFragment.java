@@ -56,9 +56,9 @@ public class ProfileMainFragment extends Fragment implements View.OnClickListene
                 EditText edtTxtPW = getView().findViewById(R.id.edtTxtRegPW);
 
                 if (editTxtUsername.getText().toString().equalsIgnoreCase("bob")) {
-                    txtViewErrorMsg.setText("Success!");
+                    txtViewErrorMsg.setText("Success! WEENER!");
                 } else {
-                    txtViewErrorMsg.setText("Failed!");
+                    txtViewErrorMsg.setText("Failed! YOU SUCC");
                 }
                 break;
         }
