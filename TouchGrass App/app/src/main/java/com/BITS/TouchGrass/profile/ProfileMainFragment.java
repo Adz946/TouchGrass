@@ -35,6 +35,7 @@ public class ProfileMainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_profile_main, container, false);
 
