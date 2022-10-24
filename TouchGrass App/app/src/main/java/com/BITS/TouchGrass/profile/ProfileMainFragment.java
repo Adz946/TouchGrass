@@ -23,6 +23,7 @@ public class ProfileMainFragment extends Fragment {
     EditText editTxtUsername, edtTxtPW;
 
     private final ProfileRegisterFragment profileRegisterFragment = new ProfileRegisterFragment();
+    private final ProfileFriendsFragment profileFriendsFragment = new ProfileFriendsFragment();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,7 +36,7 @@ public class ProfileMainFragment extends Fragment {
         registerBtn = (Button) view.findViewById(R.id.btnRegister);
         txtViewErrorMsg = (TextView) view.findViewById(R.id.txtViewErrorMsg);
         editTxtUsername = (EditText) view.findViewById(R.id.editTxtUsername);
-        edtTxtPW = view.findViewById(R.id.edtTxtRegPW);
+        edtTxtPW = (EditText) view.findViewById(R.id.edtTxtRegPW);
 
         // Methods to call
         setListeners();
@@ -47,10 +48,13 @@ public class ProfileMainFragment extends Fragment {
     public void setListeners() {
 
         logInBtn.setOnClickListener(v -> {
-            if (editTxtUsername.getText().toString().equalsIgnoreCase("bob")) {
-                txtViewErrorMsg.setText("Success! WEENER!");
+            if (editTxtUsername.getText().toString().equalsIgnoreCase("bob") && edtTxtPW.getText().toString().equals("password")) {
+                  FragmentTransaction fr = getParentFragmentManager().beginTransaction();
+                  fr.replace(R.id.flFragment, profileFriendsFragment);
+                  fr.commit();
+               // txtViewErrorMsg.setText("pass?");
             } else {
-                txtViewErrorMsg.setText("Failed! YOU SUCC");
+                txtViewErrorMsg.setText("Failed! Username or password incorrect" + edtTxtPW.getText().toString());
             }
         });
 
