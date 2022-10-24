@@ -16,6 +16,8 @@ import com.BITS.TouchGrass.R;
 public class ProfileMainFragment extends Fragment implements View.OnClickListener {
     Button myButton;
     View myView;
+    TextView txtViewErrorMsg;
+    EditText editTxtUsername, edtTxtPW;
 
 
     @Override
@@ -23,8 +25,24 @@ public class ProfileMainFragment extends Fragment implements View.OnClickListene
         myView = inflater.inflate(R.layout.fragment_profile_main, container, false);
         myButton = (Button) myView.findViewById(R.id.btnLogin);
         myButton.setOnClickListener(this);
+        txtViewErrorMsg = myView.findViewById(R.id.txtViewErrorMsg);
+        editTxtUsername = myView.findViewById(R.id.editTxtUsername);
+        edtTxtPW = myView.findViewById(R.id.edtTxtRegPW);
         // Inflate the layout for this fragment
-
+        return myView;
        
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnLogin:
+                if (editTxtUsername.getText().toString().equalsIgnoreCase("bob")) {
+                    txtViewErrorMsg.setText("Success! WEENER!");
+                } else {
+                    txtViewErrorMsg.setText("Failed! YOU SUCC");
+                }
+                break;
+        }
     }
 }
