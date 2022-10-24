@@ -12,12 +12,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:autofillHints=""
         android:ems="10"
         android:hint="Username"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:textColorHint="#757575"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -31,22 +29,22 @@
         android:hint="Password"
         android:inputType="textPassword"
         android:minHeight="48dp"
-        android:textColorHint="#757575"
         app:layout_constraintEnd_toEndOf="@+id/editTxtUsername"
         app:layout_constraintStart_toStartOf="@+id/editTxtUsername"
-        app:layout_constraintTop_toBottomOf="@+id/editTxtUsername"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@+id/editTxtUsername" />
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="110dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="30dp"
-        android:onClick="onLoginBtnClick"
-        android:text="Login"
-        app:layout_constraintEnd_toEndOf="@+id/txtViewErrorMsg"
-        app:layout_constraintStart_toStartOf="@+id/txtViewErrorMsg"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewErrorMsg" />
+    <EditText
+        android:id="@+id/edtTxtRegPWConfirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:hint="Confirm Password"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="@+id/edtTxtRegPW"
+        app:layout_constraintStart_toStartOf="@+id/edtTxtRegPW"
+        app:layout_constraintTop_toBottomOf="@+id/edtTxtRegPW" />
 
     <Button
         android:id="@+id/btnRegister"
@@ -67,16 +65,15 @@
         android:src="@drawable/ic_launcher_foreground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ImageContrastCheck" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txtViewErrorMsg"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/edtTxtRegPW"
-        app:layout_constraintStart_toStartOf="@+id/edtTxtRegPW"
-        app:layout_constraintTop_toBottomOf="@+id/edtTxtRegPW" />
+        app:layout_constraintEnd_toEndOf="@+id/edtTxtRegPWConfirm"
+        app:layout_constraintStart_toStartOf="@+id/edtTxtRegPWConfirm"
+        app:layout_constraintTop_toBottomOf="@+id/edtTxtRegPWConfirm" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
