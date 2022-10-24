@@ -18,4 +18,18 @@
     <string name="self">Self</string>
     <string name="your_reminders">Your Reminders</string>
     <string name="make_group_reminder">Make Group Reminder</string>
+    <string name="set_time">Set Time</string>
+    <string name="left_arrow"><![CDATA[<-]]></string>
+    <string name="right_arrow"><![CDATA[->]]></string>
+
+    <string-array name="repeat_reminder">
+        <item>Never</item>
+        <item>Daily</item>
+        <item>Every 2 Days</item>
+        <item>Every 3 Days</item>
+        <item>Weekly</item>
+        <item>Fortnightly</item>
+        <item>Monthly</item>
+        <item>Custom…</item>
+    </string-array>
 </resources>

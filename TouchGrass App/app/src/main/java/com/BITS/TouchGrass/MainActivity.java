@@ -1,17 +1,17 @@
 package com.BITS.TouchGrass;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 
 import com.BITS.TouchGrass.calendar.*;
-import com.BITS.TouchGrass.home.*;
 import com.BITS.TouchGrass.reminders.*;
 import com.BITS.TouchGrass.challenges.*;
 import com.BITS.TouchGrass.profile.*;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import android.os.Bundle;
 import android.view.MenuItem;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
 
@@ -22,18 +22,20 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Objects.requireNonNull(getSupportActionBar()).hide();
+
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
-        bottomNavigationView.setSelectedItemId(R.id.home);
-
+        bottomNavigationView.setSelectedItemId(R.id.calendar);
     }
 
-    HomeFragment homeFragment = new HomeFragment();
+
     ChallengesMainFragment challengesMainFragment = new ChallengesMainFragment();
     CalendarMainFragment calendarMainFragment = new CalendarMainFragment();
     RemindersMainFragment remindersMainFragment = new RemindersMainFragment();
     ProfileMainFragment profileMainFragment = new ProfileMainFragment();
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -47,10 +49,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, calendarMainFragment).commit();
                 return true;
 
-            case R.id.home:
-                getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, homeFragment).commit();
-                return true;
-
             case R.id.reminders:
                 getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, remindersMainFragment).commit();
                 return true;
@@ -60,5 +58,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 return true;
         }
         return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() > 0) {
+            getFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
+        }
     }
 }

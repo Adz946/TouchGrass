@@ -25,12 +25,12 @@ public class Example_Stuff extends AppCompatActivity {
         ImageButton ib = findViewById(R.id.Change);
         if (i == 0) {
             grayskull.setText("I have the power!");
-            ib.setImageResource(R.drawable.man);
+            ib.setImageResource(R.drawable.example_man);
             i = 1;
         }
         else if (i == 1) {
             grayskull.setText("By the power of Grayskull...");
-            ib.setImageResource(R.drawable.skull);
+            ib.setImageResource(R.drawable.example_skull);
             i = 0;
         }
     }
