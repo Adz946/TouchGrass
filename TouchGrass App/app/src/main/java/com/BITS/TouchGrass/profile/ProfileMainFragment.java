@@ -17,8 +17,8 @@ import com.BITS.TouchGrass.reminders.EditReminderFragment;
 
 public class ProfileMainFragment extends Fragment {
 
-    Button logInBtn, registerBtn;
     View view;
+    Button logInBtn, registerBtn;
     TextView txtViewErrorMsg;
     EditText editTxtUsername, edtTxtPW;
 
@@ -52,7 +52,6 @@ public class ProfileMainFragment extends Fragment {
                   FragmentTransaction fr = getParentFragmentManager().beginTransaction();
                   fr.replace(R.id.flFragment, profileFriendsFragment);
                   fr.commit();
-               // txtViewErrorMsg.setText("pass?");
             } else {
                 txtViewErrorMsg.setText("Failed! Username or password incorrect" + edtTxtPW.getText().toString());
             }
