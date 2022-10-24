@@ -27,24 +27,34 @@ public class CalendarMainFragment extends Fragment implements CalendarAdapter.On
     private RecyclerView calendarRecyclerView;
     private LocalDate selectedDate;
 
+    private Button previousMonthBtn, nextMonthBtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_calendar_main, container, false);
 
-        calendarRecyclerView = view.findViewById(R.id.calendarRecyclerView);
-        monthYearText = view.findViewById(R.id.monthYearTV);
+        initWidgets(view);
+
+
         selectedDate = LocalDate.now();
         setMonthView();
-
-        Button previousMonthBtn = view.findViewById(R.id.previous_month_button);
-        previousMonthBtn.setOnClickListener(this::previousMonthAction);
-
-        Button nextMonthBtn = view.findViewById(R.id.next_month_button);
-        nextMonthBtn.setOnClickListener(this::nextMonthAction);
+        setListeners();
 
         return view;
+    }
+
+
+    private void initWidgets(View view) {
+        calendarRecyclerView = view.findViewById(R.id.calendarRecyclerView);
+        monthYearText = view.findViewById(R.id.monthYearTV);
+        previousMonthBtn = view.findViewById(R.id.previous_month_button);
+        nextMonthBtn = view.findViewById(R.id.next_month_button);
+    }
+
+    private void setListeners() {
+        previousMonthBtn.setOnClickListener(this::previousMonthAction);
+        nextMonthBtn.setOnClickListener(this::nextMonthAction);
     }
 
     private void setMonthView() {

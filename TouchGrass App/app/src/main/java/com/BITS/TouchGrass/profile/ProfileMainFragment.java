@@ -25,6 +25,13 @@ public class ProfileMainFragment extends Fragment {
     private final ProfileRegisterFragment profileRegisterFragment = new ProfileRegisterFragment();
     private final ProfileFriendsFragment profileFriendsFragment = new ProfileFriendsFragment();
 
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -64,6 +71,7 @@ public class ProfileMainFragment extends Fragment {
         });
     }
 
-
-
+//    public void onResume() {
+//        super.onResume();
+//    }
 }

@@ -15,12 +15,17 @@ import android.widget.ListView;
 import com.BITS.TouchGrass.R;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
+
+// https://www.geeksforgeeks.org/android-recyclerview/
 public class RemindersMainFragment extends Fragment {
 
     private ListView selfReminderListView, groupReminderListView;
     private final NewReminderFragment newReminderFragment = new NewReminderFragment();
     private final EditReminderFragment editReminderFragment = new EditReminderFragment();
+
+    Button newReminderButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,21 +39,27 @@ public class RemindersMainFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_reminders_main, container, false);
 
-        Button newReminderButton = view.findViewById(R.id.new_reminder_button);
+        initWidgets(view);
+        setListeners();
+
+
+        return view;
+    }
+
+    private void initWidgets(View view) {
+        newReminderButton = view.findViewById(R.id.new_reminder_button);
+    }
+
+    private void setListeners() {
         newReminderButton.setOnClickListener(v -> {
             FragmentTransaction fr = getParentFragmentManager().beginTransaction();
             fr.replace(R.id.flFragment, editReminderFragment);
             fr.commit();
         });
-
-        return view;
     }
 
-//    public void onResume() {
-//        super.onResume();
-//        setEventAdapter();
-//    }
-//
+
+
 //    public void setEventAdapter() {
 //        ArrayList<Reminder> currentReminders = Reminder.remindersList;
 //        ReminderAdapter reminderAdapter = new ReminderAdapter(requireActivity().getApplicationContext(), currentReminders);

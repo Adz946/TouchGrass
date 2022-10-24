@@ -1,61 +1,62 @@
 package com.BITS.TouchGrass.reminders;
 
-import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.BITS.TouchGrass.R;
 
-import java.util.List;
+import java.util.ArrayList;
 
-public class ReminderAdapter extends ArrayAdapter<Reminder> {
+class ReminderAdapter extends RecyclerView.Adapter<ReminderViewHolder> {
 
-    public ReminderAdapter(@NonNull Context context, List<Reminder> reminders) {
-        super(context, 0, reminders);
+
+    private final ArrayList<Reminder> remindersData;
+
+
+    public ReminderAdapter(ArrayList<Reminder> remindersData) {
+        this.remindersData = remindersData;
     }
+
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public ReminderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View view = inflater.inflate(R.layout.reminder_cell, parent, false);
 
-        Reminder reminder = getItem(position);
-
-        if (convertView == null)
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.reminder_cell, parent, false);
+        return new ReminderViewHolder(view);
+    }
 
 
-        TextView reminderDateTV, reminderTimeTV = null, reminderTitleTV, colouredPriorityBar;
-        String reminderDate, reminderTime, reminderTitle, reminderPriority;
+    @Override
+    public void onBindViewHolder(@NonNull ReminderViewHolder holder, int position) {
+        int index = holder.getAdapterPosition();
+        Reminder currentReminder = remindersData.get(position);
+        holder.reminderDate.setText(currentReminder.getNextDate().toString());
+        holder.reminderTime.setText(currentReminder.getTime().toString());
+        holder.reminderTitle.setText(currentReminder.getTitle());
+        holder.reminderPriorityBar.setBackground(currentReminder.getPriority());
+        holder.reminderEditBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // go to edit reminder, but with all the details filled in.
+            }
+        });
+    }
 
-//        reminderDateTV = convertView.findViewById(R.id.reminderDateTV);
-//        reminderDate = String.valueOf(reminder.getEndDate());
-//        reminderDateTV.setText(reminderDate);
 
-//        if (!reminder.isAllDayReminder())
-//            reminderTimeTV = convertView.findViewById(R.id.reminderTimeTV);
-//            reminderTime = String.valueOf(reminder.getTime());
-//            reminderTimeTV.setText(reminderTime);
-//
-        reminderTitleTV = convertView.findViewById(R.id.reminderTitleTV);
-        reminderTitle = String.valueOf(reminder.getTitle());
-        reminderTitleTV.setText(reminderTitle);
-//
-//        colouredPriorityBar = convertView.findViewById(R.id.colouredPriorityBar);
-//        reminderPriority = reminder.getPriority();
-//        if (reminderPriority.equalsIgnoreCase("low"))
-//            colouredPriorityBar.setBackground(Drawable.createFromPath("@drawable/priority_button_sky_blue"));
-//        if (reminderPriority.equalsIgnoreCase("moderate"))
-//            colouredPriorityBar.setBackground(Drawable.createFromPath("@drawable/priority_button_yellow"));
-//        if (reminderPriority.equalsIgnoreCase("high"))
-//            colouredPriorityBar.setBackground(Drawable.createFromPath("@drawable/priority_button_red"));
+    @Override
+    public int getItemCount() {
+        return remindersData.size();
+    }
 
-        return convertView;
+
+    @Override
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
     }
 }

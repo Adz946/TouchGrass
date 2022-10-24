@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.BITS.TouchGrass.R;
 
-public class CalendarViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+public class CalendarViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     public final TextView dayOfMonth;
     private final CalendarAdapter.OnItemListener onItemListener;
