@@ -3,6 +3,7 @@ package com.BITS.TouchGrass.profile;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,37 +13,54 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.BITS.TouchGrass.R;
+import com.BITS.TouchGrass.reminders.EditReminderFragment;
 
-public class ProfileMainFragment extends Fragment implements View.OnClickListener {
-    Button myButton;
-    View myView;
+public class ProfileMainFragment extends Fragment {
+
+    Button logInBtn, registerBtn;
+    View view;
     TextView txtViewErrorMsg;
     EditText editTxtUsername, edtTxtPW;
 
+    private final ProfileRegisterFragment profileRegisterFragment = new ProfileRegisterFragment();
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        myView = inflater.inflate(R.layout.fragment_profile_main, container, false);
-        myButton = (Button) myView.findViewById(R.id.btnLogin);
-        myButton.setOnClickListener(this);
-        txtViewErrorMsg = myView.findViewById(R.id.txtViewErrorMsg);
-        editTxtUsername = myView.findViewById(R.id.editTxtUsername);
-        edtTxtPW = myView.findViewById(R.id.edtTxtRegPW);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return myView;
-       
+        view = inflater.inflate(R.layout.fragment_profile_main, container, false);
+
+        // Initialise all the UI elements
+        logInBtn = (Button) view.findViewById(R.id.btnLogin);
+        registerBtn = (Button) view.findViewById(R.id.btnRegister);
+        txtViewErrorMsg = (TextView) view.findViewById(R.id.txtViewErrorMsg);
+        editTxtUsername = (EditText) view.findViewById(R.id.editTxtUsername);
+        edtTxtPW = view.findViewById(R.id.edtTxtRegPW);
+
+        // Methods to call
+        setListeners();
+
+        return view;
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btnLogin:
-                if (editTxtUsername.getText().toString().equalsIgnoreCase("bob")) {
-                    txtViewErrorMsg.setText("Success! WEENER!");
-                } else {
-                    txtViewErrorMsg.setText("Failed! YOU SUCC");
-                }
-                break;
-        }
+
+    public void setListeners() {
+
+        logInBtn.setOnClickListener(v -> {
+            if (editTxtUsername.getText().toString().equalsIgnoreCase("bob")) {
+                txtViewErrorMsg.setText("Success! WEENER!");
+            } else {
+                txtViewErrorMsg.setText("Failed! YOU SUCC");
+            }
+        });
+
+        registerBtn.setOnClickListener(v -> {
+            FragmentTransaction fr = getParentFragmentManager().beginTransaction();
+            fr.replace(R.id.flFragment, profileRegisterFragment);
+            fr.commit();
+        });
     }
+
+
+
 }
