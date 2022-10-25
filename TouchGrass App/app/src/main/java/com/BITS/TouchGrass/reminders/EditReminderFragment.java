@@ -280,7 +280,7 @@ public class EditReminderFragment extends Fragment {
         if (isAllDayReminder)
             setTimeBtn.setBackgroundColor(Color.LTGRAY);
         else
-            setTimeBtn.setBackgroundColor(Color.parseColor("#7DB27B"));
+            setTimeBtn.setBackgroundColor(getResources().getColor(R.color.grass_green));
     }
 
 

@@ -2,6 +2,7 @@ package com.BITS.TouchGrass.profile;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -29,13 +30,15 @@ public class ProfileMainFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+
+        }
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_profile_main, container, false);
 
@@ -62,6 +65,7 @@ public class ProfileMainFragment extends Fragment {
                   fr.commit();
             } else {
                 txtViewErrorMsg.setText("Failed! Username or password incorrect" + edtTxtPW.getText().toString());
+                txtViewErrorMsg.setTextColor(getResources().getColor(R.color.red));
             }
         });
 
@@ -72,7 +76,15 @@ public class ProfileMainFragment extends Fragment {
         });
     }
 
-//    public void onResume() {
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+
+
+    }
+
+    //    public void onResume() {
 //        super.onResume();
 //    }
 }

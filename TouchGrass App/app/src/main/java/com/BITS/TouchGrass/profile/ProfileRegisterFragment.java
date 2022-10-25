@@ -13,35 +13,43 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.BITS.TouchGrass.R;
 
-
 public class ProfileRegisterFragment extends Fragment {
 
-    View view;
     Button btnRegister;
     TextView txtViewErrorMsg;
     EditText edtTxtUsername, edtTxtPW, edtTxtPWConfirm;
 
     private final ProfileFriendsFragment profileFriendsFragment = new ProfileFriendsFragment();
-    private final ProfileMainFragment profmain = new ProfileMainFragment();
+    //private final ProfileMainFragment profileMainFragment = new ProfileMainFragment();
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_profile_register, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile_register, container, false);
 
+        initWidgets(view);
+        setListeners();
+
+        return view;
+    }
+
+
+    private void initWidgets(View view) {
         btnRegister = (Button) view.findViewById(R.id.btnRegister);
         txtViewErrorMsg = (TextView) view.findViewById(R.id.txtViewErrorMsg);
         edtTxtUsername = (EditText) view.findViewById(R.id.editTxtUsername);
         edtTxtPW = (EditText) view.findViewById(R.id.edtTxtRegPW);
         edtTxtPWConfirm = (EditText) view.findViewById(R.id.edtTxtRegPWConfirm);
-
-        setListeners();
-
-        return view;
-
     }
+
 
     private void setListeners() {
 
@@ -51,6 +59,7 @@ public class ProfileRegisterFragment extends Fragment {
                 fr.replace(R.id.flFragment, profileFriendsFragment);
                 fr.commit();
                 txtViewErrorMsg.setText("Success!");
+
             }
             else if (!edtTxtPW.getText().toString().equals(edtTxtPWConfirm.getText().toString())) {
                 txtViewErrorMsg.setText("password and password confirmation mismatch...");
@@ -61,6 +70,4 @@ public class ProfileRegisterFragment extends Fragment {
             }
         });
     }
-
-
 }

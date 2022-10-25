@@ -21,8 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/left_arrow"
-            android:textColor="@color/light_grass_green"
-            android:background="@android:color/transparent"
+            style="?android:attr/buttonBarButtonStyle"
             android:textStyle="bold"
             android:textSize="20sp"/>
 
@@ -42,8 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/right_arrow"
-            android:textColor="@color/light_grass_green"
-            android:background="@android:color/transparent"
+            style="?android:attr/buttonBarButtonStyle"
             android:textStyle="bold"
             android:textSize="20sp"/>
 

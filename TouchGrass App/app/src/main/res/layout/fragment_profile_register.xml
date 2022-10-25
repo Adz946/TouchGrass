@@ -51,8 +51,18 @@
         android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
-        android:onClick="onRegisterBtnClick"
         android:text="Register"
+        app:layout_constraintEnd_toEndOf="@+id/edtTxtRegPW"
+        app:layout_constraintStart_toStartOf="@+id/edtTxtRegPW"
+        app:layout_constraintTop_toBottomOf="@+id/edtTxtRegPW" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="210dp"
+        android:text="I have an account"
+        style="?android:attr/buttonBarButtonStyle"
         app:layout_constraintEnd_toEndOf="@+id/edtTxtRegPW"
         app:layout_constraintStart_toStartOf="@+id/edtTxtRegPW"
         app:layout_constraintTop_toBottomOf="@+id/edtTxtRegPW" />
@@ -69,7 +79,7 @@
 
     <TextView
         android:id="@+id/txtViewErrorMsg"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="@+id/edtTxtRegPWConfirm"
