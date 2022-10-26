@@ -81,5 +81,9 @@ public class ProfileRegisterFragment extends Fragment {
 
             }
         });
+
+        returnToLoginBtn.setOnClickListener(v -> {
+            getParentFragmentManager().popBackStack();
+        });
     }
 }
