@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Reminder {
 
-    public static ArrayList<Reminder> remindersList = new ArrayList<>();
+//    public static ArrayList<Reminder> remindersList = new ArrayList<>();
 
     private String title;
     private boolean groupReminder;
@@ -17,11 +17,11 @@ public class Reminder {
     private LocalDate nextDate;
     private LocalDate endDate;
     private LocalTime time;
-    private Drawable priority;
+    private int priority;
 
 
     public Reminder(String title, boolean groupReminder, boolean allDayReminder,
-                    LocalDate startDate, LocalDate nextDate, LocalDate endDate, LocalTime time, Drawable priority) {
+                    LocalDate startDate, LocalDate nextDate, LocalDate endDate, LocalTime time, int priority) {
         this.title = title;
         this.groupReminder = groupReminder;
         this.allDayReminder = allDayReminder;
@@ -92,12 +92,11 @@ public class Reminder {
         this.time = time;
     }
 
-    public Drawable getPriority() {
+    public int getPriority() {
         return priority;
     }
 
-    public void setPriority(Drawable priority) {
+    public void setPriority(int priority) {
         this.priority = priority;
     }
-
 }

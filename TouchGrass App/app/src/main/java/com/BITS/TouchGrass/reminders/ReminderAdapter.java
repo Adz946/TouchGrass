@@ -1,5 +1,6 @@
 package com.BITS.TouchGrass.reminders;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +14,13 @@ import java.util.ArrayList;
 
 class ReminderAdapter extends RecyclerView.Adapter<ReminderViewHolder> {
 
+    private final ArrayList<Reminder> currentReminders;
+    Context context;
 
-    private final ArrayList<Reminder> remindersData;
-
-
-    public ReminderAdapter(ArrayList<Reminder> remindersData) {
-        this.remindersData = remindersData;
+    public ReminderAdapter(Context context, ArrayList<Reminder> currentReminders) {
+        this.context = context;
+        this.currentReminders = currentReminders;
     }
-
 
     @NonNull
     @Override
@@ -31,29 +31,20 @@ class ReminderAdapter extends RecyclerView.Adapter<ReminderViewHolder> {
         return new ReminderViewHolder(view);
     }
 
-
     @Override
     public void onBindViewHolder(@NonNull ReminderViewHolder holder, int position) {
-        int index = holder.getAdapterPosition();
-        Reminder currentReminder = remindersData.get(position);
+        Reminder currentReminder = this.currentReminders.get(position);
         holder.reminderDate.setText(currentReminder.getNextDate().toString());
         holder.reminderTime.setText(currentReminder.getTime().toString());
         holder.reminderTitle.setText(currentReminder.getTitle());
-        holder.reminderPriorityBar.setBackground(currentReminder.getPriority());
-        holder.reminderEditBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // go to edit reminder, but with all the details filled in.
-            }
-        });
+        holder.reminderPriorityBar.setBackgroundColor(currentReminder.getPriority());
+        holder.reminderEditBtn.setText("Buttone");
     }
-
 
     @Override
     public int getItemCount() {
-        return remindersData.size();
+        return currentReminders.size();
     }
-
 
     @Override
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
