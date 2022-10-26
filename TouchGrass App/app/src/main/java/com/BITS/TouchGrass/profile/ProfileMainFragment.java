@@ -65,7 +65,6 @@ public class ProfileMainFragment extends Fragment {
                   fr.commit();
             } else {
                 txtViewErrorMsg.setText("Failed! Username or password incorrect" + edtTxtPW.getText().toString());
-                txtViewErrorMsg.setTextColor(getResources().getColor(R.color.red));
             }
         });
 
@@ -80,8 +79,6 @@ public class ProfileMainFragment extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-
-
 
     }
 

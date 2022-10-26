@@ -57,7 +57,7 @@
         app:layout_constraintTop_toBottomOf="@+id/edtTxtRegPW" />
 
     <Button
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnReturnToLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="210dp"
@@ -82,6 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:textColor="@color/red"
         app:layout_constraintEnd_toEndOf="@+id/edtTxtRegPWConfirm"
         app:layout_constraintStart_toStartOf="@+id/edtTxtRegPWConfirm"
         app:layout_constraintTop_toBottomOf="@+id/edtTxtRegPWConfirm" />
