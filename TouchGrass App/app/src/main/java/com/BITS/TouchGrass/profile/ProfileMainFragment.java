@@ -72,6 +72,7 @@ public class ProfileMainFragment extends Fragment {
         registerBtn.setOnClickListener(v -> {
             FragmentTransaction fr = getParentFragmentManager().beginTransaction();
             fr.replace(R.id.flFragment, profileRegisterFragment);
+            fr.addToBackStack("test");
             fr.commit();
         });
     }

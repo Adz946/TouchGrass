@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.BITS.TouchGrass.R;
@@ -18,9 +19,6 @@ public class ProfileRegisterFragment extends Fragment {
     Button btnRegister;
     TextView txtViewErrorMsg;
     EditText edtTxtUsername, edtTxtPW, edtTxtPWConfirm;
-
-    private final ProfileFriendsFragment profileFriendsFragment = new ProfileFriendsFragment();
-    //private final ProfileMainFragment profileMainFragment = new ProfileMainFragment();
 
 
     @Override
@@ -55,10 +53,8 @@ public class ProfileRegisterFragment extends Fragment {
 
         btnRegister.setOnClickListener(v -> {
             if (!edtTxtUsername.getText().toString().equalsIgnoreCase("bob") && edtTxtPW.getText().toString().equals(edtTxtPWConfirm.getText().toString())) {
-                FragmentTransaction fr = getParentFragmentManager().beginTransaction();
-                fr.replace(R.id.flFragment, profileFriendsFragment);
-                fr.commit();
-                txtViewErrorMsg.setText("Success!");
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                fm.popBackStack();
 
             }
             else if (!edtTxtPW.getText().toString().equals(edtTxtPWConfirm.getText().toString())) {
