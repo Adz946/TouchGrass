@@ -57,6 +57,7 @@ public class RemindersMainFragment extends Fragment {
         newReminderButton.setOnClickListener(v -> {
             FragmentTransaction fr = getParentFragmentManager().beginTransaction();
             fr.replace(R.id.flFragment, editReminderFragment);
+            fr.addToBackStack("reminder");
             fr.commit();
         });
     }

@@ -83,7 +83,7 @@ public class ProfileRegisterFragment extends Fragment {
         });
 
         returnToLoginBtn.setOnClickListener(v -> {
-            getParentFragmentManager().popBackStack();
+            getParentFragmentManager().popBackStack();  // go back to profile_main/login_screen
         });
     }
 }
