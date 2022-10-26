@@ -38,7 +38,6 @@ class ReminderAdapter extends RecyclerView.Adapter<ReminderViewHolder> {
         holder.reminderTime.setText(currentReminder.getTime().toString());
         holder.reminderTitle.setText(currentReminder.getTitle());
         holder.reminderPriorityBar.setBackgroundColor(currentReminder.getPriority());
-        holder.reminderEditBtn.setText("Buttone");
     }
 
     @Override
