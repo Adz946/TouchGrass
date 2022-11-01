@@ -70,23 +70,30 @@ public class RemindersMainFragment extends Fragment {
 
     public void setEventAdapter() {
         ArrayList<Reminder> currentReminders = new ArrayList<>();
+        ArrayList<SelfReminder> currentSelfReminders = new ArrayList<>();
+//        ArrayList<GroupReminder> currentGroupReminders = new ArrayList<>();
 
-        currentReminders.add(new Reminder("Yo", false, false, LocalDate.now(),
+        currentReminders.add(new SelfReminder("Yo", false, LocalDate.now(),
                 LocalDate.now(), LocalDate.now(), LocalTime.now(), R.drawable.priority_button_blue));
 
-        currentReminders.add(new Reminder("What", false, false, LocalDate.now(),
+        currentSelfReminders.add(new SelfReminder("What", false, LocalDate.now(),
                 LocalDate.now(), LocalDate.now(), LocalTime.now(), R.drawable.priority_button_red));
 
-        currentReminders.add(new Reminder("Is", false, false, LocalDate.now(),
+        currentReminders.add(new SelfReminder("Is", false, LocalDate.now(),
                 LocalDate.now(), LocalDate.now(), LocalTime.now(), R.drawable.priority_button_yellow));
 
-        currentReminders.add(new Reminder("UP!", false, false, LocalDate.now(),
+        currentReminders.add(new GroupReminder("UP!", false, LocalDate.now(),
                 LocalDate.now(), LocalDate.now(), LocalTime.now(), R.drawable.priority_button_blue));
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        selfReminderRecyclerView.setLayoutManager(layoutManager);
+        LinearLayoutManager selfLayoutManager = new LinearLayoutManager(getContext());
+        selfReminderRecyclerView.setLayoutManager(selfLayoutManager);
+
+        LinearLayoutManager groupLayoutManager = new LinearLayoutManager(getContext());
+        groupReminderRecyclerView.setLayoutManager(groupLayoutManager);
 
         ReminderAdapter reminderAdapter = new ReminderAdapter(requireActivity().getApplicationContext(), currentReminders);
+//        ReminderAdapter selfReminderAdapter = new ReminderAdapter(requireActivity().getApplicationContext(), currentReminders);
+//        ReminderAdapter groupReminderAdapter = new ReminderAdapter(requireActivity().getApplicationContext(), currentReminders);
 
         selfReminderRecyclerView.setAdapter(reminderAdapter);
     }

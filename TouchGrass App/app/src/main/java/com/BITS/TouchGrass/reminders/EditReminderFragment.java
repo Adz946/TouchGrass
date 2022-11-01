@@ -39,7 +39,7 @@ public class EditReminderFragment extends Fragment {
     ArrayList<Friend> friendsSharedWith = new ArrayList<Friend>();
 
     String repeatFrequency, priority, description;
-    boolean groupReminder, isAllDayReminder;
+    boolean isGroupReminder, isAllDayReminder;
     LocalDate startDate, endDate;
     Ringtone ringtone;
 
@@ -283,6 +283,22 @@ public class EditReminderFragment extends Fragment {
             setTimeBtn.setBackgroundColor(Color.LTGRAY);
         else
             setTimeBtn.setBackgroundColor(getResources().getColor(R.color.grass_green));
+    }
+
+    private void addReminder() {
+        if (isGroupReminder) {
+            addGroupReminder();
+        } else {
+            addSelfReminder();
+        }
+    }
+
+    private void addSelfReminder() {
+//        SelfReminder reminder = new SelfReminder();
+    }
+
+    private void addGroupReminder() {
+
     }
 
 

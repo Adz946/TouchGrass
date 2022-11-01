@@ -11,7 +11,6 @@ public class Reminder {
 //    public static ArrayList<Reminder> remindersList = new ArrayList<>();
 
     private String title;
-    private boolean groupReminder;
     private boolean allDayReminder;
     private LocalDate startDate;
     private LocalDate nextDate;
@@ -20,10 +19,9 @@ public class Reminder {
     private int priority;
 
 
-    public Reminder(String title, boolean groupReminder, boolean allDayReminder,
-                    LocalDate startDate, LocalDate nextDate, LocalDate endDate, LocalTime time, int priority) {
+    public Reminder(String title, boolean allDayReminder, LocalDate startDate,
+                    LocalDate nextDate, LocalDate endDate, LocalTime time, int priority) {
         this.title = title;
-        this.groupReminder = groupReminder;
         this.allDayReminder = allDayReminder;
         this.startDate = startDate;
         this.nextDate = nextDate;
@@ -42,14 +40,6 @@ public class Reminder {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public boolean isGroupReminder() {
-        return groupReminder;
-    }
-
-    public void setGroupReminder(boolean groupReminder) {
-        this.groupReminder = groupReminder;
     }
 
     public boolean isAllDayReminder() {
