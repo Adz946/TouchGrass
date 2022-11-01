@@ -19,7 +19,6 @@
         android:layout_height="60dp"
         android:orientation="horizontal">
 
-
         <View
             android:id="@+id/colouredPriorityBar"
             android:layout_width="5dp"

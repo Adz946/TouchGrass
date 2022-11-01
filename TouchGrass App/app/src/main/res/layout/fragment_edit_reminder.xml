@@ -2,7 +2,7 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".reminders.NewReminderFragment"
+    tools:context=".reminders.EditReminderFragment"
     tools:ignore="HardcodedText"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -54,6 +54,12 @@
                 android:layout_height="wrap_content"
                 android:text="Shared with:"
                 android:textSize="18sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </androidx.recyclerview.widget.RecyclerView>
 
         </LinearLayout>
 
@@ -255,9 +261,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:layout_marginBottom="40dp"
         android:inputType="text"
         android:minHeight="50dp"
-        android:hint="Write a description"
+        android:hint="Description (optional)"
         android:importantForAutofill="no" />
 
 
@@ -270,7 +277,7 @@
 
             <Button
                 android:id="@+id/cancel_button"
-                android:layout_width="50dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Cancel"
                 android:layout_weight="1"
@@ -279,9 +286,13 @@
         <!-- Adam's Note - setting both buttons to 50/0/2/etc. dp
                 makes them both half the size of the screen (width) -->
 
+        <!-- Clayton's Response Note - the width should be 0dp, because
+                we're using layout weight of 1 for both buttons. This will
+                do the same thing while also staying flexible across screen sizes -->
+
             <Button
                 android:id="@+id/add_reminder_button"
-                android:layout_width="50dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Add Reminder"
                 android:layout_weight="1"

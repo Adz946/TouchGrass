@@ -25,7 +25,6 @@ import java.util.Objects;
 // https://www.geeksforgeeks.org/android-recyclerview/
 public class RemindersMainFragment extends Fragment {
 
-    private final NewReminderFragment newReminderFragment = new NewReminderFragment();
     private final EditReminderFragment editReminderFragment = new EditReminderFragment();
 
     Button newReminderButton;
