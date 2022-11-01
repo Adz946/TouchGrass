@@ -21,6 +21,7 @@
     <string name="set_time">Set Time</string>
     <string name="left_arrow"><![CDATA[<-]]></string>
     <string name="right_arrow"><![CDATA[->]]></string>
+    <string name="set_tone">Set Tone</string>
 
     <string-array name="repeat_reminder">
         <item>Never</item>

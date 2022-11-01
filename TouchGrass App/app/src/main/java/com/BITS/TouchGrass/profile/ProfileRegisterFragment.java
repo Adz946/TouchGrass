@@ -40,12 +40,12 @@ public class ProfileRegisterFragment extends Fragment {
 
 
     private void initWidgets(View view) {
-        btnRegister = (Button) view.findViewById(R.id.btnRegister);
-        txtViewErrorMsg = (TextView) view.findViewById(R.id.txtViewErrorMsg);
-        edtTxtUsername = (EditText) view.findViewById(R.id.editTxtUsername);
-        edtTxtPW = (EditText) view.findViewById(R.id.edtTxtRegPW);
-        edtTxtPWConfirm = (EditText) view.findViewById(R.id.edtTxtRegPWConfirm);
-        returnToLoginBtn = (Button) view.findViewById(R.id.btnReturnToLogin);
+        btnRegister = view.findViewById(R.id.btnRegister);
+        txtViewErrorMsg = view.findViewById(R.id.txtViewErrorMsg);
+        edtTxtUsername = view.findViewById(R.id.editTxtUsername);
+        edtTxtPW = view.findViewById(R.id.edtTxtRegPW);
+        edtTxtPWConfirm = view.findViewById(R.id.edtTxtRegPWConfirm);
+        returnToLoginBtn = view.findViewById(R.id.btnReturnToLogin);
     }
 
 
