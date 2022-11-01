@@ -159,7 +159,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="16dp"
-                    android:text="@string/set_time" />
+                    android:text="SET TIME" />
 
             </LinearLayout>
 
@@ -251,7 +251,7 @@
             android:id="@+id/set_tone_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Set Tone"
+            android:text="SET TONE"
             android:layout_gravity="center" />
 
     </LinearLayout>

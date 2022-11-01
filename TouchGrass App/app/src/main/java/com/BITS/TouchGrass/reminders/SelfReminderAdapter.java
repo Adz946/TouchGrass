@@ -1,6 +1,7 @@
 package com.BITS.TouchGrass.reminders;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +13,12 @@ import com.BITS.TouchGrass.R;
 
 import java.util.ArrayList;
 
-class ReminderAdapter extends RecyclerView.Adapter<ReminderViewHolder> {
+class SelfReminderAdapter extends RecyclerView.Adapter<ReminderViewHolder> {
 
-    private final ArrayList<Reminder> currentReminders;
+    private final ArrayList<SelfReminder> currentReminders;
     Context context;
 
-    public ReminderAdapter(Context context, ArrayList<Reminder> currentReminders) {
+    public SelfReminderAdapter(Context context, ArrayList<SelfReminder> currentReminders) {
         this.context = context;
         this.currentReminders = currentReminders;
     }
@@ -34,10 +35,24 @@ class ReminderAdapter extends RecyclerView.Adapter<ReminderViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ReminderViewHolder holder, int position) {
         Reminder currentReminder = this.currentReminders.get(position);
-        holder.reminderDate.setText(currentReminder.getNextDate().toString());
+        holder.reminderDate.setText(currentReminder.getEndDate().toString());
         holder.reminderTime.setText(currentReminder.getTime().toString());
         holder.reminderTitle.setText(currentReminder.getTitle());
-        holder.reminderPriorityBar.setBackgroundColor(currentReminder.getPriority());
+        holder.reminderPriorityBar.setBackground(getPriorityColor(currentReminder));
+    }
+
+    private Drawable getPriorityColor(Reminder currentReminder) {
+        String priority = currentReminder.getPriority();
+        switch (priority) {
+            case "low":
+                return Drawable.createFromPath(String.valueOf(R.drawable.priority_button_blue));
+            case "moderate":
+                return Drawable.createFromPath(String.valueOf(R.drawable.priority_button_yellow));
+            case "high":
+                return Drawable.createFromPath(String.valueOf(R.drawable.priority_button_red));
+            default:
+                return null;
+        }
     }
 
     @Override

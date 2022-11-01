@@ -17,10 +17,10 @@ public class ReminderViewHolder extends RecyclerView.ViewHolder {
 
     public ReminderViewHolder(@NonNull View view) {
         super(view);
-        reminderDate = (TextView) view.findViewById(R.id.reminderDateTV);
-        reminderTime = (TextView) view.findViewById(R.id.reminderTimeTV);
-        reminderTitle = (TextView) view.findViewById(R.id.reminderTitleTV);
-        reminderEditBtn = (Button) view.findViewById(R.id.edit_reminder_button);
-        reminderPriorityBar = (View) view.findViewById(R.id.colouredPriorityBar);
+        reminderDate = view.findViewById(R.id.reminderDateTV);
+        reminderTime = view.findViewById(R.id.reminderTimeTV);
+        reminderTitle = view.findViewById(R.id.reminderTitleTV);
+        reminderEditBtn = view.findViewById(R.id.edit_reminder_button);
+        reminderPriorityBar = view.findViewById(R.id.colouredPriorityBar);
     }
 }
