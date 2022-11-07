@@ -22,7 +22,7 @@ public class Example_Stuff extends AppCompatActivity {
 
     public void Clicker(View V) {
         TextView grayskull = findViewById(R.id.Grayskull);
-        ImageButton ib = findViewById(R.id.Change);
+        ImageView ib = findViewById(R.id.Change);
         if (i == 0) {
             grayskull.setText("I have the power!");
             ib.setImageResource(R.drawable.example_man);

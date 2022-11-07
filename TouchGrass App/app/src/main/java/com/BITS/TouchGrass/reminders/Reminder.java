@@ -8,27 +8,25 @@ import java.util.ArrayList;
 
 public class Reminder {
 
-    public static ArrayList<Reminder> remindersList = new ArrayList<>();
+//    public static ArrayList<Reminder> remindersList = new ArrayList<>();
 
     private String title;
-    private boolean groupReminder;
     private boolean allDayReminder;
     private LocalDate startDate;
-    private LocalDate nextDate;
     private LocalDate endDate;
     private LocalTime time;
-    private Drawable priority;
+    private int repeatFrequency;
+    private String priority;
 
 
-    public Reminder(String title, boolean groupReminder, boolean allDayReminder,
-                    LocalDate startDate, LocalDate nextDate, LocalDate endDate, LocalTime time, Drawable priority) {
+    public Reminder(String title, boolean allDayReminder, LocalDate startDate, LocalDate endDate,
+                    LocalTime time, int repeatFrequency, String priority) {
         this.title = title;
-        this.groupReminder = groupReminder;
         this.allDayReminder = allDayReminder;
         this.startDate = startDate;
-        this.nextDate = nextDate;
         this.endDate = endDate;
         this.time = time;
+        this.repeatFrequency = repeatFrequency;
         this.priority = priority;
     }
 
@@ -42,14 +40,6 @@ public class Reminder {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public boolean isGroupReminder() {
-        return groupReminder;
-    }
-
-    public void setGroupReminder(boolean groupReminder) {
-        this.groupReminder = groupReminder;
     }
 
     public boolean isAllDayReminder() {
@@ -68,14 +58,6 @@ public class Reminder {
         this.startDate = startDate;
     }
 
-    public LocalDate getNextDate() {
-        return nextDate;
-    }
-
-    public void setNextDate(LocalDate nextDate) {
-        this.nextDate = nextDate;
-    }
-
     public LocalDate getEndDate() {
         return endDate;
     }
@@ -92,12 +74,19 @@ public class Reminder {
         this.time = time;
     }
 
-    public Drawable getPriority() {
+    public String getPriority() {
         return priority;
     }
 
-    public void setPriority(Drawable priority) {
+    public void setPriority(String priority) {
         this.priority = priority;
     }
 
+    public int getRepeatFrequency() {
+        return repeatFrequency;
+    }
+
+    public void setRepeatFrequency(int repeatFrequency) {
+        this.repeatFrequency = repeatFrequency;
+    }
 }
