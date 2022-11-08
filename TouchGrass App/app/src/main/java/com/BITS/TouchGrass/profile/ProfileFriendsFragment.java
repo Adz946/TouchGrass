@@ -57,13 +57,13 @@ public class ProfileFriendsFragment extends Fragment {
         addFriendBtn.setOnClickListener(v -> {
 
 
-            if (alreadyFriend() && !doesNotExist() && !yourself()) {
+            if (alreadyFriend() && exist() && !yourself()) {
                 Toast.makeText(getContext(), "User is already your friend!!", Toast.LENGTH_SHORT).show();
-            } else if (yourself() && !alreadyFriend() && !doesNotExist()) {
+            } else if (yourself() && !alreadyFriend() && exist()) {
                 Toast.makeText(getContext(), "You can't add yourself!!", Toast.LENGTH_SHORT).show();
-            } else if (doesNotExist() && !yourself() && !alreadyFriend()) {
+            } else if (!exist() && !yourself() && !alreadyFriend()) {
                 Toast.makeText(getContext(), "User does not exist...", Toast.LENGTH_SHORT).show();
-            } else if (!(alreadyFriend() && doesNotExist() && yourself())) {
+            } else if (!(alreadyFriend() && !exist() && yourself())) {
                 Toast.makeText(getContext(), searchUser.getText().toString() +" added to your Friends List", Toast.LENGTH_SHORT).show();
                 addFriend();
             }
@@ -95,8 +95,11 @@ public class ProfileFriendsFragment extends Fragment {
             if (MainActivity.loggedUser.getName().equalsIgnoreCase(MainActivity.friendsList.get(i).get(0))) {
                 temp = MainActivity.friendsList.get(i);
                 for(int k = 1; k < temp.size(); k ++) {
+                    //Toast.makeText(getContext(), temp.get(k), Toast.LENGTH_SHORT).show();
                     if (searchUser.getText().toString().equalsIgnoreCase(temp.get(k))) {
+
                         alreadyFriend = true;
+                        break;
                     }
                 }
             }
@@ -104,14 +107,14 @@ public class ProfileFriendsFragment extends Fragment {
         return alreadyFriend;
     }
 
-    private boolean doesNotExist() {
-        boolean noMatch = true;
+    private boolean exist() {
+        boolean match = false;
         for (int i = 0; i < MainActivity.users.size(); i++) {
             if (searchUser.getText().toString().equalsIgnoreCase(MainActivity.users.get(i).getName())) {
-                noMatch = false;
+                match = true;
             }
         }
-        return noMatch;
+        return match;
     }
 
     private boolean yourself() {

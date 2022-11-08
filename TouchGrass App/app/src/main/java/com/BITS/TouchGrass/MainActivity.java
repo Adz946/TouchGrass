@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         InputStream is = null;
         try {
-            is = getAssets().open( "profiles.csv");
+            is = getAssets().open( "friends.csv");
         } catch (IOException e) {
             Log.wtf("MyActivity", "Error opening file " + e);
             e.printStackTrace();
@@ -166,9 +166,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         for (int i = 0; i < users.size(); i++) {
             if (loggedUser.getName().equalsIgnoreCase(users.get(i).getName())) {
                 users.get(i).setLogout();
-                loggedUser = null;
             }
         }
+        loggedUser = null;
     }
 
     ChallengesMainFragment challengesMainFragment = new ChallengesMainFragment();
