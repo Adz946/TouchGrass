@@ -127,7 +127,7 @@
         />
 
     <Button
-        android:id="@+id/set_time_button"
+        android:id="@+id/btnSetTime"
         android:layout_width="130dp"
         android:layout_height="80dp"
         android:layout_marginStart="8dp"
@@ -139,7 +139,7 @@
         />
 
     <Button
-        android:id="@+id/start_date_button"
+        android:id="@+id/btnStartDate"
         android:backgroundTint="@color/mid_grey"
         android:layout_width="130dp"
         android:layout_height="40dp"
@@ -151,7 +151,7 @@
         android:layout_weight="1.5"/>
 
     <Button
-        android:id="@+id/end_date_button"
+        android:id="@+id/btnEndDate"
         android:backgroundTint="@color/mid_grey"
         android:layout_width="130dp"
         android:layout_height="40dp"

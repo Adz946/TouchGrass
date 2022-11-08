@@ -15,8 +15,7 @@ import com.BITS.TouchGrass.R;
 public class ChallengesMainFragment extends Fragment {
 
     View view;
-    Button CreateChallengeButton, AcceptButton, RejectButton, Mon, Tue, Wed, Thu, Fri, Sat, Sun;
-    EditText EnterChallengeName;
+    Button CreateChallengeButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -27,18 +26,9 @@ public class ChallengesMainFragment extends Fragment {
         // referenced using 'view.'
 
         //Buttons
-        CreateChallengeButton = (Button) view.findViewById(R.id.btnCreateChallenge);
-        AcceptButton = (Button) view.findViewById(R.id.btnAccept);
-        RejectButton = (Button) view.findViewById(R.id.btnReject);
-        Mon = (Button) view.findViewById(R.id.btnMon);
-        Tue = (Button) view.findViewById(R.id.btnTue);
-        Wed = (Button) view.findViewById(R.id.btnWed);
-        Thu = (Button) view.findViewById(R.id.btnThu);
-        Fri = (Button) view.findViewById(R.id.btnFri);
-        Sat = (Button) view.findViewById(R.id.btnSat);
-        Sun = (Button) view.findViewById(R.id.btnSun);
 
-        EnterChallengeName = (EditText) view.findViewById(R.id.EnterChallengeName);
+        CreateChallengeButton = (Button) getView().findViewById(R.id.btnCreateChallenge_Main);
+
         return view;
     }
 }
