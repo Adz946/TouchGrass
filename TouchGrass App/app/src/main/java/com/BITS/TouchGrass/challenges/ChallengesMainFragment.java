@@ -13,8 +13,7 @@ import com.BITS.TouchGrass.R;
 
 public class ChallengesMainFragment extends Fragment {
 
-    View view;
-    Button CreateChallengeButton, AcceptButton, RejectButton;
+    Button CreateChallengeButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -24,9 +23,8 @@ public class ChallengesMainFragment extends Fragment {
         // Create the page here, and methods referring to the built page +assets on it are
         // referenced using 'view.'
 
-        CreateChallengeButton = (Button) view.findViewById(R.id.btnCreateChallenge);
-        AcceptButton = (Button) view.findViewById(R.id.btnAccept);
-        RejectButton = (Button) view.findViewById(R.id.btnReject);
+        CreateChallengeButton = view.findViewById(R.id.btnCreateChallenge);
+
         return view;
     }
 }

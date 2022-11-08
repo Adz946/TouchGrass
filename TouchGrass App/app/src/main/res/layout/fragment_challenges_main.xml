@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
@@ -7,82 +9,87 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".challenges.ChallengesMainFragment">
-    <?xml version="1.0" encoding="utf-8"?>
+
+    <Button
+        android:id="@+id/btnCreateChallenge"
+        android:layout_width="250dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:text="Create Challenge"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider2" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#777777"
+        app:layout_constraintBottom_toTopOf="@id/btnCreateChallenge"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageView"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"/>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/ic_launcher_foreground"
+        app:layout_constraintBottom_toBottomOf="@+id/divider2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <LinearLayout
-        tools:context=".challenges.ChallengesMainFragment"
-        tools:ignore="HardcodedText"
-        android:layout_height="match_parent"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp">
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCreateChallenge">
 
-        <!-- Create Challenge Button -->
 
-        <Button
-            android:id="@+id/btnCreateChallenge"
-            android:layout_width="250dp"
-            android:layout_height="48dp"
-            android:text="Create Challenge"
-            android:translationX="70dp"
-            android:translationY="175dp" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-        <!-- Accept and Reject Buttons -->
+        </androidx.recyclerview.widget.RecyclerView>
 
-        <Button
-            android:id="@+id/btnAccept"
-            android:layout_width="80dp"
-            android:layout_height="48dp"
-            android:text="Accept"
-            android:textSize="11sp"
-            android:translationX="290dp"
-            android:translationY="200dp" />
+        <View
+            android:id="@+id/divider3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:background="#777777" />
 
-        <Button
-            android:id="@+id/btnReject"
-            android:layout_width="80dp"
-            android:layout_height="48dp"
-            android:backgroundTint="@color/red"
-            android:text="Reject"
-            android:textSize="11sp"
-            android:translationX="290dp"
-            android:translationY="200dp" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-        <!-- New Challenge Button -->
+        </androidx.recyclerview.widget.RecyclerView>
 
-        <Button
-            android:layout_width="180dp"
-            android:layout_height="48dp"
-            android:backgroundTint="@color/mid_grey"
-            android:text="New Challenge"
-            android:textSize="12sp"
-            android:translationX="100dp"
-            android:translationY="130dp" />
+        <View
+            android:id="@+id/divider7"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:background="#777777" />
 
-        <!-- Challenge Icon -->
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:translationX="140dp"
-            android:translationY="-150dp"
-            android:src="@drawable/ic_launcher_foreground"
-            tools:ignore="ImageContrastCheck" />
-
-        <!-- Trophy Icon -->
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:translationX="25dp"
-            android:translationY="-40dp"
-            android:src="@drawable/ic_launcher_foreground"
-            tools:ignore="ImageContrastCheck" />
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
     </LinearLayout>
 
 
