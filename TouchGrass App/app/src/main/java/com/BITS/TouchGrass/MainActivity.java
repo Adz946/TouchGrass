@@ -49,9 +49,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         bottomNavigationView.setSelectedItemId(R.id.calendar);
 
         readProfileListFromAssets();
+        readFriendsListFromAssets();
     }
 
+
+
     public static List<User> users = new ArrayList<>();
+    public static List<List<String>> friendsList = new ArrayList<List<String>>();
     public static User loggedUser = null;
 
     private void readProfileListFromAssets() {
@@ -80,6 +84,39 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         }
     }
 
+    private void readFriendsListFromAssets() {
+
+        InputStream is = null;
+        try {
+            is = getAssets().open( "profiles.csv");
+        } catch (IOException e) {
+            Log.wtf("MyActivity", "Error opening file " + e);
+            e.printStackTrace();
+        }
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(is, Charset.forName("UTF-8"))
+        );
+
+        String line = "";
+        try {
+            int counter = 0;
+
+            while ((line = reader.readLine()) != null) {
+
+                String[] tokens = line.split(",");
+                friendsList.add(new ArrayList<String>());
+
+                for (int j = 0; j < tokens.length; j++) {
+                    friendsList.get(counter).add(tokens[j]);
+                }
+                counter++;
+            }
+        } catch (IOException e) {
+            Log.wtf("MyActivity", "Error reading data file on line " + line, e);
+            e.printStackTrace();
+        }
+
+    }
 //    private void readProfileList() {
 //
 //        String filename = "profiles.csv";
