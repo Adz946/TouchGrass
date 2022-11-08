@@ -8,11 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.BITS.TouchGrass.R;
 
 public class ChallengesMainFragment extends Fragment {
 
+    View view;
     Button CreateChallengeButton;
 
     @Override
@@ -23,7 +25,9 @@ public class ChallengesMainFragment extends Fragment {
         // Create the page here, and methods referring to the built page +assets on it are
         // referenced using 'view.'
 
-        CreateChallengeButton = view.findViewById(R.id.btnCreateChallenge);
+        //Buttons
+
+        CreateChallengeButton = (Button) getView().findViewById(R.id.btnCreateChallenge_Main);
 
         return view;
     }
