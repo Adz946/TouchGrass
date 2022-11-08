@@ -70,7 +70,7 @@ public class ProfileMainFragment extends Fragment {
                         (password.equals(MainActivity.users.get(i).getPassword()))) {
                     MainActivity.users.get(i).setLoggedIn();
                     noUser = false;
-                    MainActivity.user = MainActivity.users.get(i);
+                    MainActivity.loggedUser = MainActivity.users.get(i);
                 }
             }
 
@@ -78,7 +78,7 @@ public class ProfileMainFragment extends Fragment {
             if (noUser == false) {
                   FragmentTransaction fr = getParentFragmentManager().beginTransaction();
                   fr.replace(R.id.flFragment, profileFriendsFragment);
-                  fr.addToBackStack("test");
+                  fr.addToBackStack(null);
                   fr.commit();
             } else {
                 txtViewErrorMsg.setText("Failed! Username or password incorrect" );
@@ -88,7 +88,7 @@ public class ProfileMainFragment extends Fragment {
         registerBtn.setOnClickListener(v -> {
             FragmentTransaction fr = getParentFragmentManager().beginTransaction();
             fr.replace(R.id.flFragment, profileRegisterFragment);
-            fr.addToBackStack("test");
+            fr.addToBackStack(null);
             fr.commit();
         });
     }

@@ -34,9 +34,10 @@ public class ProfileFriendsFragment extends Fragment {
 
     }
 
-    private void setListeners() {
+    public void setListeners() {
 
         logoutBtn.setOnClickListener(v -> {
+
             MainActivity.logout();
             getParentFragmentManager().popBackStack();
             Toast.makeText(getContext(), "You have logged out ", Toast.LENGTH_SHORT).show();

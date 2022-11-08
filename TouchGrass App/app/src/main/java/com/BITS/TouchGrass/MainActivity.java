@@ -11,11 +11,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -44,13 +48,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.calendar);
 
-        readProfileList();
+        readProfileListFromAssets();
     }
 
     public static List<User> users = new ArrayList<>();
-    public static User user = null;
+    public static User loggedUser = null;
 
-    private void readProfileList() {
+    private void readProfileListFromAssets() {
         InputStream is = null;
         try {
             is = getAssets().open( "profiles.csv");
@@ -76,16 +80,59 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         }
     }
 
+//    private void readProfileList() {
+//
+//        String filename = "profiles.csv";
+//        File myExternalFile = new File(getExternalFilesDir("myFileStorage"), filename);
+//        //File myExternalFile = new File(Environment.getExternalStorageState() + filename);
+//        String myData ="";
+//        try {
+//            FileInputStream fis = new FileInputStream(myExternalFile);
+//            DataInputStream in = new DataInputStream(fis);
+//            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+//            String strLine;
+//            while ((strLine = br.readLine()) != null) {
+//                String[] tokens = strLine.split(",");
+//
+//                User user = new User(tokens[0], tokens[1]);
+//                users.add(user);
+//            }
+//            in.close();
+//        } catch (IOException e) {
+//            readProfileListFromAssets();
+//            Toast.makeText(getApplicationContext(), "Load from File successful", Toast.LENGTH_SHORT).show();
+//            Log.d("FFS DID THIS WORK", "LOADED");
+//
+//        } finally {
+//            saveProfiles();
+//        }
+//    }
+//
+//    private void saveProfiles() {
+//        String filename = "profiles.csv";
+//        File myExternalFile = new File(Environment.getExternalStorageState() + filename);
+//        String myData ="";
+//        try {
+//            FileOutputStream fos = new FileOutputStream(myExternalFile);
+//            StringBuilder sb = new StringBuilder();
+//            for (int i = 0; i < users.size(); i++) {
+//                sb.append(users.get(i).toString());
+//            }
+//            fos.write(sb.toString().getBytes());
+//            fos.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
     public static void logout() {
         for (int i = 0; i < users.size(); i++) {
-            if (user.getName().equalsIgnoreCase(users.get(i).getName())) {
+            if (loggedUser.getName().equalsIgnoreCase(users.get(i).getName())) {
                 users.get(i).setLogout();
-                user = null;
+                loggedUser = null;
             }
         }
     }
-
-
 
     ChallengesMainFragment challengesMainFragment = new ChallengesMainFragment();
     CalendarMainFragment calendarMainFragment = new CalendarMainFragment();
@@ -99,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         switch (item.getItemId()) {
             case R.id.profile:
-                if (user == null) {
+                if (loggedUser == null) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, profileMainFragment).commit();
                     return true;
                 } else {
