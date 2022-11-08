@@ -21,6 +21,8 @@
         <item name="android:background">@color/perfect_grey</item>
         <!-- Text color. -->
         <item name="android:textColor">@color/white</item>
+        <!-- Font. -->
+        <item name="android:fontFamily">@font/pixelmix</item>
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/light_grass_green</item>
         <item name="colorPrimaryVariant">@color/grass_green</item>
