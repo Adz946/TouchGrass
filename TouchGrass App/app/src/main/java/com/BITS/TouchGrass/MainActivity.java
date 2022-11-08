@@ -154,7 +154,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                     return true;
                 }
 
-
             case R.id.calendar:
                 getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, calendarMainFragment).commit();
                 return true;

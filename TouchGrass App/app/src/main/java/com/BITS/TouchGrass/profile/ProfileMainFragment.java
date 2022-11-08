@@ -17,6 +17,8 @@ import com.BITS.TouchGrass.MainActivity;
 import com.BITS.TouchGrass.R;
 import com.BITS.TouchGrass.reminders.EditReminderFragment;
 
+import java.util.Objects;
+
 public class ProfileMainFragment extends Fragment {
 
     View view;
@@ -75,7 +77,7 @@ public class ProfileMainFragment extends Fragment {
             }
 
 
-            if (noUser == false) {
+            if (!noUser) {
                   FragmentTransaction fr = getParentFragmentManager().beginTransaction();
                   fr.replace(R.id.flFragment, profileFriendsFragment);
                   fr.addToBackStack(null);
@@ -99,7 +101,7 @@ public class ProfileMainFragment extends Fragment {
 
     }
 
-    //    public void onResume() {
+//    public void onResume() {
 //        super.onResume();
 //    }
 }

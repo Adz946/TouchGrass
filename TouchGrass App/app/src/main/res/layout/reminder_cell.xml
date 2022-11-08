@@ -88,7 +88,6 @@
             android:layout_gravity="center"
             android:layout_marginStart="6dp"
             android:layout_marginEnd="6dp"
-
             android:text="Edit" />
 
     </LinearLayout>
