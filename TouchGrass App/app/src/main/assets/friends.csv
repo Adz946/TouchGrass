@@ -1,10 +1,6 @@
-adam,friendfriendfriend
-clayton,frienfrienfriend
-
- while ((strLine = br.readLine()) != null) {
-                String[] tokens = strLine.split(",");
-                if (MainActivity.loggedin.equal(tokens[0]) {
-                    for (int i = 1; i < tokens.size(); i++) {
-                        friendsList.add(token[i];
-                    }
-                }
+Adam, Blayne, Clayton, Jay, Michelle, Phi
+Blayne, Adam, Clayton, Jay, Michelle, Phi
+Clayton, Adam, Blayne, Jay, Michelle, Phi
+Jay, Adam, Blayne, Clayton, Michelle, Phi
+Michelle, Adam, Blayne, Clayton, Jay, Phi
+Phi, Adam, Blayne, Clayton, Jay, Michelle
