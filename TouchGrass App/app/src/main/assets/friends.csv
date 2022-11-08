@@ -1,0 +1,10 @@
+adam,friendfriendfriend
+clayton,frienfrienfriend
+
+ while ((strLine = br.readLine()) != null) {
+                String[] tokens = strLine.split(",");
+                if (MainActivity.loggedin.equal(tokens[0]) {
+                    for (int i = 1; i < tokens.size(); i++) {
+                        friendsList.add(token[i];
+                    }
+                }

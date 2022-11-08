@@ -1,5 +1,6 @@
 package com.BITS.TouchGrass.profile;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,10 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.BITS.TouchGrass.MainActivity;
 import com.BITS.TouchGrass.R;
+
+import java.io.FileOutputStream;
 
 public class ProfileRegisterFragment extends Fragment {
 
@@ -54,27 +58,40 @@ public class ProfileRegisterFragment extends Fragment {
         btnRegister.setOnClickListener(v -> {
 
             // first if should check if username is in use: 'edtTxtUsername.isInUse()'
+            String username = edtTxtUsername.getText().toString();
+            String password = edtTxtPW.getText().toString();
+            String passwordConfirm = edtTxtPWConfirm.getText().toString();
+            boolean exists = false;
+
+            for (int i = 0; i < MainActivity.users.size(); i++) {
+                if (username.equalsIgnoreCase(MainActivity.users.get(i).getName())) {
+                    exists = true;
+                }
+            }
 
             // checks to see if username is in use
-            if (edtTxtUsername.getText().toString().equalsIgnoreCase("bob")) {
+            if (exists) {
                 txtViewErrorMsg.setText("Username already in use...");
 
             // checks to see if username is empty
-            } else if (edtTxtUsername.getText().length() == 0) {
-                txtViewErrorMsg.setText("Cannot have an empty username...");
+            } else if (username.length() < 3) {
+                txtViewErrorMsg.setText("Username must be greater than 3 characters...");
 
             // checks to see if password 1 is empty
-            } else if (edtTxtPW.getText().length() == 0) {
-                txtViewErrorMsg.setText("Cannot have an empty password...");
+            } else if (password.length() < 5) {
+                txtViewErrorMsg.setText("Password must be greater than 5 characters...");
 
             // checks to see if passwords match
-            } else if (!edtTxtPW.getText().toString().equals(edtTxtPWConfirm.getText().toString())) {
+            } else if (!password.equals(passwordConfirm)) {
                 txtViewErrorMsg.setText("Passwords do not match...");
 
             // if none of the previous clauses raise an error, proceed to create account
             } else {
                 // add account to the database, and pop stack back to the login screen
                 // database.addUser(edtTxtUsername,edtTxtPW);
+                User user = new User(username, password);
+                MainActivity.users.add(user);
+
                 getParentFragmentManager().popBackStack();
                 Toast.makeText(getContext(), "Account created! Welcome "
                         + edtTxtUsername.getText() + ".", Toast.LENGTH_LONG).show();
@@ -86,4 +103,5 @@ public class ProfileRegisterFragment extends Fragment {
             getParentFragmentManager().popBackStack();  // go back to profile_main/login_screen
         });
     }
+
 }

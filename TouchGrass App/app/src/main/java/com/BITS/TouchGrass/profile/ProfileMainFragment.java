@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.BITS.TouchGrass.MainActivity;
 import com.BITS.TouchGrass.R;
 import com.BITS.TouchGrass.reminders.EditReminderFragment;
 
@@ -59,19 +60,35 @@ public class ProfileMainFragment extends Fragment {
     public void setListeners() {
 
         logInBtn.setOnClickListener(v -> {
-            if (editTxtUsername.getText().toString().equalsIgnoreCase("bob") && edtTxtPW.getText().toString().equals("password")) {
+
+            String username = editTxtUsername.getText().toString();
+            String password = edtTxtPW.getText().toString();
+            boolean noUser = true;
+
+            for (int i = 0; i < MainActivity.users.size(); i++) {
+                if (username.equalsIgnoreCase(MainActivity.users.get(i).getName()) &&
+                        (password.equals(MainActivity.users.get(i).getPassword()))) {
+                    MainActivity.users.get(i).setLoggedIn();
+                    noUser = false;
+                    MainActivity.loggedUser = MainActivity.users.get(i);
+                }
+            }
+
+
+            if (noUser == false) {
                   FragmentTransaction fr = getParentFragmentManager().beginTransaction();
                   fr.replace(R.id.flFragment, profileFriendsFragment);
+                  fr.addToBackStack(null);
                   fr.commit();
             } else {
-                txtViewErrorMsg.setText("Failed! Username or password incorrect" + edtTxtPW.getText().toString());
+                txtViewErrorMsg.setText("Failed! Username or password incorrect" );
             }
         });
 
         registerBtn.setOnClickListener(v -> {
             FragmentTransaction fr = getParentFragmentManager().beginTransaction();
             fr.replace(R.id.flFragment, profileRegisterFragment);
-            fr.addToBackStack("test");
+            fr.addToBackStack(null);
             fr.commit();
         });
     }
