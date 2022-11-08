@@ -4,13 +4,82 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".challenges.ChallengesMainFragment">
+    <?xml version="1.0" encoding="utf-8"?>
 
-
-    <TextView
-        android:layout_width="match_parent"
+    <LinearLayout
+        tools:context=".challenges.ChallengesMainFragment"
+        tools:ignore="HardcodedText"
         android:layout_height="match_parent"
-        android:text="@string/challenge_yo"
-        tools:layout_editor_absoluteX="89dp"
-        tools:layout_editor_absoluteY="107dp" />
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+
+        <!-- Create Challenge Button -->
+
+        <Button
+            android:id="@+id/btnCreateChallenge"
+            android:layout_width="250dp"
+            android:layout_height="48dp"
+            android:text="Create Challenge"
+            android:translationX="70dp"
+            android:translationY="175dp" />
+
+        <!-- Accept and Reject Buttons -->
+
+        <Button
+            android:id="@+id/btnAccept"
+            android:layout_width="80dp"
+            android:layout_height="48dp"
+            android:text="Accept"
+            android:textSize="11sp"
+            android:translationX="290dp"
+            android:translationY="200dp" />
+
+        <Button
+            android:id="@+id/btnReject"
+            android:layout_width="80dp"
+            android:layout_height="48dp"
+            android:backgroundTint="@color/red"
+            android:text="Reject"
+            android:textSize="11sp"
+            android:translationX="290dp"
+            android:translationY="200dp" />
+
+        <!-- New Challenge Button -->
+
+        <Button
+            android:layout_width="180dp"
+            android:layout_height="48dp"
+            android:backgroundTint="@color/mid_grey"
+            android:text="New Challenge"
+            android:textSize="12sp"
+            android:translationX="100dp"
+            android:translationY="130dp" />
+
+        <!-- Challenge Icon -->
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:translationX="140dp"
+            android:translationY="-150dp"
+            android:src="@drawable/ic_launcher_foreground"
+            tools:ignore="ImageContrastCheck" />
+
+        <!-- Trophy Icon -->
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:translationX="25dp"
+            android:translationY="-40dp"
+            android:src="@drawable/ic_launcher_foreground"
+            tools:ignore="ImageContrastCheck" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
