@@ -31,6 +31,9 @@ import com.BITS.TouchGrass.R;
 import com.BITS.TouchGrass.profile.Friend;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
@@ -39,9 +42,12 @@ public class EditReminderFragment extends Fragment {
 
     ArrayList<Friend> friendsSharedWith = new ArrayList<>();
 
-    String repeatFrequency, priority;
+    String priority;
+    int repeatFrequency;
+
     boolean isGroupReminder, isAllDayReminder;
     LocalDate startDate, endDate;
+    LocalTime time;
     Ringtone ringtone;
 
     ToggleButton priorityLow, priorityModerate, priorityHigh;
@@ -189,6 +195,7 @@ public class EditReminderFragment extends Fragment {
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false);
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true);
         startActivityForResult(intent, 999);
+        
         Ringtone currentRingtone = RingtoneManager.getRingtone(getContext(), currentTone);
         String ringtoneTitle = currentRingtone.getTitle(getContext());
         setToneBtn.setText(ringtoneTitle);
@@ -239,33 +246,39 @@ public class EditReminderFragment extends Fragment {
                     hour = selectedHour;
                     minute = selectedMinute;
 
+                    String formattedTimeText;
                     String formattedTime;
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:m");
 
-                    if (hour == 0)
-                        if (minute < 10)
-                            formattedTime = String.format(Locale.getDefault(), "%d:0%d am", hour + 12, minute);
-                        else
-                            formattedTime = String.format(Locale.getDefault(), "%d:%d am", hour + 12, minute);
+                    if (hour == 0) {
+                        if (minute < 10) {
+                            formattedTimeText = String.format(Locale.getDefault(), "%d:0%d am", hour + 12, minute);
+                        } else {
+                            formattedTimeText = String.format(Locale.getDefault(), "%d:%d am", hour + 12, minute);
+                        }
+                    } else if (hour > 12) {
+                        if (minute < 10) {
+                            formattedTimeText = String.format(Locale.getDefault(), "%d:0%d pm", hour - 12, minute);
+                        } else {
+                            formattedTimeText = String.format(Locale.getDefault(), "%d:%d pm", hour - 12, minute);
+                        }
+                    } else if (hour == 12) {
+                        if (minute < 10) {
+                            formattedTimeText = String.format(Locale.getDefault(), "%d:0%d pm", hour, minute);
+                        } else {
+                            formattedTimeText = String.format(Locale.getDefault(), "%d:%d pm", hour, minute);
+                        }
+                    } else {
+                        if (minute < 10) {
+                            formattedTimeText = String.format(Locale.getDefault(), "%d:0%d am", hour, minute);
+                        } else {
+                            formattedTimeText = String.format(Locale.getDefault(), "%d:%d am", hour, minute);
+                        }
+                    }
 
-                    else if (hour > 12)
-                        if (minute < 10)
-                            formattedTime = String.format(Locale.getDefault(), "%d:0%d pm", hour - 12, minute);
-                        else
-                            formattedTime = String.format(Locale.getDefault(), "%d:%d pm", hour - 12, minute);
-
-                    else if (hour == 12)
-                        if (minute < 10)
-                            formattedTime = String.format(Locale.getDefault(), "%d:0%d pm", hour, minute);
-                        else
-                            formattedTime = String.format(Locale.getDefault(), "%d:%d pm", hour, minute);
-
-                    else
-                        if (minute < 10)
-                        formattedTime = String.format(Locale.getDefault(), "%d:0%d am", hour, minute);
-                        else
-                            formattedTime = String.format(Locale.getDefault(), "%d:%d am", hour, minute);
-
-                    setTimeBtn.setText(formattedTime);
+                    formattedTime = String.format(Locale.getDefault(), "%d:%d", hour, minute);
+                    time = LocalTime.parse(formattedTime, formatter);
+                    setTimeBtn.setText(formattedTimeText);
                 };
 
             TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), onTimeSetListener,
@@ -291,31 +304,41 @@ public class EditReminderFragment extends Fragment {
         if (titleET.getText().length()==0) {
             Toast.makeText(getContext(), "Please enter a title.", Toast.LENGTH_LONG).show();
 
-        // checks if a tone has been selected
+            // checks if a tone has been selected
         } else if (setToneBtn.getText().equals("SET TONE")) {
             Toast.makeText(getContext(), "Please enter a tone.", Toast.LENGTH_LONG).show();
 
-        // otherwise, try adding the reminder (nothing went wrong prior)
+            // otherwise, try adding the reminder (nothing went wrong prior)
         } else {
-            if (isGroupReminder) {  // if its a group reminder, add it as one.
-                addGroupReminder();
-            } else {  // if its a self reminder, add it as one
-                // make sure the user has set a time
-                if (setTimeBtn.getText().equals("SET TIME")) {
-                    Toast.makeText(getContext(), "Please enter a time.", Toast.LENGTH_LONG).show();
-                } else {
+
+            if (isAllDayReminder) {  // if its an all day reminder
+                if (isGroupReminder) {  // if its a group reminder, add it as one.
+                    addGroupReminder();
+                } else {  // if its a self reminder, add it as one.
                     addSelfReminder();
+                }
+            } else {  // if its a time specific reminder
+                if (setTimeBtn.getText().equals("SET TIME")) {  // if the user hasn't edited the time
+                    Toast.makeText(getContext(), "Please enter a time.", Toast.LENGTH_LONG).show();
+                } else {  // if its a self reminder, add it as one
+                    if (isGroupReminder) {  // if its a group reminder, add it as one.
+                        addGroupReminder();
+                    } else {  // if its a self reminder, add it as one.
+                        addSelfReminder();
+                    }
                 }
             }
         }
     }
 
     private void addSelfReminder() {
-//        SelfReminder reminder = new SelfReminder();
+        new SelfReminder(titleET.getText().toString(),isAllDayReminder,startDate,endDate,time,repeatFrequency,priority);
+//        getParentFragmentManager().popBackStack();
     }
 
     private void addGroupReminder() {
-
+        new GroupReminder(titleET.getText().toString(),isAllDayReminder,startDate,endDate,time,repeatFrequency,priority);
+//        getParentFragmentManager().popBackStack();
     }
 
 
