@@ -74,11 +74,11 @@ public class RemindersMainFragment extends Fragment {
     }
 
     public void setEventAdapter() {
+
         ArrayList<SelfReminder> currentSelfReminders = SelfReminder.currentSelfReminders;
         ArrayList<GroupReminder> currentGroupReminders = GroupReminder.currentGroupReminders;
 //        ArrayList<SelfReminder> currentSelfReminders1 = new ArrayList<>();
 //        ArrayList<GroupReminder> currentGroupReminders1 = new ArrayList<>();
-
 
         LinearLayoutManager selfLayoutManager = new LinearLayoutManager(getContext());
         selfReminderRecyclerView.setLayoutManager(selfLayoutManager);

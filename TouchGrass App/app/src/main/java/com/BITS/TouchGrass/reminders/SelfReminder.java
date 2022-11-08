@@ -13,5 +13,6 @@ public class SelfReminder extends Reminder {
         super(title, allDayReminder, startDate, endDate, time, repeatFrequency, priority);
 
         currentSelfReminders.add(this);
+
     }
 }

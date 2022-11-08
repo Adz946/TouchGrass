@@ -17,5 +17,6 @@ public class GroupReminder extends Reminder {
         super(title, allDayReminder, startDate, endDate, time, repeatFrequency, priority);
 
         currentGroupReminders.add(this);
+
     }
 }

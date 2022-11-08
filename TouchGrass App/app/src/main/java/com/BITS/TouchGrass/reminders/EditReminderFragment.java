@@ -44,6 +44,7 @@ public class EditReminderFragment extends Fragment {
 
     String priority;
     int repeatFrequency;
+
     boolean isGroupReminder, isAllDayReminder;
     LocalDate startDate, endDate;
     LocalTime time;
@@ -194,7 +195,7 @@ public class EditReminderFragment extends Fragment {
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false);
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true);
         startActivityForResult(intent, 999);
-
+        
         Ringtone currentRingtone = RingtoneManager.getRingtone(getContext(), currentTone);
         String ringtoneTitle = currentRingtone.getTitle(getContext());
         setToneBtn.setText(ringtoneTitle);

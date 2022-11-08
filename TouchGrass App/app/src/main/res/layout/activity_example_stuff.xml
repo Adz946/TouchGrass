@@ -30,7 +30,7 @@
         "parent" = the page
         -->
 
-    <ImageButton
+    <ImageView
         android:id="@+id/Change"
         android:scaleType="fitCenter"
         android:adjustViewBounds="true"
@@ -42,7 +42,7 @@
         app:layout_constraintRight_toRightOf = "parent"
         android:src="@drawable/example_skull"
         android:onClick="Clicker"
-        ></ImageButton>
+        ></ImageView>
 
     <!-- <Button
        android:id = "@+id/ChangeNow"
