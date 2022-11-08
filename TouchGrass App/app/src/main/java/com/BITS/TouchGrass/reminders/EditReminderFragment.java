@@ -30,6 +30,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.BITS.TouchGrass.R;
 import com.BITS.TouchGrass.profile.Friend;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -49,6 +51,8 @@ public class EditReminderFragment extends Fragment {
     LocalDate startDate, endDate;
     LocalTime time;
     Ringtone ringtone;
+
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d/M/yyyy");
 
     ToggleButton priorityLow, priorityModerate, priorityHigh;
     Spinner setRepeatSpinner;
@@ -74,9 +78,13 @@ public class EditReminderFragment extends Fragment {
 
         // Methods to call
         buildRepeatSpinner();  // builds the repeat frequency drop down
-        priorityModerate.setChecked(true);  // defaults the priority to 'moderate'
+        priorityModerate.setChecked(true);
+        priority = "moderate";  // defaults the priority to 'moderate'
         setStartDateBtn.setText(getTodaysDate());
+        startDate = LocalDate.parse(getTodaysDate(), dtf);
         setEndDateBtn.setText(getTodaysDate());
+        endDate = LocalDate.parse(getTodaysDate(), dtf);
+        toggleAllDayReminder(view);
         setListeners();  // initialises all element listeners
 
         return view;
@@ -179,6 +187,7 @@ public class EditReminderFragment extends Fragment {
         setRepeatSpinner.setAdapter(adapter);
     }
 
+
     private void cancelOperation(View view) {
         getParentFragmentManager().popBackStack();
     }
@@ -208,6 +217,7 @@ public class EditReminderFragment extends Fragment {
             String date = makeDateString(day, month, year);
 
             setStartDateBtn.setText(date);
+            startDate = LocalDate.parse(date, dtf);
         };
 
         Calendar cal = Calendar.getInstance();
@@ -226,6 +236,7 @@ public class EditReminderFragment extends Fragment {
             String date = makeDateString(day, month, year);
 
             setEndDateBtn.setText(date);
+            endDate = LocalDate.parse(date, dtf);
         };
 
         Calendar cal = Calendar.getInstance();
@@ -299,6 +310,26 @@ public class EditReminderFragment extends Fragment {
     }
 
 
+    private int getRepeatFrequency() {
+        if (setRepeatSpinner.getSelectedItem().toString().equalsIgnoreCase("Never")) {
+            return 0;
+        } else if (setRepeatSpinner.getSelectedItem().toString().equalsIgnoreCase("Daily")) {
+            return 1;
+        } else if (setRepeatSpinner.getSelectedItem().toString().equalsIgnoreCase("Every 2 Days")) {
+            return 2;
+        } else if (setRepeatSpinner.getSelectedItem().toString().equalsIgnoreCase("Every 3 Days")) {
+            return 3;
+        } else if (setRepeatSpinner.getSelectedItem().toString().equalsIgnoreCase("Weekly")) {
+            return 7;
+        } else if (setRepeatSpinner.getSelectedItem().toString().equalsIgnoreCase("Fortnightly")) {
+            return 14;
+        } else if (setRepeatSpinner.getSelectedItem().toString().equalsIgnoreCase("Monthly")) {
+            return 30;
+        }
+        return 0;
+    }
+
+
     private void addReminder(View view) {
         // checks if a title has been entered
         if (titleET.getText().length()==0) {
@@ -312,6 +343,7 @@ public class EditReminderFragment extends Fragment {
         } else {
 
             if (isAllDayReminder) {  // if its an all day reminder
+                time = null;
                 if (isGroupReminder) {  // if its a group reminder, add it as one.
                     addGroupReminder();
                 } else {  // if its a self reminder, add it as one.
@@ -332,12 +364,25 @@ public class EditReminderFragment extends Fragment {
     }
 
     private void addSelfReminder() {
-        new SelfReminder(titleET.getText().toString(),isAllDayReminder,startDate,endDate,time,repeatFrequency,priority);
+        new SelfReminder(titleET.getText().toString(),isAllDayReminder,
+                startDate, endDate,time,getRepeatFrequency(),priority);
+        String text = String.format(Locale.getDefault(),"%s, %b, %s, %s, %s, %d, %s",
+                titleET.getText().toString(),isAllDayReminder,
+                startDate,endDate,time,getRepeatFrequency(),priority);
+        Toast.makeText(getContext(), text, Toast.LENGTH_LONG).show();
+
+//        try {
+//            FileWriter fr = new FileWriter("assets/reminder.csv");
+//            fr.write(String.format(Locale.getDefault(),"%s,%b,%s,%s,%s,%d,%s",titleET.getText().toString(),isAllDayReminder,startDate,endDate,time,repeatFrequency,priority));
+//        } catch (IOException e) {
+//            System.out.println("Error: " + e);
+//        }
 //        getParentFragmentManager().popBackStack();
     }
 
     private void addGroupReminder() {
-        new GroupReminder(titleET.getText().toString(),isAllDayReminder,startDate,endDate,time,repeatFrequency,priority);
+        new GroupReminder(titleET.getText().toString(),isAllDayReminder,
+                startDate,endDate,time,getRepeatFrequency(),priority);
 //        getParentFragmentManager().popBackStack();
     }
 
