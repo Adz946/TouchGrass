@@ -14,27 +14,33 @@ import com.BITS.TouchGrass.R;
 
 public class ChallengeCreateFragment extends Fragment {
 
-    Button SetTime, StartDate, EndDate, AddFriendsButton, CreateChallengeButton, Cancel, Mon, Tue, Wed, Thu, Fri, Sat, Sun;
-    EditText EnterChallengeName;
-    View view;
+    Button setTime, startDate, endDate, addFriendsBtn, createChallengeBtn, cancelBtn, mon, tue, wed, thu, fri, sat, sun;
+    EditText challengeNameET;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        Mon = (Button) view.findViewById(R.id.btnMon);
-        Tue = (Button) view.findViewById(R.id.btnTue);
-        Wed = (Button) view.findViewById(R.id.btnWed);
-        Thu = (Button) view.findViewById(R.id.btnThu);
-        Fri = (Button) view.findViewById(R.id.btnFri);
-        Sat = (Button) view.findViewById(R.id.btnSat);
-        Sun = (Button) view.findViewById(R.id.btnSun);
-        SetTime = (Button) view.findViewById(R.id.btnSetTime);
-        StartDate = (Button) getView().findViewById(R.id.btnStartDate);
-        EndDate = (Button) getView().findViewById(R.id.btnEndDate);
-        CreateChallengeButton = (Button) view.findViewById(R.id.btnCreateChallenge);
-        EnterChallengeName = (EditText) view.findViewById(R.id.EnterChallengeName);
+        View view = inflater.inflate(R.layout.fragment_challenge_create, container, false);
 
-        return inflater.inflate(R.layout.fragment_challenge_create, container, false);
+        initWidgets(view);
+
+        return view;
+    }
+
+
+    private void initWidgets(View view) {
+        mon = view.findViewById(R.id.btnMon);
+        tue = view.findViewById(R.id.btnTue);
+        wed = view.findViewById(R.id.btnWed);
+        thu = view.findViewById(R.id.btnThu);
+        fri = view.findViewById(R.id.btnFri);
+        sat = view.findViewById(R.id.btnSat);
+        sun = view.findViewById(R.id.btnSun);
+        setTime = view.findViewById(R.id.btnSetTime);
+        startDate = view.findViewById(R.id.btnStartDate);
+        endDate = view.findViewById(R.id.btnEndDate);
+        createChallengeBtn = view.findViewById(R.id.btnCreateChallenge);
+        challengeNameET = view.findViewById(R.id.EnterChallengeName);
     }
 }
