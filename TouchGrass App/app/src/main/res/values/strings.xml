@@ -32,6 +32,14 @@
         <item>Weekly</item>
         <item>Fortnightly</item>
         <item>Monthly</item>
-        <item>Custom…</item>
     </string-array>
+
+    <string-array name="themes_spinner">
+        <item>Light</item>
+        <item>Dark</item>
+        <item>Retro</item>
+        <item>Christmas</item>
+        <item>Colourblind</item>
+    </string-array>
+
 </resources>

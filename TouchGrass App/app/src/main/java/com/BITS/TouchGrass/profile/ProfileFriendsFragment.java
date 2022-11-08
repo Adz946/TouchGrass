@@ -1,5 +1,6 @@
 package com.BITS.TouchGrass.profile;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,12 +17,13 @@ import com.BITS.TouchGrass.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class ProfileFriendsFragment extends Fragment {
 
     View view;
-    Button logoutBtn, addFriendBtn;
+    Button logoutBtn, addFriendBtn, changeThemeBtn;
     TextView searchUser;
 
 
@@ -39,10 +41,12 @@ public class ProfileFriendsFragment extends Fragment {
 
     }
 
+
     private void initWidgets(View view) {
         logoutBtn = (Button) view.findViewById(R.id.logout);
         addFriendBtn = (Button) view.findViewById(R.id.addFriend);
         searchUser = (TextView) view.findViewById(R.id.searchUser);
+        changeThemeBtn = view.findViewById(R.id.change_theme_buttone);
     }
 
 
@@ -55,8 +59,6 @@ public class ProfileFriendsFragment extends Fragment {
         });
 
         addFriendBtn.setOnClickListener(v -> {
-
-
             if (alreadyFriend() && exist() && !yourself()) {
                 Toast.makeText(getContext(), "User is already your friend!!", Toast.LENGTH_SHORT).show();
             } else if (yourself() && !alreadyFriend() && exist()) {
@@ -67,9 +69,23 @@ public class ProfileFriendsFragment extends Fragment {
                 Toast.makeText(getContext(), searchUser.getText().toString() +" added to your Friends List", Toast.LENGTH_SHORT).show();
                 addFriend();
             }
-
         });
 
+        changeThemeBtn.setOnClickListener(v -> {
+
+            Toast.makeText(getContext(), requireActivity().getTheme().toString(),Toast.LENGTH_LONG).show();
+
+//            if (requireActivity().getTheme()==R.style.Theme_TouchGrass_Retro) {
+//
+//            }
+
+            requireActivity().setTheme(R.style.Theme_TouchGrass_Retro);
+
+            requireActivity().getSupportFragmentManager().beginTransaction().replace(ProfileFriendsFragment.this.getId(), new ProfileFriendsFragment()).commit();
+//            ProfileFriendsFragment fragment = (ProfileFriendsFragment) getParentFragmentManager().findFragmentByTag("profile_friends_tag");
+//            getParentFragmentManager().beginTransaction().detach(fragment).attach(fragment).commit();
+
+        });
     }
 
     private void addFriend() {
@@ -118,10 +134,7 @@ public class ProfileFriendsFragment extends Fragment {
     }
 
     private boolean yourself() {
-        boolean yourself = false;
-        if (searchUser.getText().toString().equalsIgnoreCase(MainActivity.loggedUser.getName())) {
-            yourself = true;
-        }
-        return yourself;
+        // this returns the boolean value 'true' if searchUser == loggedUser.getName()
+        return searchUser.getText().toString().equalsIgnoreCase(MainActivity.loggedUser.getName());
     }
 }
