@@ -56,7 +56,6 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:text="@string/self"
-                    android:fontFamily="@font/pixelmix"
                     android:textSize="32sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -86,7 +85,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
-                    android:fontFamily="@font/gelasio"
                     android:text="@string/group"
                     android:textSize="32sp" />
 

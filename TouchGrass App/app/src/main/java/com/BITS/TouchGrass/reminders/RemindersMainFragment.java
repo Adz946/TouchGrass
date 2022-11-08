@@ -2,6 +2,7 @@ package com.BITS.TouchGrass.reminders;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import androidx.fragment.app.FragmentTransaction;
@@ -27,6 +28,8 @@ public class RemindersMainFragment extends Fragment {
 
     Button newReminderButton;
     RecyclerView selfReminderRecyclerView, groupReminderRecyclerView;
+    SelfReminderAdapter selfReminderAdapter;
+    GroupReminderAdapter groupReminderAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,11 @@ public class RemindersMainFragment extends Fragment {
 
         initWidgets(view);
         setListeners();
+//        try {
+//            selfReminderAdapter.notifyDataSetChanged();
+//        } catch (Exception ignored) {
+//
+//        }
         setEventAdapter();
 
         return view;
@@ -66,42 +74,11 @@ public class RemindersMainFragment extends Fragment {
     }
 
     public void setEventAdapter() {
-//        ArrayList<Reminder> currentReminders = new ArrayList<>();
-        ArrayList<SelfReminder> currentSelfReminders = new ArrayList<>();
-        ArrayList<GroupReminder> currentGroupReminders = new ArrayList<>();
 
-        currentSelfReminders.add(new SelfReminder("Yo", false,
-                LocalDate.now(), LocalDate.now(), LocalTime.now(), 0, "low"));
-
-        currentSelfReminders.add(new SelfReminder("What", false,
-                LocalDate.now(), LocalDate.now(), LocalTime.now(), 0, "low"));
-
-        currentSelfReminders.add(new SelfReminder("Is", false,
-                LocalDate.now(), LocalDate.now(), LocalTime.now(), 0, "low"));
-
-        currentGroupReminders.add(new GroupReminder("UP!", false,
-                LocalDate.now(), LocalDate.now(), LocalTime.now(), 0, "low"));
-
-        currentSelfReminders.add(new SelfReminder("Is", false,
-                LocalDate.now(), LocalDate.now(), LocalTime.now(), 0, "low"));
-
-        currentGroupReminders.add(new GroupReminder("UP!", false,
-                LocalDate.now(), LocalDate.now(), LocalTime.now(), 0, "low"));
-
-        currentGroupReminders.add(new GroupReminder("UPPER!", false,
-                LocalDate.now(), LocalDate.now(), LocalTime.now(), 0, "low"));
-
-        currentGroupReminders.add(new GroupReminder("UPPERER!", false,
-                LocalDate.now(), LocalDate.now(), LocalTime.now(), 0, "low"));
-
-        currentGroupReminders.add(new GroupReminder("MORE UPPER!", false,
-                LocalDate.now(), LocalDate.now(), LocalTime.now(), 0, "low"));
-
-        currentGroupReminders.add(new GroupReminder("UPPERERER!", false,
-                LocalDate.now(), LocalDate.now(), LocalTime.now(), 0, "low"));
-
-        currentGroupReminders.add(new GroupReminder("MOST UP!", false,
-                LocalDate.now(), LocalDate.now(), LocalTime.now(), 0, "low"));
+        ArrayList<SelfReminder> currentSelfReminders = SelfReminder.currentSelfReminders;
+        ArrayList<GroupReminder> currentGroupReminders = GroupReminder.currentGroupReminders;
+//        ArrayList<SelfReminder> currentSelfReminders1 = new ArrayList<>();
+//        ArrayList<GroupReminder> currentGroupReminders1 = new ArrayList<>();
 
         LinearLayoutManager selfLayoutManager = new LinearLayoutManager(getContext());
         selfReminderRecyclerView.setLayoutManager(selfLayoutManager);
@@ -109,9 +86,9 @@ public class RemindersMainFragment extends Fragment {
         LinearLayoutManager groupLayoutManager = new LinearLayoutManager(getContext());
         groupReminderRecyclerView.setLayoutManager(groupLayoutManager);
 
-        SelfReminderAdapter selfReminderAdapter = new SelfReminderAdapter(
+        selfReminderAdapter = new SelfReminderAdapter(
                 requireActivity().getApplicationContext(), currentSelfReminders);
-        GroupReminderAdapter groupReminderAdapter = new GroupReminderAdapter(
+        groupReminderAdapter = new GroupReminderAdapter(
                 requireActivity().getApplicationContext(), currentGroupReminders);
 
         selfReminderRecyclerView.setAdapter(selfReminderAdapter);

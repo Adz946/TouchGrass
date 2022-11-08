@@ -15,6 +15,7 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
     </style>
 
+    <!-- Retro Theme -->
     <style name="Theme.TouchGrass_Retro" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Background color. -->
         <item name="android:background">@color/perfect_grey</item>
@@ -30,8 +31,58 @@
         <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+    </style>
 
+    <!-- Dark Theme -->
+    <style name="Theme.TouchGrass_Dark" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Background color. -->
+        <item name="android:background">@color/perfect_grey</item>
+        <!-- Text color. -->
+        <item name="android:textColor">@color/white</item>
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/light_grass_green</item>
+        <item name="colorPrimaryVariant">@color/grass_green</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/light_grass_green</item>
+        <item name="colorSecondaryVariant">@color/grass_green</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+    </style>
 
+    <!-- Christmas Theme -->
+    <style name="Theme.TouchGrass_Christmas" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Background color. -->
+        <item name="android:background">@color/light_grass_green</item>
+        <!-- Text color. -->
+        <item name="android:textColor">@color/perfect_grey</item>
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/grass_green</item>
+        <item name="colorPrimaryVariant">@color/white</item>
+        <item name="colorOnPrimary">@color/grass_green</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/perfect_grey</item>
+        <item name="colorSecondaryVariant">@color/grass_green</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+    </style>
+
+    <!-- Colourblind Theme -->
+    <style name="Theme.TouchGrass_Colourblind" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Text color. -->
+        <item name="android:textColor">@color/black</item>
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/grass_green</item>
+        <item name="colorPrimaryVariant">@color/light_grass_green</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/light_grass_green</item>
+        <item name="colorSecondaryVariant">@color/grass_green</item>
+        <item name="colorOnSecondary">@color/perfect_grey</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
     </style>
 
 </resources>

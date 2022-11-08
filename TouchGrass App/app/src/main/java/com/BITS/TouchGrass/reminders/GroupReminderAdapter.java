@@ -45,11 +45,11 @@ class GroupReminderAdapter extends RecyclerView.Adapter<ReminderViewHolder> {
         String priority = currentReminder.getPriority();
         switch (priority) {
             case "low":
-                return Drawable.createFromPath(String.valueOf(R.drawable.priority_button_blue));
+                return context.getDrawable(R.drawable.priority_button_blue);
             case "moderate":
-                return Drawable.createFromPath(String.valueOf(R.drawable.priority_button_yellow));
+                return context.getDrawable(R.drawable.priority_button_yellow);
             case "high":
-                return Drawable.createFromPath(String.valueOf(R.drawable.priority_button_red));
+                return context.getDrawable(R.drawable.priority_button_red);
             default:
                 return null;
         }
