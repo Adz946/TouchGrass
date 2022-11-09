@@ -2,7 +2,6 @@ package com.BITS.TouchGrass.reminders;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import androidx.fragment.app.FragmentTransaction;
@@ -16,8 +15,6 @@ import android.widget.Button;
 
 import com.BITS.TouchGrass.R;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 
 
@@ -53,14 +50,14 @@ public class RemindersMainFragment extends Fragment {
 //        } catch (Exception ignored) {
 //
 //        }
-        setEventAdapter();
+        setReminderAdapter();
 
         return view;
     }
 
     private void initWidgets(View view) {
-        selfReminderRecyclerView = (RecyclerView) view.findViewById(R.id.selfRemindersRecyclerView);
-        groupReminderRecyclerView = (RecyclerView) view.findViewById(R.id.groupRemindersRecyclerView);
+        selfReminderRecyclerView = view.findViewById(R.id.selfRemindersRecyclerView);
+        groupReminderRecyclerView = view.findViewById(R.id.groupRemindersRecyclerView);
         newReminderButton = view.findViewById(R.id.new_reminder_button);
     }
 
@@ -73,12 +70,30 @@ public class RemindersMainFragment extends Fragment {
         });
     }
 
-    public void setEventAdapter() {
 
-        ArrayList<SelfReminder> currentSelfReminders = SelfReminder.currentSelfReminders;
-        ArrayList<GroupReminder> currentGroupReminders = GroupReminder.currentGroupReminders;
-//        ArrayList<SelfReminder> currentSelfReminders1 = new ArrayList<>();
-//        ArrayList<GroupReminder> currentGroupReminders1 = new ArrayList<>();
+    @Override
+    public void onResume() {
+        super.onResume();
+        setReminderAdapter();
+    }
+
+    public void setReminderAdapter() {
+
+//        ArrayList<SelfReminder> currentSelfReminders = SelfReminder.currentSelfReminders;
+//        ArrayList<GroupReminder> currentGroupReminders = GroupReminder.currentGroupReminders;
+
+
+        ArrayList<SelfReminder> currentSelfReminders = new ArrayList<>();
+        ArrayList<GroupReminder> currentGroupReminders = new ArrayList<>();
+
+        for (Reminder reminder : Reminder.remindersList) {
+            if (reminder instanceof SelfReminder) {
+                currentSelfReminders.add((SelfReminder) reminder);
+            }
+            if (reminder instanceof GroupReminder) {
+                currentGroupReminders.add((GroupReminder) reminder);
+            }
+        }
 
         LinearLayoutManager selfLayoutManager = new LinearLayoutManager(getContext());
         selfReminderRecyclerView.setLayoutManager(selfLayoutManager);

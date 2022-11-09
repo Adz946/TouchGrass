@@ -50,7 +50,6 @@ public class EditReminderFragment extends Fragment {
     boolean isGroupReminder, isAllDayReminder;
     LocalDate startDate, endDate;
     LocalTime time;
-    Ringtone ringtone;
 
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d/M/yyyy");
 
@@ -366,24 +365,19 @@ public class EditReminderFragment extends Fragment {
     private void addSelfReminder() {
         new SelfReminder(titleET.getText().toString(),isAllDayReminder,
                 startDate, endDate,time,getRepeatFrequency(),priority);
-        String text = String.format(Locale.getDefault(),"%s, %b, %s, %s, %s, %d, %s",
-                titleET.getText().toString(),isAllDayReminder,
-                startDate,endDate,time,getRepeatFrequency(),priority);
-        Toast.makeText(getContext(), text, Toast.LENGTH_LONG).show();
+//        String text = String.format(Locale.getDefault(),"%s, %b, %s, %s, %s, %d, %s",
+//                titleET.getText().toString(),isAllDayReminder,
+//                startDate,endDate,time,getRepeatFrequency(),priority);
+//        Toast.makeText(getContext(), text, Toast.LENGTH_LONG).show();
 
-//        try {
-//            FileWriter fr = new FileWriter("assets/reminder.csv");
-//            fr.write(String.format(Locale.getDefault(),"%s,%b,%s,%s,%s,%d,%s",titleET.getText().toString(),isAllDayReminder,startDate,endDate,time,repeatFrequency,priority));
-//        } catch (IOException e) {
-//            System.out.println("Error: " + e);
-//        }
-//        getParentFragmentManager().popBackStack();
+        getParentFragmentManager().popBackStack();
     }
 
     private void addGroupReminder() {
         new GroupReminder(titleET.getText().toString(),isAllDayReminder,
                 startDate,endDate,time,getRepeatFrequency(),priority);
-//        getParentFragmentManager().popBackStack();
+
+        getParentFragmentManager().popBackStack();
     }
 
 

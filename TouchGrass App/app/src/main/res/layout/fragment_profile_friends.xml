@@ -8,76 +8,77 @@
     android:layout_height="match_parent"
     tools:context=".profile.ProfileFriendsFragment">
 
-    <ImageView
-        android:id="@+id/profileImg"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:src="@drawable/ic_profile_black"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <Button
-        android:id="@+id/addFriend"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:text="Add"
-        app:layout_constraintBottom_toBottomOf="@+id/searchUser"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/profileImg"
-        app:layout_constraintTop_toBottomOf="@+id/profileImg" />
-
-    <EditText
-        android:id="@+id/searchUser"
-        android:layout_width="238dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="Search User"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toStartOf="@+id/addFriend"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileImg" />
-
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:text="LOGOUT"
-        app:layout_constraintBottom_toTopOf="@+id/profileImg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/profileImg" />
-
-    <Button
-        android:id="@+id/change_theme_buttone"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:text="Change\nTheme"
-        app:layout_constraintBottom_toTopOf="@+id/addFriend"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/logout" />
-
-    <ScrollView
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchUser">
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/profileImg"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginTop="80dp"
+            android:src="@drawable/ic_profile_black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/friendsRecycler"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-    </ScrollView>
+        <Button
+            android:id="@+id/addFriend"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:text="Add"
+            app:layout_constraintBottom_toBottomOf="@+id/searchUser"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/profileImg"
+            app:layout_constraintTop_toBottomOf="@+id/profileImg" />
+
+        <EditText
+            android:id="@+id/searchUser"
+            android:layout_width="238dp"
+            android:layout_height="41dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:hint="Search User"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toStartOf="@+id/addFriend"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileImg" />
+
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="LOGOUT"
+            app:layout_constraintBottom_toTopOf="@+id/profileImg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/profileImg" />
+
+        <Spinner
+            android:id="@+id/change_theme_spinner"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:text="Light"
+            android:spinnerMode="dropdown"
+            app:layout_constraintBottom_toTopOf="@+id/addFriend"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/profileImg"
+            app:layout_constraintTop_toBottomOf="@+id/logout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/friendsRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/constraintLayout" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
