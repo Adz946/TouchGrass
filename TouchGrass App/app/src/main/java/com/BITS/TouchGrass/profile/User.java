@@ -3,11 +3,20 @@ package com.BITS.TouchGrass.profile;
 public class User {
     private String name;
     private String password;
+    private String profileImg;
     private boolean loggedIn;
+
+    public User(String name, String password, String profileImg) {
+        this.name = name;
+        this.password = password;
+        this.profileImg = profileImg;
+        this.loggedIn = false;
+    }
 
     public User(String name, String password) {
         this.name = name;
         this.password = password;
+        this.profileImg = "ic_profile_black.png";
         this.loggedIn = false;
     }
 
@@ -25,6 +34,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getProfileImg() {
+        return profileImg;
+    }
+
+    public void setProfileImg(String profileImg) {
+        this.profileImg = profileImg;
     }
 
     public boolean isLoggedIn() {

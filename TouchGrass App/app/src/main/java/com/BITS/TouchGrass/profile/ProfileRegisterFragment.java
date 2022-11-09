@@ -58,9 +58,9 @@ public class ProfileRegisterFragment extends Fragment {
         btnRegister.setOnClickListener(v -> {
 
             // first if should check if username is in use: 'edtTxtUsername.isInUse()'
-            String username = edtTxtUsername.getText().toString();
-            String password = edtTxtPW.getText().toString();
-            String passwordConfirm = edtTxtPWConfirm.getText().toString();
+            String username = edtTxtUsername.getText().toString().strip();
+            String password = edtTxtPW.getText().toString().strip();
+            String passwordConfirm = edtTxtPWConfirm.getText().toString().strip();
             boolean exists = false;
 
             for (int i = 0; i < MainActivity.users.size(); i++) {

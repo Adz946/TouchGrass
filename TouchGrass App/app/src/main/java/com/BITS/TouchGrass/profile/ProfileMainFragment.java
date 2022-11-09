@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.BITS.TouchGrass.MainActivity;
@@ -25,6 +26,7 @@ public class ProfileMainFragment extends Fragment {
     Button logInBtn, registerBtn;
     TextView txtViewErrorMsg;
     EditText editTxtUsername, edtTxtPW;
+    ImageView profileImg;
 
     private final ProfileRegisterFragment profileRegisterFragment = new ProfileRegisterFragment();
     private final ProfileFriendsFragment profileFriendsFragment = new ProfileFriendsFragment();
@@ -51,6 +53,8 @@ public class ProfileMainFragment extends Fragment {
         txtViewErrorMsg = (TextView) view.findViewById(R.id.txtViewErrorMsg);
         editTxtUsername = (EditText) view.findViewById(R.id.editTxtUsername);
         edtTxtPW = (EditText) view.findViewById(R.id.edtTxtRegPW);
+        profileImg = (ImageView) view.findViewById(R.id.profileImg);
+
 
         // Methods to call
         setListeners();
@@ -63,8 +67,8 @@ public class ProfileMainFragment extends Fragment {
 
         logInBtn.setOnClickListener(v -> {
 
-            String username = editTxtUsername.getText().toString();
-            String password = edtTxtPW.getText().toString();
+            String username = editTxtUsername.getText().toString().strip();
+            String password = edtTxtPW.getText().toString().strip();
             boolean noUser = true;
 
             for (int i = 0; i < MainActivity.users.size(); i++) {
@@ -85,6 +89,9 @@ public class ProfileMainFragment extends Fragment {
             } else {
                 txtViewErrorMsg.setText("Failed! Username or password incorrect" );
             }
+            editTxtUsername.setText("");
+            edtTxtPW.setText("");
+
         });
 
         registerBtn.setOnClickListener(v -> {

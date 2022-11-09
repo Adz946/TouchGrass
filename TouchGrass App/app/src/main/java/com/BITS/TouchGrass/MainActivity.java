@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
 
     public static List<User> users = new ArrayList<>();
-    public static List<List<String>> friendsList = new ArrayList<List<String>>();
+    public static List<List<String>> friendsList = new ArrayList<>();
     public static User loggedUser = null;
 
     private void readProfileListFromAssets() {
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             while ((line = reader.readLine()) != null) {
                 String[] tokens = line.split(",");
 
-                User user = new User(tokens[0], tokens[1]);
+                User user = new User(tokens[0].strip(), tokens[1].strip(), tokens[2].strip());
                 users.add(user);
             }
         } catch (IOException e) {
@@ -104,10 +104,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             while ((line = reader.readLine()) != null) {
 
                 String[] tokens = line.split(",");
-                friendsList.add(new ArrayList<String>());
+                friendsList.add(new ArrayList<>());
 
                 for (int j = 0; j < tokens.length; j++) {
-                    friendsList.get(counter).add(tokens[j]);
+                    friendsList.get(counter).add(tokens[j].strip());
                 }
                 counter++;
             }

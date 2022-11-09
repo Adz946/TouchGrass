@@ -45,7 +45,7 @@
             android:background="@color/mid_grey" />
 
         <TextView
-            android:id="@+id/reminderTitleTV"
+            android:id="@+id/friendName"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginTop="2dp"
