@@ -14,21 +14,19 @@ import com.BITS.TouchGrass.R;
 
 public class ChallengesMainFragment extends Fragment {
 
-    View view;
-    Button CreateChallengeButton;
+    Button createChallengeBtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_challenges_main, container, false);
 
-        // Create the page here, and methods referring to the built page +assets on it are
-        // referenced using 'view.'
-
-        //Buttons
-
-        CreateChallengeButton = (Button) getView().findViewById(R.id.btnCreateChallenge_Main);
+        initWidgets(view);
 
         return view;
+    }
+
+    private void initWidgets(View view) {
+        createChallengeBtn = view.findViewById(R.id.btnCreateChallenge);
     }
 }
