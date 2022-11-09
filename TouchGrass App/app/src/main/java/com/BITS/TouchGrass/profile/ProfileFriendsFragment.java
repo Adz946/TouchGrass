@@ -80,9 +80,6 @@ public class ProfileFriendsFragment extends Fragment {
                 }
             }
         }
-        for (int l = 0; l <friendsList.size(); l++) {
-            Toast.makeText(getContext(), friendsList.get(l).toString(), Toast.LENGTH_SHORT).show();
-        }
     }
 
 //    private void setProfileImg() {
