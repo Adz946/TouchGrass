@@ -53,7 +53,8 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     public void onBindViewHolder(@NonNull RecycleViewAdapter.MyViewHolder holder, int position) {
 
         holder.friendName.setText(friendsList.get(position).getName());
-        Glide.with(this.context).load(friendsList.get(position).getProfileImg()).into(holder.friendImg);
+        holder.friendImg.setImageResource(R.drawable.ic_profile_black);
+        //Glide.with(this.context).load(friendsList.get(position).getProfileImg()).into(holder.friendImg);
     }
 
     @Override

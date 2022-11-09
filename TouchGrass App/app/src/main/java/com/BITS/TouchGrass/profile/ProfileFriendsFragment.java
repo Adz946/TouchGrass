@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.BITS.TouchGrass.MainActivity;
 import com.BITS.TouchGrass.R;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +55,7 @@ public class ProfileFriendsFragment extends Fragment {
         mAdapter = new RecycleViewAdapter(friendsList, this.getActivity());
         recyclerView.setAdapter(mAdapter);
 
-
+        //Glide.with(this).load(friendsList.get(MainActivity.loggedUser.getProfileImg()).into(profileImg);
 
         setFriendsList();
         //setProfileImg();
