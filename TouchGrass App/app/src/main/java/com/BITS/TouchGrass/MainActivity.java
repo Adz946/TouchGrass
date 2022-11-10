@@ -80,10 +80,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 User user = new User(tokens[0].strip(), tokens[1].strip(), tokens[2].strip());
                 users.add(user);
             }
+            reader.close();
         } catch (IOException e) {
             Log.wtf("MyActivity", "Error reading data file on line " + line, e);
             e.printStackTrace();
         }
+
     }
 
     private void readFriendsListFromAssets() {
@@ -113,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 }
                 counter++;
             }
+            reader.close();
         } catch (IOException e) {
             Log.wtf("MyActivity", "Error reading data file on line " + line, e);
             e.printStackTrace();
