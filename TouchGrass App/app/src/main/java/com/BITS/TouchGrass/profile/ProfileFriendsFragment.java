@@ -74,7 +74,7 @@ public class ProfileFriendsFragment extends Fragment {
             }
         }
         for (int j = 1; j < fList.size(); j++) {
-            for( int k = 0; k < MainActivity.users.size(); k++) {
+            for (int k = 0; k < MainActivity.users.size(); k++) {
                 if (fList.get(j).strip().equalsIgnoreCase(MainActivity.users.get(k).getName().strip())) {
                     friendsList.add(MainActivity.users.get(k));
                     break;
