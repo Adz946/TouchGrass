@@ -1,7 +1,5 @@
 package com.BITS.TouchGrass.reminders;
 
-import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -16,33 +14,26 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.BITS.TouchGrass.R;
-import com.BITS.TouchGrass.profile.Friend;
+import com.BITS.TouchGrass.profile.User;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
 public class EditReminderFragment extends Fragment {
 
-    ArrayList<Friend> friendsSharedWith = new ArrayList<>();
+    ArrayList<User> friendsSharedWith = new ArrayList<>();
 
     String priority;
     int repeatFrequency;

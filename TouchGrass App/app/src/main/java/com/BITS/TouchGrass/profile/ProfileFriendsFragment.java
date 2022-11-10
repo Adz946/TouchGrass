@@ -35,14 +35,13 @@ public class ProfileFriendsFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile_friends, container, false);
         loggedUser = MainActivity.loggedUser;
 
         initWidgets(view);
 
-        buildThemeSpinner();
+//        buildThemeSpinner();  // this is freezing the page
 
         // Glide.with(this).load(friendsList.get(MainActivity.loggedUser.getProfileImg()).into(profileImg);
 
@@ -65,16 +64,18 @@ public class ProfileFriendsFragment extends Fragment {
 
 
     public void setFriendsListAdapter() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
-        RecycleViewAdapter adapter = new RecycleViewAdapter(friendsList, getContext());
+        RecycleViewAdapter adapter = new RecycleViewAdapter(friendsList, this.getActivity());
         recyclerView.setAdapter(adapter);
     }
 
 
     private void setFriendsList() {
-        List<String> fList = new ArrayList<>();
+        ArrayList<String> fList = new ArrayList<>();
+        ArrayList<User> temp = new ArrayList<>();
+
         for (int i = 0; i < MainActivity.friendsList.size(); i++) {
             if (MainActivity.loggedUser.getName().equalsIgnoreCase(MainActivity.friendsList.get(i).get(0))) {
                 fList = MainActivity.friendsList.get(i);
@@ -84,11 +85,12 @@ public class ProfileFriendsFragment extends Fragment {
         for (int j = 1; j < fList.size(); j++) {
             for (int k = 0; k < MainActivity.users.size(); k++) {
                 if (fList.get(j).strip().equalsIgnoreCase(MainActivity.users.get(k).getName().strip())) {
-                    friendsList.add(MainActivity.users.get(k));
+                    temp.add(MainActivity.users.get(k));
                     break;
                 }
             }
         }
+        friendsList = temp;
     }
 
 //    private void setProfileImg() {
@@ -117,7 +119,6 @@ public class ProfileFriendsFragment extends Fragment {
         });
 
         addFriendBtn.setOnClickListener(v -> {
-
 
             if (alreadyFriend() && exist() && !yourself()) {
                 Toast.makeText(getContext(), "User is already your friend!!", Toast.LENGTH_SHORT).show();
@@ -185,6 +186,9 @@ public class ProfileFriendsFragment extends Fragment {
                 break;
             }
         }
+        requireActivity().getSupportFragmentManager().beginTransaction()
+                .replace(ProfileFriendsFragment.this.getId(), new ProfileFriendsFragment())
+                .commit();
     }
 
     private boolean alreadyFriend() {
@@ -223,6 +227,7 @@ public class ProfileFriendsFragment extends Fragment {
         // simplified boolean expression
         return searchUser.getText().toString().equalsIgnoreCase(MainActivity.loggedUser.getName());
     }
+
 
     private void buildThemeSpinner() {
         // creates an adapter from the spinner template, and applies to our options in 'themes_spinner'

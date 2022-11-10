@@ -12,15 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.BITS.TouchGrass.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.MyViewHolder> {
 
-    List<User> friendsList;
+    ArrayList<User> friendsList;
     Context context;
 
-
-    public RecycleViewAdapter(List<User> friendsList, Context context) {
+    public RecycleViewAdapter(ArrayList<User> friendsList, Context context) {
         this.friendsList = friendsList;
         this.context = context;
     }
@@ -29,7 +29,6 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
         ImageView friendImg;
         TextView friendName;
-
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
