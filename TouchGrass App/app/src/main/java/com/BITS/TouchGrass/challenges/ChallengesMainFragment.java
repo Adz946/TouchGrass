@@ -3,6 +3,7 @@ package com.BITS.TouchGrass.challenges;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,6 +21,8 @@ public class ChallengesMainFragment extends Fragment {
     Button createChallengeBtn;
     RecyclerView incomingChallengesRV, ongoingChallengesRV, completedChallengesRV;
 
+    private final ChallengeCreateFragment fragment_challenge_create = new ChallengeCreateFragment();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -36,6 +39,16 @@ public class ChallengesMainFragment extends Fragment {
         incomingChallengesRV = view.findViewById(R.id.incoming_challenge_RV);
         ongoingChallengesRV = view.findViewById(R.id.ongoing_challenge_RV);
         completedChallengesRV = view.findViewById(R.id.completed_challenge_RV);
+        setListeners();
+    }
+
+    private void setListeners () {
+        createChallengeBtn.setOnClickListener(v -> {
+            FragmentTransaction fr = getParentFragmentManager().beginTransaction();
+            fr.replace(R.id.flFragment, fragment_challenge_create);
+            fr.addToBackStack("challenge");
+            fr.commit();
+        });
     }
 
     @Override
