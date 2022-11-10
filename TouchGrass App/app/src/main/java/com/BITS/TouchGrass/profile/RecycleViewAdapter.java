@@ -11,17 +11,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.BITS.TouchGrass.R;
-import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.MyViewHolder> {
 
-    List<User> friendsList;
+    ArrayList<User> friendsList;
     Context context;
 
-
-    public RecycleViewAdapter(List<User> friendsList, Context context) {
+    public RecycleViewAdapter(ArrayList<User> friendsList, Context context) {
         this.friendsList = friendsList;
         this.context = context;
     }
@@ -30,7 +29,6 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
         ImageView friendImg;
         TextView friendName;
-
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -44,9 +42,8 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     @Override
     public RecycleViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.totally_not_stolen_friend_cell,parent,false);
-        MyViewHolder holder = new MyViewHolder(view);
 
-        return holder;
+        return new MyViewHolder(view);
     }
 
     @Override

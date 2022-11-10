@@ -1,6 +1,7 @@
 package com.BITS.TouchGrass.profile;
 
 public class User {
+
     private String name;
     private String password;
     private String profileImg;

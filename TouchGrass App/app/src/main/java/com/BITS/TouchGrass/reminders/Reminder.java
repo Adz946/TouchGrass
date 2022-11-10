@@ -8,7 +8,10 @@ import java.util.ArrayList;
 
 public class Reminder {
 
-//    public static ArrayList<Reminder> remindersList = new ArrayList<>();
+    public static ArrayList<Reminder> remindersList = new ArrayList<>();
+//    public static ArrayList<SelfReminder> currentSelfReminders = new ArrayList<>();
+//    public static ArrayList<GroupReminder> currentGroupReminders = new ArrayList<>();
+
 
     private String title;
     private boolean allDayReminder;
@@ -30,9 +33,19 @@ public class Reminder {
         this.priority = priority;
     }
 
-    public Reminder(String title) {
-        this.title = title;
+    public static ArrayList<Reminder> remindersForDate(LocalDate date) {
+        ArrayList<Reminder> reminders = new ArrayList<>();
+
+        for (Reminder reminder : remindersList) {
+            if (reminder.getEndDate().equals(date)) {
+                reminders.add(reminder);
+            }
+        }
+
+        return reminders;
     }
+
+
 
     public String getTitle() {
         return title;

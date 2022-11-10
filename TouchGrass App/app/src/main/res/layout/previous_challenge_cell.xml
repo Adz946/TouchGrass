@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:id="@+id/challenge_title"
+                android:id="@+id/completed_challenge_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
