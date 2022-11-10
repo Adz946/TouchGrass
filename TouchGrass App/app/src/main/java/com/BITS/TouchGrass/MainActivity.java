@@ -35,6 +35,7 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
 
+    public static String currentTheme;
     BottomNavigationView bottomNavigationView;
 
     @Override

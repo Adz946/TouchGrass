@@ -1,5 +1,6 @@
 package com.BITS.TouchGrass.profile;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,13 +27,14 @@ import java.util.List;
 public class ProfileFriendsFragment extends Fragment {
 
     Button logoutBtn, addFriendBtn;
-    Spinner changeThemeSpinner;
+    Spinner setThemeSpinner;
     TextView searchUser;
     ImageView profileImg;
     ArrayList<User> friendsList = new ArrayList<>();
     User loggedUser;
     RecyclerView recyclerView;
 
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -41,7 +43,7 @@ public class ProfileFriendsFragment extends Fragment {
 
         initWidgets(view);
 
-//        buildThemeSpinner();  // this is freezing the page
+        buildThemeSpinner();
 
         // Glide.with(this).load(friendsList.get(MainActivity.loggedUser.getProfileImg()).into(profileImg);
 
@@ -49,21 +51,120 @@ public class ProfileFriendsFragment extends Fragment {
         // setProfileImg();
         setListeners();
 
+        selectSpinnerValue(MainActivity.currentTheme);
+
         setFriendsListAdapter();
 
         return view;
-
-    }
-
-    // each time the page is opened, the friends list will update
-    @Override
-    public void onResume() {
-        super.onResume();
-        setFriendsListAdapter();
     }
 
 
-    public void setFriendsListAdapter() {
+    private void initWidgets(View view) {
+        logoutBtn = view.findViewById(R.id.logout);
+        addFriendBtn = view.findViewById(R.id.addFriend);
+        searchUser = view.findViewById(R.id.searchUser);
+        profileImg = view.findViewById(R.id.profileImg);
+        setThemeSpinner = view.findViewById(R.id.change_theme_spinner);
+        recyclerView = view.findViewById(R.id.friendsRecycler);
+    }
+
+
+    private void setListeners() {
+
+        logoutBtn.setOnClickListener(v -> {
+            MainActivity.logout();
+            getParentFragmentManager().popBackStack();
+            Toast.makeText(getContext(), "You have logged out ", Toast.LENGTH_SHORT).show();
+        });
+
+        addFriendBtn.setOnClickListener(v -> {
+            if (alreadyFriend() && exist() && !yourself()) {
+                Toast.makeText(getContext(), "User is already your friend!!", Toast.LENGTH_SHORT).show();
+                //searchUser.setText("");
+            } else if (yourself() && !alreadyFriend() && exist()) {
+                Toast.makeText(getContext(), "You can't add yourself!!", Toast.LENGTH_SHORT).show();
+                //searchUser.setText("");
+            } else if (!exist() && !yourself() && !alreadyFriend()) {
+                Toast.makeText(getContext(), "User does not exist...", Toast.LENGTH_SHORT).show();
+                //searchUser.setText("");
+            } else if (!(alreadyFriend() && !exist() && yourself())) {
+                Toast.makeText(getContext(), searchUser.getText().toString() + " added to your Friends List", Toast.LENGTH_SHORT).show();
+                //searchUser.setText("");
+                addFriend();
+            }
+            searchUser.setText("");
+        });
+
+        setThemeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+
+                if (!item.equals(MainActivity.currentTheme)) {
+
+//                    String themeName = null;
+//
+//                    try {
+//                        int theme = requireContext().getPackageManager()
+//                                .getActivityInfo(requireActivity().getComponentName(), 0)
+//                                .getThemeResource();
+//                        String fullThemeName = requireContext().getResources().getResourceEntryName(theme);
+//                        String[] fields = fullThemeName.split("_");
+//                        themeName = fields[1];
+//                    } catch (PackageManager.NameNotFoundException e) {
+//                        e.printStackTrace();
+//                    }
+//
+//                    if (!item.equals(themeName)) {
+                    switch (item) {
+                        case "Light":
+                            requireContext().setTheme(R.style.Theme_TouchGrass_Light);
+                            break;
+                        case "Dark":
+                            requireContext().setTheme(R.style.Theme_TouchGrass_Dark);
+                            break;
+                        case "Retro":
+                            requireContext().setTheme(R.style.Theme_TouchGrass_Retro);
+                            break;
+                        case "Christmas":
+                            requireContext().setTheme(R.style.Theme_TouchGrass_Christmas);
+                            break;
+                        case "Colourblind":
+                            requireContext().setTheme(R.style.Theme_TouchGrass_Colourblind);
+                            break;
+                    }
+                    MainActivity.currentTheme = item;
+                    reloadPage();
+//                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private void selectSpinnerValue(String string) {
+        for (int i = 0; i < setThemeSpinner.getCount(); i++) {
+            if (setThemeSpinner.getItemAtPosition(i).toString().equals(string)) {
+                setThemeSpinner.setSelection(i);
+                break;
+            }
+        }
+    }
+
+//
+//    // each time the page is opened, the friends list will update
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        setFriendsListAdapter();
+//    }
+
+
+    private void setFriendsListAdapter() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
@@ -100,78 +201,13 @@ public class ProfileFriendsFragment extends Fragment {
 //
 //    }
 
-    private void initWidgets(View view) {
-        logoutBtn = view.findViewById(R.id.logout);
-        addFriendBtn = view.findViewById(R.id.addFriend);
-        searchUser = view.findViewById(R.id.searchUser);
-        profileImg = view.findViewById(R.id.profileImg);
-        changeThemeSpinner = view.findViewById(R.id.change_theme_spinner);
-        recyclerView = view.findViewById(R.id.friendsRecycler);
+
+    private void reloadPage() {
+        requireActivity().getSupportFragmentManager().beginTransaction()
+                .replace(ProfileFriendsFragment.this.getId(), new ProfileFriendsFragment())
+                .commit();
     }
 
-
-    public void setListeners() {
-
-        logoutBtn.setOnClickListener(v -> {
-            MainActivity.logout();
-            getParentFragmentManager().popBackStack();
-            Toast.makeText(getContext(), "You have logged out ", Toast.LENGTH_SHORT).show();
-        });
-
-        addFriendBtn.setOnClickListener(v -> {
-
-            if (alreadyFriend() && exist() && !yourself()) {
-                Toast.makeText(getContext(), "User is already your friend!!", Toast.LENGTH_SHORT).show();
-                //searchUser.setText("");
-            } else if (yourself() && !alreadyFriend() && exist()) {
-                Toast.makeText(getContext(), "You can't add yourself!!", Toast.LENGTH_SHORT).show();
-                //searchUser.setText("");
-            } else if (!exist() && !yourself() && !alreadyFriend()) {
-                Toast.makeText(getContext(), "User does not exist...", Toast.LENGTH_SHORT).show();
-                //searchUser.setText("");
-            } else if (!(alreadyFriend() && !exist() && yourself())) {
-                Toast.makeText(getContext(), searchUser.getText().toString() +" added to your Friends List", Toast.LENGTH_SHORT).show();
-                //searchUser.setText("");
-                addFriend();
-            }
-            searchUser.setText("");
-        });
-
-        changeThemeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = parent.getItemAtPosition(position).toString();
-
-                switch (item) {
-                    case "Light":
-                        requireActivity().setTheme(R.style.Theme_TouchGrass);
-                        break;
-                    case "Dark":
-                        requireActivity().setTheme(R.style.Theme_TouchGrass_Dark);
-                        break;
-                    case "Retro":
-                        requireActivity().setTheme(R.style.Theme_TouchGrass_Retro);
-                        break;
-                    case "Christmas":
-                        requireActivity().setTheme(R.style.Theme_TouchGrass_Christmas);
-                        break;
-                    case "Colourblind":
-                        requireActivity().setTheme(R.style.Theme_TouchGrass_Colourblind);
-                        break;
-                }
-
-                requireActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(ProfileFriendsFragment.this.getId(), new ProfileFriendsFragment())
-                        .commit();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-    }
 
     private void addFriend() {
         for (int i = 0; i < MainActivity.friendsList.size(); i++) {
@@ -186,9 +222,7 @@ public class ProfileFriendsFragment extends Fragment {
                 break;
             }
         }
-        requireActivity().getSupportFragmentManager().beginTransaction()
-                .replace(ProfileFriendsFragment.this.getId(), new ProfileFriendsFragment())
-                .commit();
+        reloadPage();
     }
 
     private boolean alreadyFriend() {
@@ -236,6 +270,6 @@ public class ProfileFriendsFragment extends Fragment {
         // sets the layout resource
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         // applies the adapter to our drop down
-        changeThemeSpinner.setAdapter(adapter);
+        setThemeSpinner.setAdapter(adapter);
     }
 }
