@@ -36,7 +36,6 @@ public class EditReminderFragment extends Fragment {
     ArrayList<User> friendsSharedWith = new ArrayList<>();
 
     String priority;
-    int repeatFrequency;
 
     boolean isGroupReminder, isAllDayReminder;
     LocalDate startDate, endDate;
