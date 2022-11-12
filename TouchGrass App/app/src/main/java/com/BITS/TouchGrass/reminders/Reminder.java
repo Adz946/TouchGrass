@@ -20,10 +20,11 @@ public class Reminder {
     private LocalTime time;
     private int repeatFrequency;
     private String priority;
+    private String description;
 
 
     public Reminder(String title, boolean allDayReminder, LocalDate startDate, LocalDate endDate,
-                    LocalTime time, int repeatFrequency, String priority) {
+                    LocalTime time, int repeatFrequency, String priority, String description) {
         this.title = title;
         this.allDayReminder = allDayReminder;
         this.startDate = startDate;
@@ -31,6 +32,7 @@ public class Reminder {
         this.time = time;
         this.repeatFrequency = repeatFrequency;
         this.priority = priority;
+        this.description = description;
     }
 
     public static ArrayList<Reminder> remindersForDate(LocalDate date) {
@@ -101,5 +103,13 @@ public class Reminder {
 
     public void setRepeatFrequency(int repeatFrequency) {
         this.repeatFrequency = repeatFrequency;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

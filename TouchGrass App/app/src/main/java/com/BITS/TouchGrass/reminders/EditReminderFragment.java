@@ -361,7 +361,7 @@ public class EditReminderFragment extends Fragment {
 
     private void addSelfReminder() {
         new SelfReminder(titleET.getText().toString(),isAllDayReminder,
-                startDate, endDate, time, getRepeatFrequency(), priority);
+                startDate, endDate, time, getRepeatFrequency(), priority, descriptionET.getText().toString());
 //        String text = String.format(Locale.getDefault(),"%s, %b, %s, %s, %s, %d, %s",
 //                titleET.getText().toString(),isAllDayReminder,
 //                startDate,endDate,time,getRepeatFrequency(),priority);
@@ -373,7 +373,7 @@ public class EditReminderFragment extends Fragment {
 
     private void addGroupReminder() {
         new GroupReminder(titleET.getText().toString(),isAllDayReminder,
-                startDate, endDate, time, getRepeatFrequency(), priority);
+                startDate, endDate, time, getRepeatFrequency(), priority, descriptionET.getText().toString());
 
         Toast.makeText(getContext(), "Reminder added", Toast.LENGTH_LONG).show();
         getParentFragmentManager().popBackStack();
