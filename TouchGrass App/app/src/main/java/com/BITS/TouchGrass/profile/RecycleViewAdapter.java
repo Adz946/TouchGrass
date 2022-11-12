@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.BITS.TouchGrass.R;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,8 +51,8 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     public void onBindViewHolder(@NonNull RecycleViewAdapter.MyViewHolder holder, int position) {
 
         holder.friendName.setText(friendsList.get(position).getName());
-        holder.friendImg.setImageResource(R.drawable.ic_profile_black);
-        //Glide.with(this.context).load(friendsList.get(position).getProfileImg()).into(holder.friendImg);
+        //holder.friendImg.setImageResource(R.drawable.ic_profile_black);
+        Glide.with(this.context).load(friendsList.get(position).getProfileImg()).into(holder.friendImg);
     }
 
     @Override
