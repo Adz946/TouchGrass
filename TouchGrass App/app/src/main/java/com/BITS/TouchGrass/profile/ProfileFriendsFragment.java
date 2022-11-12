@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.BITS.TouchGrass.MainActivity;
 import com.BITS.TouchGrass.R;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,13 +40,13 @@ public class ProfileFriendsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile_friends, container, false);
-        loggedUser = MainActivity.loggedUser;
+        this.loggedUser = MainActivity.loggedUser;
 
         initWidgets(view);
 
         buildThemeSpinner();
 
-        // Glide.with(this).load(friendsList.get(MainActivity.loggedUser.getProfileImg()).into(profileImg);
+        Glide.with(this).load(this.loggedUser.getProfileImg()).into(profileImg);
 
         setFriendsList();
         // setProfileImg();

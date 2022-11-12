@@ -14,12 +14,6 @@ public class User {
         this.loggedIn = false;
     }
 
-    public User(String name, String password) {
-        this.name = name;
-        this.password = password;
-        this.profileImg = "ic_profile_black.png";
-        this.loggedIn = false;
-    }
 
     public String getName() {
         return name;
@@ -59,7 +53,7 @@ public class User {
 
     @Override
     public String toString() {
-        return this.name + "," + this.password;
+        return this.name + "," + this.password + "," + this.profileImg;
     }
 }
 

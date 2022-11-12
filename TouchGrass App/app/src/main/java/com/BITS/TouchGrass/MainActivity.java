@@ -86,6 +86,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             e.printStackTrace();
         }
 
+        for (int i= 0; i < users.size(); i++) {
+            Log.d("testing", users.get(i).toString());
+
+        }
+
     }
 
     private void readFriendsListFromAssets() {
