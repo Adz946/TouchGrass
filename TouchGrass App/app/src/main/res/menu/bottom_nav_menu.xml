@@ -4,18 +4,18 @@
     <item
         android:id="@+id/profile"
         android:title="@string/profile"
-        android:icon="@drawable/ic_profile_black" />
+        android:icon="@drawable/profile_icon" />
     <item
         android:id="@+id/calendar"
         android:title="@string/calendar"
-        android:icon="@drawable/ic_calendar_black" />
+        android:icon="@drawable/calendar_icon" />
     <item
         android:id="@+id/reminders"
         android:title="@string/reminders"
-        android:icon="@drawable/ic_reminder_black" />
+        android:icon="@drawable/reminder_icon" />
     <item
         android:id="@+id/challenges"
         android:title="@string/challenges"
-        android:icon="@drawable/ic_challenge_black" />
+        android:icon="@drawable/challenge_icon" />
 
 </menu>
