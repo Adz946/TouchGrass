@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav"
+    app:startDestination="@id/profile_logIn" >
+
+    <fragment
+        android:id="@+id/profile_home"
+        android:name="com.hydrago.refinements.Profile.Pro_Home"
+        tools:layout="@layout/pro_home_layout" />
+
+    <fragment
+        android:id="@+id/profile_logIn"
+        android:name="com.hydrago.refinements.Profile.Pro_LogIn"
+        tools:layout="@layout/pro_log_in_layout" />
+
+    <fragment
+        android:id="@+id/calendar_home"
+        android:name="com.hydrago.refinements.Calendar.Cal_Home"
+        tools:layout="@layout/cal_home_layout" />
+
+    <fragment
+        android:id="@+id/reminder_home"
+        android:name="com.hydrago.refinements.Reminder.Rem_Home"
+        tools:layout="@layout/rem_home_layout" />
+
+    <fragment
+        android:id="@+id/challenge_home"
+        android:name="com.hydrago.refinements.Challenge.Cha_Home"
+        tools:layout="@layout/cha_home_layout" />
+</navigation>
