@@ -1,15 +1,12 @@
-package com.hydrago.refinements.Challenge;
+package com.BITS.TouchGrass.Challenge;
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.hydrago.refinements.R;
+import com.BITS.TouchGrass.*;
 
 public class Cha_Home extends Fragment {
 

@@ -1,4 +1,4 @@
-package com.hydrago.refinements.Profile;
+package com.BITS.TouchGrass.Profile;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,9 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.hydrago.refinements.Adapter;
-import com.hydrago.refinements.R;
-import com.hydrago.refinements.databinding.ProHomeLayoutBinding;
+import com.BITS.TouchGrass.*;
+import com.BITS.TouchGrass.databinding.ProHomeLayoutBinding;
 
 public class Pro_Home extends Fragment {
 
