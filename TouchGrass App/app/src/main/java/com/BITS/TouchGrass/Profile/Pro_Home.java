@@ -22,9 +22,22 @@ public class Pro_Home extends Fragment {
     }
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        rec = view.findViewById(R.id.friendList);
-        rec.setLayoutManager(new LinearLayoutManager(getContext()));
-        Adapter adapter = new Adapter("friends", getContext());
-        rec.setAdapter(adapter);
+        setRecycler(view);
+    }
+
+    public void setRecycler(View view) {
+        int i = 0;
+
+        while (i < ObjectClasses.users.size()) {
+            ObjectClasses.User user = ObjectClasses.users.get(i);
+
+            if (user.getLoggedIn()) {
+                rec = view.findViewById(R.id.friendList);
+                rec.setLayoutManager(new LinearLayoutManager(getContext()));
+                Adapter adapter = new Adapter("friends", getContext());
+                rec.setAdapter(adapter);
+            }
+            i += 1;
+        }
     }
 }

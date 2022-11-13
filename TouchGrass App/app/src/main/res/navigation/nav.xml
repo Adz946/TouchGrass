@@ -8,26 +8,26 @@
 
     <fragment
         android:id="@+id/profile_home"
-        android:name="com.hydrago.refinements.Profile.Pro_Home"
+        android:name="com.BITS.TouchGrass.Profile.Pro_Home"
         tools:layout="@layout/pro_home_layout" />
 
     <fragment
         android:id="@+id/profile_logIn"
-        android:name="com.hydrago.refinements.Profile.Pro_LogIn"
+        android:name="com.BITS.TouchGrass.Profile.Pro_LogIn"
         tools:layout="@layout/pro_log_in_layout" />
 
     <fragment
         android:id="@+id/calendar_home"
-        android:name="com.hydrago.refinements.Calendar.Cal_Home"
+        android:name="com.BITS.TouchGrass.Calendar.Cal_Home"
         tools:layout="@layout/cal_home_layout" />
 
     <fragment
         android:id="@+id/reminder_home"
-        android:name="com.hydrago.refinements.Reminder.Rem_Home"
+        android:name="com.BITS.TouchGrass.Reminder.Rem_Home"
         tools:layout="@layout/rem_home_layout" />
 
     <fragment
         android:id="@+id/challenge_home"
-        android:name="com.hydrago.refinements.Challenge.Cha_Home"
+        android:name="com.BITS.TouchGrass.Challenge.Cha_Home"
         tools:layout="@layout/cha_home_layout" />
 </navigation>
