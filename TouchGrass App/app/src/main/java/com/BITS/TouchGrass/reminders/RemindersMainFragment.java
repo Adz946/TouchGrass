@@ -41,7 +41,7 @@ public class RemindersMainFragment extends Fragment {
     User loggedUser;
 
     //phi testing
-    ArrayList<SelfReminder> selfReminderList = new ArrayList<>();
+    static ArrayList<SelfReminder> selfReminderList = new ArrayList<>();
 
 
     @Override
@@ -60,7 +60,6 @@ public class RemindersMainFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_reminders_main, container, false);
 
         this.loggedUser = MainActivity.loggedUser;
-
 
 
         initWidgets(view);
@@ -103,11 +102,13 @@ public class RemindersMainFragment extends Fragment {
         }
     }
 
-//    public static void resetLists() {
-//        for (int i = 0; i < MainActivity.selfReminderList.size(); i++) {
-//            selfReminderList = null;
-//        }
-//    }
+    public static void resetLists() {
+        if (selfReminderList.size()>0 || selfReminderList != null) {
+            for (int i = selfReminderList.size(); i > 0; i--) {
+                selfReminderList.remove(i-1);
+            }
+        }
+    }
 
 
 

@@ -48,7 +48,9 @@ public class ProfileFriendsFragment extends Fragment {
 
         buildThemeSpinner();
 
-        Glide.with(this).load(this.loggedUser.getProfileImg()).into(profileImg);
+        if (MainActivity.loggedUser != null) {
+            Glide.with(this).load(this.loggedUser.getProfileImg()).into(profileImg);
+        }
 
         setFriendsList();
         // setProfileImg();
@@ -76,7 +78,7 @@ public class ProfileFriendsFragment extends Fragment {
 
         logoutBtn.setOnClickListener(v -> {
             MainActivity.logout();
-            //RemindersMainFragment.resetLists();
+            RemindersMainFragment.resetLists();
             getParentFragmentManager().popBackStack();
             Toast.makeText(getContext(), "You have logged out ", Toast.LENGTH_SHORT).show();
         });
@@ -236,10 +238,8 @@ public class ProfileFriendsFragment extends Fragment {
         for ( int i = 0; i <MainActivity.friendsList.size(); i++) {
             if (MainActivity.loggedUser.getName().equalsIgnoreCase(MainActivity.friendsList.get(i).get(0))) {
                 temp = MainActivity.friendsList.get(i);
-//                if (temp.contains("adam")) {
-//                    alreadyFriend = true;
-//                    break;
-//                }
+
+
                 for(int k = 1; k < temp.size(); k ++) {
                     if (searchUser.getText().toString().strip().equalsIgnoreCase(temp.get(k))) {
                         alreadyFriend = true;
