@@ -1,9 +1,13 @@
 package com.BITS.TouchGrass.challenges;
 
+import static android.graphics.Color.parseColor;
+
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -33,6 +37,7 @@ public class ChallengeCreateFragment extends Fragment {
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d/M/yyyy");
     LocalTime time;
     LocalDate StartDateTime, EndDateTime;
+    public static final int MIDGREY = parseColor("#585B58");
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,123 +74,121 @@ public class ChallengeCreateFragment extends Fragment {
         startDate.setOnClickListener(this::showStartDatePicker);
         endDate.setOnClickListener(this::showEndDatePicker);
         cancelBtn.setOnClickListener(this::cancelOperation);
-        mon.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked && !ActiveDays.contains("Monday")) {
+        //Creating background maps
+        Drawable monBackground = mon.getBackground();
+        monBackground = DrawableCompat.wrap(monBackground);
+        Drawable finalMonBackground = monBackground;
+        Drawable tueBackground = tue.getBackground();
+        tueBackground = DrawableCompat.wrap(tueBackground);
+        Drawable finalTueBackground = tueBackground;
+        Drawable wedBackground = wed.getBackground();
+        wedBackground = DrawableCompat.wrap(wedBackground);
+        Drawable finalWedBackground = wedBackground;
+        Drawable thuBackground = thu.getBackground();
+        thuBackground = DrawableCompat.wrap(thuBackground);
+        Drawable finalThuBackground = thuBackground;
+        Drawable friBackground = fri.getBackground();
+        friBackground = DrawableCompat.wrap(friBackground);
+        Drawable finalFriBackground = friBackground;
+        Drawable satBackground = sat.getBackground();
+        satBackground = DrawableCompat.wrap(satBackground);
+        Drawable finalSatBackground = satBackground;
+        Drawable sunBackground = sun.getBackground();
+        sunBackground = DrawableCompat.wrap(sunBackground);
+        Drawable finalSunBackground = sunBackground;
+        //Day button listeners
+        mon.setOnCheckedChangeListener((monView, MonisChecked) -> {
+            if (MonisChecked && !ActiveDays.contains("Monday")) {
                 ActiveDays.add("Monday");
-                mon.setBackgroundColor(Color.GREEN);
-            }
-            else {
+                DrawableCompat.setTint(finalMonBackground, Color.GREEN);
+                mon.setBackground(finalMonBackground);
+            } else {
                 if (ActiveDays.contains("Monday")) {
+                    DrawableCompat.setTint(finalMonBackground, MIDGREY);
+                    mon.setBackground(finalMonBackground);
                     ActiveDays.remove("Monday");
                 }
-                mon.setBackgroundColor(Color.LTGRAY);
+            }
+        tue.setOnCheckedChangeListener((tueView, TueisChecked) -> {
+            if (TueisChecked && !ActiveDays.contains("Tuesday")) {
+                ActiveDays.add("Tuesday");
+                DrawableCompat.setTint(finalTueBackground, Color.GREEN);
+                tue.setBackground(finalTueBackground);
+            } else {
+                if (ActiveDays.contains("Tuesday")) {
+                    DrawableCompat.setTint(finalTueBackground, MIDGREY);
+                    tue.setBackground(finalTueBackground);
+                    ActiveDays.remove("Tuesday");
+                }
+            }
+        wed.setOnCheckedChangeListener((wedView, WedisChecked) -> {
+            if (WedisChecked && !ActiveDays.contains("Wednesday")) {
+                ActiveDays.add("Wednesday");
+                DrawableCompat.setTint(finalWedBackground, Color.GREEN);
+                wed.setBackground(finalWedBackground);
+            } else {
+                if (ActiveDays.contains("Wednesday")) {
+                    DrawableCompat.setTint(finalWedBackground, MIDGREY);
+                    wed.setBackground(finalWedBackground);
+                    ActiveDays.remove("Wednesday");
+                }
             }
         });
-//        mon.setOnCheckedChangeListener(changeDays(mon));
-//        tue.setOnCheckedChangeListener(changeDays(tue));
-//        wed.setOnCheckedChangeListener(changeDays(wed));
-//        thu.setOnCheckedChangeListener(changeDays(thu));
-//        fri.setOnCheckedChangeListener(changeDays(fri));
-//        sat.setOnCheckedChangeListener(changeDays(sat));
-//        sun.setOnCheckedChangeListener(changeDays(sun));
+        thu.setOnCheckedChangeListener((thuView, ThuisChecked) -> {
+            if (ThuisChecked && !ActiveDays.contains("Thursday")) {
+                ActiveDays.add("Thursday");
+                DrawableCompat.setTint(finalThuBackground, Color.GREEN);
+                thu.setBackground(finalThuBackground);
+            } else {
+                if (ActiveDays.contains("Thursday")) {
+                    DrawableCompat.setTint(finalThuBackground, MIDGREY);
+                    thu.setBackground(finalThuBackground);
+                    ActiveDays.remove("Thursday");
+                }
+            }
+        fri.setOnCheckedChangeListener((friView, FriisChecked) -> {
+            if (FriisChecked && !ActiveDays.contains("Friday")) {
+                ActiveDays.add("Friday");
+                DrawableCompat.setTint(finalFriBackground, Color.GREEN);
+                fri.setBackground(finalFriBackground);
+            } else {
+                if (ActiveDays.contains("Friday")) {
+                    DrawableCompat.setTint(finalFriBackground, MIDGREY);
+                    fri.setBackground(finalFriBackground);
+                    ActiveDays.remove("Friday");
+                }
+            }
+        sat.setOnCheckedChangeListener((satView, SatisChecked) -> {
+            if (SatisChecked && !ActiveDays.contains("Saturday")) {
+                ActiveDays.add("Saturday");
+                DrawableCompat.setTint(finalSatBackground, Color.GREEN);
+                sat.setBackground(finalSatBackground);
+            } else {
+                if (ActiveDays.contains("Saturday")) {
+                    DrawableCompat.setTint(finalSatBackground, MIDGREY);
+                    sat.setBackground(finalSatBackground);
+                    ActiveDays.remove("Saturday");
+                }
+            }
+        sun.setOnCheckedChangeListener((sunView, SunisChecked) -> {
+            if (SunisChecked && !ActiveDays.contains("Sunday")) {
+                ActiveDays.add("Sunday");
+                DrawableCompat.setTint(finalSunBackground, Color.GREEN);
+                sun.setBackground(finalSunBackground);
+            } else {
+                if (ActiveDays.contains("Sunday")) {
+                    DrawableCompat.setTint(finalSunBackground, MIDGREY);
+                    sun.setBackground(finalSunBackground);
+                    ActiveDays.remove("Sunday");
+                }
+            }
+        });
+        });
+        });
+        });
+        });
+        });
     }
-
-//    private CompoundButton.OnCheckedChangeListener changeDays(ToggleButton daybtn) {
-//        boolean inActiveDays = false;
-//        int i;
-//            if (daybtn == mon && mon.isChecked()) {
-//                for (i = 0; i <= ActiveDays.size() && !inActiveDays; i++) {
-//                    if (ActiveDays.get(i).equalsIgnoreCase("Monday")) {
-//                        ActiveDays.remove("Monday");
-//                        mon.setBackgroundColor(Color.LTGRAY);
-//                        inActiveDays = true;
-//                    }
-//                    else {
-//                        ActiveDays.add("Monday");
-//                        mon.setBackgroundColor(Color.GREEN);
-//                    }
-//                }
-//            }
-//            else if (daybtn == tue && tue.isChecked()) {
-//                for (i = 0; i <= ActiveDays.size() && !inActiveDays; i++) {
-//                    if (ActiveDays.get(i).equalsIgnoreCase("Tuesday")) {
-//                        ActiveDays.remove("Tuesday");
-//                        tue.setBackgroundColor(Color.LTGRAY);
-//                        inActiveDays = true;
-//                    }
-//                    else if (i == ActiveDays.size() - 1) {
-//                        ActiveDays.add("Tuesday");
-//                        tue.setTextColor(Color.GREEN);
-//                    }
-//                }
-//            }
-//            else if (daybtn == wed && wed.isChecked()) {
-//                for (i = 0; i <= ActiveDays.size() && !inActiveDays; i++) {
-//                    if (ActiveDays.get(i).equalsIgnoreCase("Wednesday")) {
-//                        ActiveDays.remove("Wednesday");
-//                        wed.setBackgroundColor(Color.LTGRAY);
-//                        inActiveDays = true;
-//                    }
-//                    else if (i == ActiveDays.size() - 1) {
-//                        ActiveDays.add("Wednesday");
-//                        wed.setBackgroundColor(Color.GREEN);
-//                    }
-//                }
-//            }
-//            else if (daybtn == thu && thu.isChecked()) {
-//                for (i = 0; i <= ActiveDays.size() && !inActiveDays; i++) {
-//                    if (ActiveDays.get(i).equalsIgnoreCase("Thursday")) {
-//                        ActiveDays.remove("Thursday");
-//                        thu.setBackgroundColor(Color.LTGRAY);
-//                        inActiveDays = true;
-//                    }
-//                    else if (i == ActiveDays.size() - 1) {
-//                        ActiveDays.add("Thursday");
-//                        thu.setBackgroundColor(Color.GREEN);
-//                    }
-//                }
-//            }
-//            else if (daybtn == fri && fri.isChecked()) {
-//                for (i = 0; i <= ActiveDays.size() && !inActiveDays; i++) {
-//                    if (ActiveDays.get(i).equalsIgnoreCase("Friday")) {
-//                        ActiveDays.remove("Friday");
-//                        fri.setBackgroundColor(Color.LTGRAY);
-//                        inActiveDays = true;
-//                    }
-//                    else if (i == ActiveDays.size() - 1) {
-//                        ActiveDays.add("Friday");
-//                        fri.setBackgroundColor(Color.GREEN);
-//                    }
-//                }
-//            }
-//            else if (daybtn == sat && sat.isChecked()) {
-//                for (i = 0; i <= ActiveDays.size() && !inActiveDays; i++) {
-//                    if (ActiveDays.get(i).equalsIgnoreCase("Saturday")) {
-//                        ActiveDays.remove("Saturday");
-//                        sat.setBackgroundColor(Color.LTGRAY);
-//                        inActiveDays = true;
-//                    }
-//                    else if (i == ActiveDays.size() - 1) {
-//                        ActiveDays.add("Saturday");
-//                        sat.setBackgroundColor(Color.GREEN);
-//                    }
-//                }
-//            }
-//            else if (daybtn == sun && sun.isChecked()) {
-//                for (i = 0; i <= ActiveDays.size() && !inActiveDays; i++) {
-//                    if (ActiveDays.get(i).equalsIgnoreCase("Sunday")) {
-//                        ActiveDays.remove("Sunday");
-//                        sun.setBackgroundColor(Color.LTGRAY);
-//                        inActiveDays = true;
-//                    }
-//                    else if (i == ActiveDays.size() - 1) {
-//                        ActiveDays.add("Sunday");
-//                        sun.setBackgroundColor(Color.GREEN);
-//                    }
-//                }
-//            }
-//        return null;
-//    }
 
     private void cancelOperation(View view) {
         getParentFragmentManager().popBackStack();
