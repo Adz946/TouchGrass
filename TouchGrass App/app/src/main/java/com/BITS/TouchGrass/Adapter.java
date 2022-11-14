@@ -47,12 +47,16 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
         Thread thread = new Thread(() -> {
+
             if (type.equals("friends")) {
-                holder.img.setImageResource( findData( con, "idk" ) );
-                holder.txt.setText( MainActivity.loggedUser.getFriends().get(position) );
+                ObjectClasses.User friend = MainActivity.loggedUser.getFriends().get(position);
+
+                holder.img.setImageResource( findData( con, friend.getImage() ) );
+                holder.txt.setText( friend.getUsername() );
                 holder.btn.setText(R.string.friendText);
                 holder.btn.setOnClickListener( v -> holder.btn.setText("Pressed") );
             }
+
             else if (type.equals("reminders")) {
                 Log.d("bindData Message", "This is for the list of reminders");
             }
@@ -69,7 +73,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
     public int getItemCount() {
         int i = 0;
 
-        if (this.type.equals("friends")) { i = ObjectClasses.users.size(); }
+        if (this.type.equals("friends")) { i = MainActivity.loggedUser.getFriends().size(); }
         else if (this.type.equals("reminders")) { i = ObjectClasses.reminders.size(); }
 
         return i;

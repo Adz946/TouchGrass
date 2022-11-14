@@ -14,17 +14,17 @@ public class ObjectClasses {
     public static class User {
 
         private String username, password, image;
-        private ArrayList<String> friends = new ArrayList<>();
+        private ArrayList<User> friends = new ArrayList<>();
 
         public String getUsername() { return this.username; }
         public String getPassword() { return this.password; }
         public String getImage() { return this.image; }
-        public ArrayList<String> getFriends() { return this.friends; }
+        public ArrayList<User> getFriends() { return this.friends; }
 
         public void setUsername(String username) { this.username = username; }
         public void setPassword(String password) { this.password = password; }
         public void setImage(String image) { this.image = image; }
-        public void setFriend(String userN) { this.friends.add(userN); }
+        public void setFriend(User user) { this.friends.add(user); }
     }
 
     //------------------------------------------------------------------------------------------

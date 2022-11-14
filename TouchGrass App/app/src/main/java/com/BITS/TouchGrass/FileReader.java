@@ -98,16 +98,36 @@ public class FileReader {
                 ArrayList<String> data = list.get(j);
 
                 if (user.getUsername().equals(data.get(0)) && !user.getUsername().equals(data.get(1))) {
-                    user.setFriend(data.get(1)); }
+                    user.setFriend( returnFriend( data.get(1) ) );
+                }
 
                 else if (!user.getUsername().equals(data.get(0)) && user.getUsername().equals(data.get(1))) {
-                    user.setFriend(data.get(0)); }
+                    user.setFriend( returnFriend( data.get(0) ) );
+                }
 
                 j += 1;
             }
 
             i += 1;
         }
+    }
+
+    //------------------------------------------------------------------------------------------
+
+    public ObjectClasses.User returnFriend(String username) {
+        int i = 0;
+
+        while (i < ObjectClasses.users.size()) {
+            ObjectClasses.User user = ObjectClasses.users.get(i);
+
+            if (user.getUsername().equals(username)) {
+                return user;
+            }
+
+            i += 1;
+        }
+
+        return null;
     }
 
     //------------------------------------------------------------------------------------------
