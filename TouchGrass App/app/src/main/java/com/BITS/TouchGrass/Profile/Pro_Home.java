@@ -1,6 +1,7 @@
 package com.BITS.TouchGrass.Profile;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,22 +23,17 @@ public class Pro_Home extends Fragment {
     }
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        setRecycler(view);
-    }
-
-    public void setRecycler(View view) {
         int i = 0;
 
-        while (i < ObjectClasses.users.size()) {
-            ObjectClasses.User user = ObjectClasses.users.get(i);
-
-            if (user.getLoggedIn()) {
-                rec = view.findViewById(R.id.friendList);
-                rec.setLayoutManager(new LinearLayoutManager(getContext()));
-                Adapter adapter = new Adapter("friends", getContext());
-                rec.setAdapter(adapter);
-            }
+        while (i < MainActivity.loggedUser.getFriends().size()) {
+            String friend = MainActivity.loggedUser.getFriends().get(i);
+            Log.d("Friend --", "-- " + friend);
             i += 1;
         }
+
+        rec = view.findViewById(R.id.friendList);
+        rec.setLayoutManager(new LinearLayoutManager(getContext()));
+        Adapter adapter = new Adapter("friends", getContext());
+        rec.setAdapter(adapter);
     }
 }

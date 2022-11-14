@@ -46,17 +46,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
-        Thread thread = new Thread() {
-            @Override
-            public void run() {
-                if (type.equals("friends")) {
-                    addFriends(holder);
-                }
-                else if (type.equals("reminders")) {
-                    Log.d("bindData Message", "This is for the list of reminders");
-                }
+        Thread thread = new Thread(() -> {
+            if (type.equals("friends")) {
+                addFriends(holder);
             }
-        };
+            else if (type.equals("reminders")) {
+                Log.d("bindData Message", "This is for the list of reminders");
+            }
+        });
         thread.start();
     }
 
@@ -66,25 +63,16 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
     }
 
     public void addFriends(myViewHolder holder) {
-        Log.d("bindData Message", "This is for the list of friends");
         int i = 0;
 
-        while (i < ObjectClasses.users.size()) {
-            ObjectClasses.User user = ObjectClasses.users.get(i);
+        while (i < MainActivity.loggedUser.getFriends().size()) {
+            Log.d("Friend Name", MainActivity.loggedUser.getFriends().get(i));
 
-            if (user.getLoggedIn()) {
-                int j = 0;
+            holder.img.setImageResource( findData( con, "idk" ) );
+            holder.txt.setText( MainActivity.loggedUser.getFriends().get(i) );
+            holder.btn.setText(R.string.friendText);
+            holder.btn.setOnClickListener( v -> holder.btn.setText("Pressed") );
 
-                while (j < user.getFriends().size()) {
-                    int image = findData(con, user.getImage());
-
-                    holder.img.setImageResource(image);
-                    holder.txt.setText(user.getFriends().get(j));
-                    holder.btn.setText(R.string.friendText);
-                    holder.btn.setOnClickListener(v -> holder.btn.setText("Pressed") );
-                    j += 1;
-                }
-            }
             i += 1;
         }
     }

@@ -95,7 +95,7 @@ public class FileReader {
             ObjectClasses.User user = ObjectClasses.users.get(i);
 
             while (j < list.size()) {
-                ArrayList<String> data = list.get(i);
+                ArrayList<String> data = list.get(j);
 
                 if (user.getUsername().equals(data.get(0)) && !user.getUsername().equals(data.get(1))) {
                     user.setFriend(data.get(1)); }

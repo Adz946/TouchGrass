@@ -14,19 +14,16 @@ public class ObjectClasses {
     public static class User {
 
         private String username, password, image;
-        private Boolean loggedIn = false;
         private ArrayList<String> friends = new ArrayList<>();
 
         public String getUsername() { return this.username; }
         public String getPassword() { return this.password; }
         public String getImage() { return this.image; }
-        public boolean getLoggedIn() { return this.loggedIn; }
         public ArrayList<String> getFriends() { return this.friends; }
 
         public void setUsername(String username) { this.username = username; }
         public void setPassword(String password) { this.password = password; }
         public void setImage(String image) { this.image = image; }
-        public void setLoggedIn(Boolean loggedIn) { this.loggedIn = loggedIn; }
         public void setFriend(String userN) { this.friends.add(userN); }
     }
 

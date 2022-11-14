@@ -58,7 +58,7 @@ public class Pro_LogIn extends Fragment {
             String pass = password.getText().toString();
 
             if (user.getUsername().equals(name) && user.getPassword().equals(pass)) {
-                user.setLoggedIn(true); check = true; }
+                MainActivity.loggedUser = user; check = true; }
 
             if (!userCheck && user.getUsername().equals(name)) { userCheck = true; }
             else if (!userCheck && !user.getUsername().equals(name)) {

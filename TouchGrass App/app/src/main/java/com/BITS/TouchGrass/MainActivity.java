@@ -16,14 +16,18 @@ public class MainActivity extends AppCompatActivity {
     //Creates a BottomNavView variable
 
     public static WeakReference<MainActivity> reference;
-
     public static MainActivity getReference() {
         return reference.get();
     }
+    //These allow the MainActivity's Context/Assets/etc. to be used with no memory leaks
+    //  to be used in Java classes (FileReader / Adapter / etc.)
 
-    FileReader meth = new FileReader();
-    public static WeakReference<FileReader> methods;
+    FileReader reader = new FileReader();
+    public static WeakReference<FileReader> fileReader;
+    //Creates a reference to the FileReader file without memory leaks
 
+    public static ObjectClasses.User loggedUser;
+    //Sets up the loggedIn user to use throughout the fragments
 
 
     @Override
@@ -35,9 +39,9 @@ public class MainActivity extends AppCompatActivity {
         reference = new WeakReference<>(MainActivity.this);
         //Creates a reference to use in other classes (e.g. Methods)
 
-        methods = new WeakReference<>(meth);
-        methods.get().prepLists();
-        //The following are methods from the Methods class, reads from the individual files
+        fileReader = new WeakReference<>(reader);
+        fileReader.get().prepLists();
+        //The following are methods from the fileReader class, reads from the individual files
         //  and gets each list ready to use.
 
         //------------------------------------------------------------------------------------------
