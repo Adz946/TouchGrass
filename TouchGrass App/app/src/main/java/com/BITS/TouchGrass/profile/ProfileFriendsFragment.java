@@ -48,9 +48,12 @@ public class ProfileFriendsFragment extends Fragment {
 
         buildThemeSpinner();
 
-        Glide.with(this).load(this.loggedUser.getProfileImg()).into(profileImg);
+        if (MainActivity.loggedUser != null ) {
+            Glide.with(this).load(this.loggedUser.getProfileImg()).into(profileImg);
+            setFriendsList();
+        }
 
-        setFriendsList();
+
         // setProfileImg();
         setListeners();
 
