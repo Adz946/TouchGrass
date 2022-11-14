@@ -23,17 +23,23 @@ public class Pro_Home extends Fragment {
     }
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        int i = 0;
+        feedRecycler(view);
+    }
 
-        while (i < MainActivity.loggedUser.getFriends().size()) {
-            String friend = MainActivity.loggedUser.getFriends().get(i);
-            Log.d("Friend --", "-- " + friend);
-            i += 1;
+    public void feedRecycler(View view) {
+        if (MainActivity.loggedUser != null) {
+            int i = 0;
+
+            while (i < MainActivity.loggedUser.getFriends().size()) {
+                String friend = MainActivity.loggedUser.getFriends().get(i);
+                Log.d("Friend --", "-- " + friend);
+                i += 1;
+            }
+
+            rec = view.findViewById(R.id.friendList);
+            rec.setLayoutManager(new LinearLayoutManager(getContext()));
+            Adapter adapter = new Adapter("friends", getContext());
+            rec.setAdapter(adapter);
         }
-
-        rec = view.findViewById(R.id.friendList);
-        rec.setLayoutManager(new LinearLayoutManager(getContext()));
-        Adapter adapter = new Adapter("friends", getContext());
-        rec.setAdapter(adapter);
     }
 }
