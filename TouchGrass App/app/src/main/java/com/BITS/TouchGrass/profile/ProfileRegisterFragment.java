@@ -91,7 +91,8 @@ public class ProfileRegisterFragment extends Fragment {
                 // database.addUser(edtTxtUsername,edtTxtPW);
                 String defaultProfileImg = "https://raw.githubusercontent.com/Adz946/TouchGrass/96f84c0ac00dfd2cde555d369adc0b3aad373526/TouchGrass%20App/app/src/debug/res/drawable-hdpi/ic_profile_black.png";
                 User user = new User(username, password, defaultProfileImg);
-                MainActivity.users.add(user);
+                MainActivity.newUser(user);
+
 
                 getParentFragmentManager().popBackStack();
                 Toast.makeText(getContext(), "Account created! Welcome "

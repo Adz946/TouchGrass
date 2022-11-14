@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     public static String currentTheme;
     BottomNavigationView bottomNavigationView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,6 +127,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             e.printStackTrace();
         }
 
+    }
+
+    public static void newUser(User user) {
+        users.add(user);
+        friendsList.add(new ArrayList<>());
+        friendsList.get(friendsList.size()-1).add(user.getName());
     }
 //    private void readProfileList() {
 //
