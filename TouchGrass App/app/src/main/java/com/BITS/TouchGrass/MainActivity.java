@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         Objects.requireNonNull(getSupportActionBar()).hide();
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        bottomNavigationView.setItemIconTintList(null);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.calendar);

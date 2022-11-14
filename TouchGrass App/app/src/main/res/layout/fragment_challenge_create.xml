@@ -9,9 +9,9 @@
 
     <ImageView
         android:id="@+id/profileImg"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/challenge_dark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_launcher_foreground"
         tools:ignore="ImageContrastCheck"
         android:layout_marginHorizontal="150dp"
         android:layout_marginVertical="32dp"
