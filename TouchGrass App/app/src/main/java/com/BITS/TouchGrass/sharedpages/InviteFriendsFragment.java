@@ -10,8 +10,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.BITS.TouchGrass.R;
+import com.BITS.TouchGrass.profile.User;
+
+import java.util.ArrayList;
 
 public class InviteFriendsFragment extends Fragment {
+
+    public ArrayList<User> friendsSharedWith = new ArrayList<>();
 
     Button inviteBtn, cancelBtn;
 
