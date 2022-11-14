@@ -48,7 +48,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
         Thread thread = new Thread(() -> {
             if (type.equals("friends")) {
-                addFriends(holder);
+                holder.img.setImageResource( findData( con, "idk" ) );
+                holder.txt.setText( MainActivity.loggedUser.getFriends().get(position) );
+                holder.btn.setText(R.string.friendText);
+                holder.btn.setOnClickListener( v -> holder.btn.setText("Pressed") );
             }
             else if (type.equals("reminders")) {
                 Log.d("bindData Message", "This is for the list of reminders");
@@ -60,21 +63,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
     public int findData(Context context, String data) {
         return con.getResources().getIdentifier(
                 "drawable/" + data, null, context.getPackageName());
-    }
-
-    public void addFriends(myViewHolder holder) {
-        int i = 0;
-
-        while (i < MainActivity.loggedUser.getFriends().size()) {
-            Log.d("Friend Name", MainActivity.loggedUser.getFriends().get(i));
-
-            holder.img.setImageResource( findData( con, "idk" ) );
-            holder.txt.setText( MainActivity.loggedUser.getFriends().get(i) );
-            holder.btn.setText(R.string.friendText);
-            holder.btn.setOnClickListener( v -> holder.btn.setText("Pressed") );
-
-            i += 1;
-        }
     }
 
     @Override
