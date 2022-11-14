@@ -1,7 +1,5 @@
 package com.BITS.TouchGrass.challenges;
 
-import com.BITS.TouchGrass.reminders.Reminder;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -77,7 +75,7 @@ public class Challenge {
 
     class PastChallenge extends Challenge {
         String result;
-        public PastChallenge(String title, LocalDate StartDate, LocalDate EndDate, LocalTime Time, ArrayList<String> ActiveDays, ArrayList<String> UsersInChallenge) {
+        public PastChallenge(String title, LocalDate StartDate, LocalDate EndDate, LocalTime Time, ArrayList<String> ActiveDays, ArrayList<String> UsersInChallenge, String win) {
             super(title, StartDate, EndDate, Time, ActiveDays, UsersInChallenge);
         }
         public ArrayList<PastChallenge> ChallengesForDate(LocalDate date) {
@@ -92,7 +90,9 @@ public class Challenge {
                     ArrayList<String> ActiveDays = challenge.ActiveDays;
                     ArrayList<String> UsersInChallenge = challenge.UsersInChallenge;
 
-//                    past_challenges.add(title, StartDate, EndDate, Time, ActiveDays, UsersInChallenge, );
+                    PastChallenge pastchallenge = new PastChallenge(title, StartDate, EndDate, Time, ActiveDays, UsersInChallenge, "Win");
+                    past_challenges.add(pastchallenge);
+                    challengesList.remove(challenge);
                 }
             }
 
