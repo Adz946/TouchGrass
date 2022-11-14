@@ -23,6 +23,7 @@ import android.widget.ToggleButton;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.BITS.TouchGrass.MainActivity;
 import com.BITS.TouchGrass.R;
 import com.BITS.TouchGrass.profile.User;
 import com.BITS.TouchGrass.sharedpages.InviteFriendsFragment;
@@ -362,10 +363,13 @@ public class EditReminderFragment extends Fragment {
     private void addSelfReminder() {
         new SelfReminder(titleET.getText().toString(),isAllDayReminder,
                 startDate, endDate, time, getRepeatFrequency(), priority, descriptionET.getText().toString());
+
 //        String text = String.format(Locale.getDefault(),"%s, %b, %s, %s, %s, %d, %s",
 //                titleET.getText().toString(),isAllDayReminder,
 //                startDate,endDate,time,getRepeatFrequency(),priority);
 //        Toast.makeText(getContext(), text, Toast.LENGTH_LONG).show();
+        //String newReminder = MainActivity.loggedUser.getName() + "," + sr;
+        //.selfReminderList.add(newReminder);
 
         Toast.makeText(getContext(), "Reminder added", Toast.LENGTH_LONG).show();
         getParentFragmentManager().popBackStack();

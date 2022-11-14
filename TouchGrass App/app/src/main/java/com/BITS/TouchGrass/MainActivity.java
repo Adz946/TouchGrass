@@ -29,6 +29,9 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -53,12 +56,20 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         readProfileListFromAssets();
         readFriendsListFromAssets();
+        readSelfRemindersFromAssets();
+        readGroupRemindersFromAssets();
+
+
     }
 
 
 
-    public static ArrayList<User> users = new ArrayList<>();
-    public static ArrayList<ArrayList<String>> friendsList = new ArrayList<>();
+
+    public static List<User> users = new ArrayList<>();
+    public static List<ArrayList<String>> friendsList = new ArrayList<>();
+    public static List<String> selfReminderList = new ArrayList<>();
+    public static List<GroupReminder> groupReminderList = new ArrayList<>();
+
     public static User loggedUser = null;
 
     private void readProfileListFromAssets() {
@@ -86,12 +97,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             Log.wtf("MyActivity", "Error reading data file on line " + line, e);
             e.printStackTrace();
         }
-
-        for (int i= 0; i < users.size(); i++) {
-            Log.d("testing", users.get(i).toString());
-
-        }
-
+//
+//        for (int i= 0; i < users.size(); i++) {
+//            Log.d("testing", users.get(i).toString());
+//
+//        }
     }
 
     private void readFriendsListFromAssets() {
@@ -128,6 +138,127 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         }
 
     }
+
+    private void readSelfRemindersFromAssets() {
+
+        InputStream is = null;
+        try {
+            is = getAssets().open( "selfreminder.csv");
+        } catch (IOException e) {
+            Log.wtf("MyActivity", "Error opening file " + e);
+            e.printStackTrace();
+        }
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(is, StandardCharsets.UTF_8)
+        );
+
+        String line = "";
+        try {
+
+            while ((line = reader.readLine()) != null) {
+                selfReminderList.add(line);
+            }
+            reader.close();
+        } catch (IOException e) {
+            Log.wtf("MyActivity", "Error reading data file on line " + line, e);
+            e.printStackTrace();
+        }
+
+    }
+
+    private void readGroupRemindersFromAssets() {
+        InputStream is = null;
+        try {
+            is = getAssets().open( "groupreminder.csv");
+        } catch (IOException e) {
+            Log.wtf("MyActivity", "Error opening file " + e);
+            e.printStackTrace();
+        }
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(is, StandardCharsets.UTF_8)
+        );
+
+        String line = "";
+        try {
+            while ((line = reader.readLine()) != null) {
+
+                String[] tokens = line.split(",");
+
+                String title = tokens[0];
+                boolean allDayReminder = Boolean.parseBoolean(tokens[1]);
+                LocalDate startDate = LocalDate.parse(tokens[2], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                LocalDate endDate = LocalDate.parse(tokens[3], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                LocalTime time= LocalTime.parse(tokens[4], DateTimeFormatter.ofPattern("HH:mm"));
+                int repeatFrequency = Integer.parseInt(tokens[5]);
+                String priority = tokens[6].strip();
+                String description = tokens[7];
+
+                GroupReminder gr = new GroupReminder(title,allDayReminder,startDate,endDate,time,repeatFrequency,priority,description);
+
+                for (int i = 8; i < tokens.length; i++) {
+                    gr.addMember(tokens[i]);
+                }
+
+                groupReminderList.add(gr);
+
+            }
+            reader.close();
+        } catch (IOException e) {
+            Log.wtf("MyActivity", "Error reading data file on line " + line, e);
+            e.printStackTrace();
+        }
+    }
+
+
+//    private void addSelfRemindersFromAssets() {
+//        InputStream is = null;
+//        try {
+//            is = getAssets().open( "selfreminder.csv");
+//        } catch (IOException e) {
+//            Log.wtf("MyActivity", "Error opening file " + e);
+//            e.printStackTrace();
+//        }
+//        BufferedReader reader = new BufferedReader(
+//                new InputStreamReader(is, StandardCharsets.UTF_8)
+//        );
+//
+//        String line = "";
+//        try {
+//            while ((line = reader.readLine()) != null) {
+//                String[] tokens = line.split(",");
+//
+//                if (tokens[0].equalsIgnoreCase(loggedUser.getName())) {
+//
+//                    String title = tokens[1];
+//                    boolean allDayReminder = Boolean.parseBoolean(tokens[2]);
+//                    LocalDate startDate = LocalDate.parse(tokens[3], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+//                    LocalDate endDate = LocalDate.parse(tokens[4], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+//                    LocalTime time= LocalTime.parse(tokens[5], DateTimeFormatter.ofPattern("HH:mm"));
+//                    int repeatFrequency = Integer.parseInt(tokens[6]);
+//                    String priority = tokens[7].strip();
+//                    String description = tokens[8];
+//
+//                    SelfReminder selfReminder = new SelfReminder(title,allDayReminder,startDate,endDate,time,repeatFrequency,priority,description);
+//                    selfReminders.add(selfReminder);
+//                }
+//            }
+//            reader.close();
+//        } catch (IOException e) {
+//            Log.wtf("MyActivity", "Error reading data file on line " + line, e);
+//            e.printStackTrace();
+//        }
+//
+//
+//
+//        for (int i= 0; i < users.size(); i++) {
+//            Log.d("testing", users.get(i).toString());
+//
+//        }
+//
+//    }
+
+
+
 
     public static void newUser(User user) {
         users.add(user);
@@ -213,8 +344,15 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 return true;
 
             case R.id.reminders:
-                getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, remindersMainFragment).commit();
-                return true;
+                if (loggedUser == null) {
+                    //getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, profileMainFragment).commit();
+                    Toast.makeText(this, "Log in required to access this feature", Toast.LENGTH_SHORT).show();
+                    return true;
+                } else {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, remindersMainFragment).commit();
+                    return true;
+                }
+
 
             case R.id.challenges:
                 getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, challengesMainFragment).commit();

@@ -1,7 +1,5 @@
 package com.BITS.TouchGrass.reminders;
 
-import android.graphics.drawable.Drawable;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -47,6 +45,10 @@ public class Reminder {
         return reminders;
     }
 
+    @Override
+    public String toString() {
+        return title +","+allDayReminder + "," + startDate.toString() + "," + endDate.toString() + "," + time.toString() + "," + repeatFrequency + "," + priority + "," + description;
+    }
 
 
     public String getTitle() {
@@ -112,4 +114,5 @@ public class Reminder {
     public void setDescription(String description) {
         this.description = description;
     }
+
 }

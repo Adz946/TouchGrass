@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.BITS.TouchGrass.MainActivity;
 import com.BITS.TouchGrass.R;
+import com.BITS.TouchGrass.reminders.RemindersMainFragment;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -28,7 +29,6 @@ import java.util.List;
 
 public class ProfileFriendsFragment extends Fragment {
 
-    //Button addFriendBtn;
     ImageButton logoutBtn, addFriendBtn;
     Spinner setThemeSpinner;
     TextView searchUser;
@@ -76,6 +76,7 @@ public class ProfileFriendsFragment extends Fragment {
 
         logoutBtn.setOnClickListener(v -> {
             MainActivity.logout();
+            //RemindersMainFragment.resetLists();
             getParentFragmentManager().popBackStack();
             Toast.makeText(getContext(), "You have logged out ", Toast.LENGTH_SHORT).show();
         });
