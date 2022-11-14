@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -80,6 +81,7 @@ public class ProfileFriendsFragment extends Fragment {
             MainActivity.logout();
             RemindersMainFragment.resetLists();
             getParentFragmentManager().popBackStack();
+
             Toast.makeText(getContext(), "You have logged out ", Toast.LENGTH_SHORT).show();
         });
 
