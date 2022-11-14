@@ -32,7 +32,7 @@
             app:cardPreventCornerOverlap="false"
             app:cardUseCompatPadding="false"
             app:layout_constraintBottom_toBottomOf="@+id/searchUser"
-            app:layout_constraintEnd_toStartOf="@+id/searchUser"
+            app:layout_constraintStart_toEndOf="@+id/searchUser"
             tools:ignore="MissingConstraints">
 
             <ImageButton
@@ -41,7 +41,7 @@
                 android:layout_height="50dp"
                 android:layout_marginBottom="16dp"
                 android:backgroundTint="#007DB17B"
-                android:src="@drawable/search"
+                android:src="@drawable/adduser"
                 android:text="Add" />
         </androidx.cardview.widget.CardView>
 
@@ -99,7 +99,6 @@
             android:layout_width="238dp"
             android:layout_height="41dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginBottom="16dp"
             android:ems="10"
             android:hint="Search User"
