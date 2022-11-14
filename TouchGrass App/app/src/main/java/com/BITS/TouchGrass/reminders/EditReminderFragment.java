@@ -37,7 +37,6 @@ import java.util.Locale;
 public class EditReminderFragment extends Fragment {
 
     InviteFriendsFragment inviteFriendsFragment = new InviteFriendsFragment();
-    ArrayList<User> friendsSharedWith = new ArrayList<>();
 
     String priority;
 
@@ -377,7 +376,8 @@ public class EditReminderFragment extends Fragment {
 
     private void addSelfReminder() {
         new SelfReminder(titleET.getText().toString(),isAllDayReminder,
-                startDate, endDate, time, getRepeatFrequency(), priority, descriptionET.getText().toString());
+                startDate, endDate, time, getRepeatFrequency(), priority,
+                descriptionET.getText().toString());
 //        String text = String.format(Locale.getDefault(),"%s, %b, %s, %s, %s, %d, %s",
 //                titleET.getText().toString(),isAllDayReminder,
 //                startDate,endDate,time,getRepeatFrequency(),priority);
@@ -389,7 +389,8 @@ public class EditReminderFragment extends Fragment {
 
     private void addGroupReminder() {
         new GroupReminder(titleET.getText().toString(),isAllDayReminder,
-                startDate, endDate, time, getRepeatFrequency(), priority, descriptionET.getText().toString());
+                startDate, endDate, time, getRepeatFrequency(), priority,
+                descriptionET.getText().toString(), inviteFriendsFragment.friendsSharedWith);
 
         Toast.makeText(getContext(), "Reminder added", Toast.LENGTH_LONG).show();
         getParentFragmentManager().popBackStack();

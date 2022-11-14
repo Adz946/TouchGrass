@@ -21,8 +21,6 @@ import java.util.ArrayList;
 // https://www.geeksforgeeks.org/android-recyclerview/
 public class RemindersMainFragment extends Fragment {
 
-//    private final EditReminderFragment editReminderFragment = new EditReminderFragment();
-
     Button newReminderButton;
     RecyclerView selfReminderRecyclerView, groupReminderRecyclerView;
     SelfReminderAdapter selfReminderAdapter;
@@ -45,11 +43,6 @@ public class RemindersMainFragment extends Fragment {
 
         initWidgets(view);
         setListeners();
-//        try {
-//            selfReminderAdapter.notifyDataSetChanged();
-//        } catch (Exception ignored) {
-//
-//        }
         setReminderAdapter();
 
         return view;
@@ -78,10 +71,6 @@ public class RemindersMainFragment extends Fragment {
     }
 
     public void setReminderAdapter() {
-
-//        ArrayList<SelfReminder> currentSelfReminders = SelfReminder.currentSelfReminders;
-//        ArrayList<GroupReminder> currentGroupReminders = GroupReminder.currentGroupReminders;
-
 
         ArrayList<SelfReminder> currentSelfReminders = new ArrayList<>();
         ArrayList<GroupReminder> currentGroupReminders = new ArrayList<>();
