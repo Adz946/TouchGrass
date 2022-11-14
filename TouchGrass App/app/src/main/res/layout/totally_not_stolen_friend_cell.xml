@@ -66,13 +66,23 @@
             android:id="@+id/friendName"
             android:layout_width="147dp"
             android:layout_height="29dp"
-            android:layout_marginStart="24dp"
             android:gravity="center"
             android:text="friend username here"
             app:layout_constraintBottom_toBottomOf="@+id/divider4"
+            app:layout_constraintEnd_toStartOf="@+id/delButton"
             app:layout_constraintStart_toEndOf="@+id/cardView"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.51" />
+
+        <Button
+            android:id="@+id/delButton"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="24dp"
+            android:text="DEL"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/divider4"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
