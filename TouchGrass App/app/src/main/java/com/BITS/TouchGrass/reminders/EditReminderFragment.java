@@ -45,6 +45,8 @@ public class EditReminderFragment extends Fragment {
     LocalDate startDate, endDate;
     LocalTime time;
 
+    String formattedTimeText = "SET TIME", toneText = "SET TONE";
+
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d/M/yyyy");
 
     ToggleButton priorityLow, priorityModerate, priorityHigh;
@@ -72,11 +74,20 @@ public class EditReminderFragment extends Fragment {
         startDate = LocalDate.parse(getTodaysDate(), dtf);
         setEndDateBtn.setText(getTodaysDate());
         endDate = LocalDate.parse(getTodaysDate(), dtf);
-        toggleAllDayReminder(view);
+        toggleAllDayReminder();
         setListeners();  // initialises all element listeners
 
         return view;
     }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setTimeBtn.setText(formattedTimeText);
+        setToneBtn.setText(toneText);
+    }
+
 
     private void initWidgets(View view) {
         titleET = view.findViewById(R.id.title_of_reminder);
@@ -105,8 +116,9 @@ public class EditReminderFragment extends Fragment {
         cancelBtn.setOnClickListener(this::cancelOperation);
         addReminderBtn.setOnClickListener(this::addReminder);
         setToneBtn.setOnClickListener(this::setTone);
-        allDayCheckBox.setOnClickListener(this::toggleAllDayReminder);
+        allDayCheckBox.setOnClickListener(v -> toggleAllDayReminder());
         groupReminderBtn.setOnClickListener(v -> {
+            toggleGroupReminder(); // toggles for now, however should only change once other users are added
             FragmentTransaction fr = getParentFragmentManager().beginTransaction();
             fr.replace(R.id.flFragment, inviteFriendsFragment);
             fr.addToBackStack("reminder");
@@ -193,7 +205,7 @@ public class EditReminderFragment extends Fragment {
         final Uri currentTone = RingtoneManager.getActualDefaultRingtoneUri(getContext(),
                 RingtoneManager.TYPE_NOTIFICATION);
         Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
-        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_RINGTONE);
+        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_NOTIFICATION);
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select Tone");
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, currentTone);
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false);
@@ -201,8 +213,8 @@ public class EditReminderFragment extends Fragment {
         startActivityForResult(intent, 999);
         
         Ringtone currentRingtone = RingtoneManager.getRingtone(getContext(), currentTone);
-        String ringtoneTitle = currentRingtone.getTitle(getContext());
-        setToneBtn.setText(ringtoneTitle);
+        toneText = currentRingtone.getTitle(getContext());
+        setToneBtn.setText(toneText);
     }
 
 
@@ -252,7 +264,6 @@ public class EditReminderFragment extends Fragment {
                     hour = selectedHour;
                     minute = selectedMinute;
 
-                    String formattedTimeText;
                     String formattedTime;
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:m");
 
@@ -296,13 +307,18 @@ public class EditReminderFragment extends Fragment {
     }
 
 
-    private void toggleAllDayReminder(View view) {
+    private void toggleAllDayReminder() {
         isAllDayReminder = allDayCheckBox.isChecked();
         if (isAllDayReminder) {
             setTimeBtn.setBackgroundColor(Color.LTGRAY);
         } else {
             setTimeBtn.setBackgroundColor(getResources().getColor(R.color.grass_green));
         }
+    }
+
+
+    private void toggleGroupReminder() {
+        isGroupReminder = !isGroupReminder;
     }
 
 
@@ -332,7 +348,7 @@ public class EditReminderFragment extends Fragment {
             Toast.makeText(getContext(), "Please enter a title.", Toast.LENGTH_LONG).show();
 
             // checks if a tone has been selected
-        } else if (setToneBtn.getText().equals("SET TONE")) {
+        } else if (setToneBtn==null) {
             Toast.makeText(getContext(), "Please enter a tone.", Toast.LENGTH_LONG).show();
 
             // otherwise, try adding the reminder (nothing went wrong prior)

@@ -21,7 +21,7 @@ import java.util.ArrayList;
 // https://www.geeksforgeeks.org/android-recyclerview/
 public class RemindersMainFragment extends Fragment {
 
-    private final EditReminderFragment editReminderFragment = new EditReminderFragment();
+//    private final EditReminderFragment editReminderFragment = new EditReminderFragment();
 
     Button newReminderButton;
     RecyclerView selfReminderRecyclerView, groupReminderRecyclerView;
@@ -64,7 +64,7 @@ public class RemindersMainFragment extends Fragment {
     private void setListeners() {
         newReminderButton.setOnClickListener(v -> {
             FragmentTransaction fr = getParentFragmentManager().beginTransaction();
-            fr.replace(R.id.flFragment, editReminderFragment);
+            fr.replace(R.id.flFragment, new EditReminderFragment());
             fr.addToBackStack("reminder");
             fr.commit();
         });
