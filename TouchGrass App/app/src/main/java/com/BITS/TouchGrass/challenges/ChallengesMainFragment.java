@@ -63,17 +63,17 @@ public class ChallengesMainFragment extends Fragment {
         ArrayList<Challenge> ongoingChallenges = new ArrayList<>();
         ArrayList<Challenge> completedChallenges = new ArrayList<>();
 
-        for (Challenge challenge : Challenge.challengesList) {
-            if (challenge.type.equals("incoming")) {
-                incomingChallenges.add(challenge);
-            }
-            if (challenge.type.equals("ongoing")) {
-                ongoingChallenges.add(challenge);
-            }
-            if (challenge.type.equals("completed")) {
-                completedChallenges.add(challenge);
-            }
-        }
+//        for (Challenge challenge : Challenge.challengesList) {
+//            if (challenge.type.equals("incoming")) {
+//                incomingChallenges.add(challenge);
+//            }
+//            if (challenge.type.equals("ongoing")) {
+//                ongoingChallenges.add(challenge);
+//            }
+//            if (challenge.type.equals("completed")) {
+//                completedChallenges.add(challenge);
+//            }
+//        }
 
         LinearLayoutManager incomingLayoutManager = new LinearLayoutManager(getContext());
         incomingChallengesRV.setLayoutManager(incomingLayoutManager);
