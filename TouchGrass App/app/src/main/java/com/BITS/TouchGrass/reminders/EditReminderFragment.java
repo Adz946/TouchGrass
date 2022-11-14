@@ -14,15 +14,18 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.BITS.TouchGrass.R;
 import com.BITS.TouchGrass.profile.User;
+import com.BITS.TouchGrass.sharedpages.InviteFriendsFragment;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -33,6 +36,7 @@ import java.util.Locale;
 
 public class EditReminderFragment extends Fragment {
 
+    InviteFriendsFragment inviteFriendsFragment = new InviteFriendsFragment();
     ArrayList<User> friendsSharedWith = new ArrayList<>();
 
     String priority;
@@ -45,15 +49,10 @@ public class EditReminderFragment extends Fragment {
 
     ToggleButton priorityLow, priorityModerate, priorityHigh;
     Spinner setRepeatSpinner;
-    Button setTimeBtn, setStartDateBtn, setEndDateBtn, setToneBtn, cancelBtn, addReminderBtn;
+    Button setTimeBtn, setStartDateBtn, setEndDateBtn, setToneBtn, cancelBtn, addReminderBtn, groupReminderBtn;
     EditText titleET, descriptionET;
     CheckBox allDayCheckBox;
     int hour, minute;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
 
     @Override
@@ -93,6 +92,7 @@ public class EditReminderFragment extends Fragment {
         setToneBtn = view.findViewById(R.id.set_tone_button);
         allDayCheckBox = view.findViewById(R.id.all_day_checkbox);
         descriptionET = view.findViewById(R.id.description_of_reminder);
+        groupReminderBtn = view.findViewById(R.id.make_group_reminder_button);
     }
 
 
@@ -106,6 +106,12 @@ public class EditReminderFragment extends Fragment {
         addReminderBtn.setOnClickListener(this::addReminder);
         setToneBtn.setOnClickListener(this::setTone);
         allDayCheckBox.setOnClickListener(this::toggleAllDayReminder);
+        groupReminderBtn.setOnClickListener(v -> {
+            FragmentTransaction fr = getParentFragmentManager().beginTransaction();
+            fr.replace(R.id.flFragment, inviteFriendsFragment);
+            fr.addToBackStack("reminder");
+            fr.commit();
+        });
 
         // onCheckChange listeners (toggles)
         priorityLow.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -292,10 +298,11 @@ public class EditReminderFragment extends Fragment {
 
     private void toggleAllDayReminder(View view) {
         isAllDayReminder = allDayCheckBox.isChecked();
-        if (isAllDayReminder)
+        if (isAllDayReminder) {
             setTimeBtn.setBackgroundColor(Color.LTGRAY);
-        else
+        } else {
             setTimeBtn.setBackgroundColor(getResources().getColor(R.color.grass_green));
+        }
     }
 
 
@@ -331,20 +338,20 @@ public class EditReminderFragment extends Fragment {
             // otherwise, try adding the reminder (nothing went wrong prior)
         } else {
 
-            if (isAllDayReminder) {  // if its an all day reminder
+            if (isAllDayReminder) {  // if it's an all day reminder
                 time = null;
-                if (isGroupReminder) {  // if its a group reminder, add it as one.
+                if (isGroupReminder) {  // if it's a group reminder, add it as one.
                     addGroupReminder();
                 } else {  // if its a self reminder, add it as one.
                     addSelfReminder();
                 }
-            } else {  // if its a time specific reminder
+            } else {  // if it's a time specific reminder
                 if (setTimeBtn.getText().equals("SET TIME")) {  // if the user hasn't edited the time
                     Toast.makeText(getContext(), "Please enter a time.", Toast.LENGTH_LONG).show();
-                } else {  // if its a self reminder, add it as one
-                    if (isGroupReminder) {  // if its a group reminder, add it as one.
+                } else {  // if it's a self reminder, add it as one
+                    if (isGroupReminder) {  // if it's a group reminder, add it as one.
                         addGroupReminder();
-                    } else {  // if its a self reminder, add it as one.
+                    } else {  // if it's a self reminder, add it as one.
                         addSelfReminder();
                     }
                 }
@@ -354,19 +361,21 @@ public class EditReminderFragment extends Fragment {
 
     private void addSelfReminder() {
         new SelfReminder(titleET.getText().toString(),isAllDayReminder,
-                startDate, endDate,time,getRepeatFrequency(),priority);
+                startDate, endDate, time, getRepeatFrequency(), priority, descriptionET.getText().toString());
 //        String text = String.format(Locale.getDefault(),"%s, %b, %s, %s, %s, %d, %s",
 //                titleET.getText().toString(),isAllDayReminder,
 //                startDate,endDate,time,getRepeatFrequency(),priority);
 //        Toast.makeText(getContext(), text, Toast.LENGTH_LONG).show();
 
+        Toast.makeText(getContext(), "Reminder added", Toast.LENGTH_LONG).show();
         getParentFragmentManager().popBackStack();
     }
 
     private void addGroupReminder() {
         new GroupReminder(titleET.getText().toString(),isAllDayReminder,
-                startDate,endDate,time,getRepeatFrequency(),priority);
+                startDate, endDate, time, getRepeatFrequency(), priority, descriptionET.getText().toString());
 
+        Toast.makeText(getContext(), "Reminder added", Toast.LENGTH_LONG).show();
         getParentFragmentManager().popBackStack();
     }
 
