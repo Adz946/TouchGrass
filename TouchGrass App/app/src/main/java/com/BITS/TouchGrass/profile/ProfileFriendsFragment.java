@@ -51,9 +51,10 @@ public class ProfileFriendsFragment extends Fragment {
 
         if (MainActivity.loggedUser != null) {
             Glide.with(this).load(this.loggedUser.getProfileImg()).into(profileImg);
+            setFriendsList();
         }
 
-        setFriendsList();
+
         // setProfileImg();
         setListeners();
 
