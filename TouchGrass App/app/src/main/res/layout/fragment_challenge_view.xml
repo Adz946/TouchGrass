@@ -248,9 +248,9 @@
             android:layout_width="200dp"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="20dp"
-            android:text="Username Example"
+            android:text="Viewing User"
             android:textAlignment="center"
-            android:textColor="@color/white"
+            android:textColor="@color/light_grass_green"
             android:textSize="15dp"/>
 
         <TextView
@@ -260,7 +260,7 @@
             android:layout_marginTop="20dp"
             android:text="Points"
             android:textAlignment="center"
-            android:textColor="@color/white"
+            android:textColor="@color/light_grass_green"
             android:textSize="15dp"/>
 
         <!-- Second user in the table       -->
