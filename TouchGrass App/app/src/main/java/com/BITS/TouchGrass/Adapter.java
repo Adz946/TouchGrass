@@ -11,18 +11,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
+public class Adapter extends RecyclerView.Adapter<Adapter.theViewHolder> {
 
     private final String type;
     private final Context con;
 
-    public static class myViewHolder extends RecyclerView.ViewHolder {
+    public static class theViewHolder extends RecyclerView.ViewHolder {
 
         private final ImageView img;
         private final TextView txt;
         private final Button btn;
 
-        public myViewHolder(@NonNull View itemView) {
+        public theViewHolder(@NonNull View itemView) {
             super(itemView);
             img = itemView.findViewById(R.id.img);
             txt = itemView.findViewById(R.id.txt);
@@ -37,15 +37,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
 
     @NonNull
     @Override
-    public Adapter.myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context con = parent.getContext();
+    public Adapter.theViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(con);
         View view = inflater.inflate(R.layout.item_layout, parent, false);
-        return new Adapter.myViewHolder(view);
+        return new Adapter.theViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull theViewHolder holder, int position) {
         Thread thread = new Thread(() -> {
 
             if (type.equals("friends")) {

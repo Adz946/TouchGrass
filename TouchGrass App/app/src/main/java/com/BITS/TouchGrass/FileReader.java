@@ -1,7 +1,6 @@
 package com.BITS.TouchGrass;
 
 import static java.lang.Integer.parseInt;
-import android.os.Build;
 import android.util.Log;
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -15,14 +14,11 @@ public class FileReader {
     //------------------------------------------------------------------------------------------
 
     public void prepLists() {
-        Thread thread = new Thread() {
-            @Override
-            public void run() {
-                try { setUsers(); } catch (Exception e) { Log.d("User Error", e.toString()); }
-                try { setFriends(); } catch (Exception e) { Log.d("Friend Error", e.toString()); }
-                try { setReminders(); } catch (Exception e) { Log.d("Reminder Error", e.toString()); }
-            }
-        };
+        Thread thread = new Thread(() -> {
+            try { setUsers(); } catch (Exception e) { Log.d("User Error", e.toString()); }
+            try { setFriends(); } catch (Exception e) { Log.d("Friend Error", e.toString()); }
+            try { setReminders(); } catch (Exception e) { Log.d("Reminder Error", e.toString()); }
+        });
         thread.setName("Preparation Thread");
         thread.start();
     }
@@ -38,7 +34,6 @@ public class FileReader {
 
             String line;
             line = reader.readLine();
-            int j = 1;
 
             while (line != null) {
                 ArrayList<String> tempList = new ArrayList<>();
@@ -46,9 +41,7 @@ public class FileReader {
                 int i = 0;
 
                 while (i < split.length) {
-                    Log.d(file + " Item | Row " + j, "Column - " + i + " | " + split[i].trim());
                     tempList.add(split[i].trim());
-                    j += 1;
                     i += 1;
                 }
 
@@ -145,17 +138,14 @@ public class FileReader {
             reminder.setRepType(data.get(2));
             reminder.setRepAmount(parseInt(data.get(3)));
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                reminder.set_sDate(LocalDate.parse(data.get(4)));
-                reminder.set_eDate(LocalDate.parse(data.get(5)));
+            reminder.set_sDate(LocalDate.parse(data.get(4)));
+            reminder.set_eDate(LocalDate.parse(data.get(5)));
 
-                try {
-                    reminder.setTime(LocalTime.parse(data.get(6)));
-                }
-                catch (Exception e) {
-                    reminder.setAllDay(data.get(6));
-                }
-
+            try {
+                reminder.setTime(LocalTime.parse(data.get(6)));
+            }
+            catch (Exception e) {
+                reminder.setAllDay(data.get(6));
             }
 
             ObjectClasses.reminders.add(reminder);
