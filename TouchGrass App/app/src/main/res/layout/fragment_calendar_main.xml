@@ -12,8 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp">
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="10dp">
 
         <Button
             android:id="@+id/previous_month_button"
@@ -108,8 +108,19 @@
             android:textAlignment="center"
             android:textSize="16sp"/>
 
-    </LinearLayout>
 
+    </LinearLayout>
+    <Button
+        android:id="@+id/btnCreateReminder"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/grass_green"
+        android:layout_marginHorizontal="100dp"
+        android:layout_marginVertical="16dp"
+        android:translationY="450dp"
+        android:text="Create Reminder"
+        />
     <!--
         This looks empty, but it isn't.
         RecyclerView is manipulated in the .java class
